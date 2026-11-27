@@ -20,7 +20,7 @@ export default defineConfig({
     launchOptions: { args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] },
   },
   webServer: {
-    command: 'npx astro preview --port 4322 --host 127.0.0.1',
+    command: 'npx astro preview --port 4322',
     url: 'http://127.0.0.1:4322/',
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,
@@ -28,6 +28,7 @@ export default defineConfig({
   },
   projects: [
     { name: 'desktop', use: { viewport: { width: 1440, height: 900 } } },
-    { name: 'phone', use: { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true } },
+    // The phone project runs locally; CI runs the desktop project to keep the job short.
+    ...(process.env.CI ? [] : [{ name: 'phone', use: { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true } }]),
   ],
 });

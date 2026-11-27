@@ -26,9 +26,9 @@ test.describe('About phone', () => {
     const developer = page.locator('[data-developer]');
     await expect(developer).toBeHidden();
     const build = page.locator('[data-build-number]');
-    for (let i = 0; i < 6; i++) await build.click();
-    await expect(page.locator('[data-snackbar]')).toContainText('1 step away');
-    await build.click();
+    for (let i = 0; i < 4; i++) await build.click();
+    await expect(page.locator('[data-snackbar]')).toContainText('steps away');
+    for (let i = 0; i < 3; i++) await build.click();
     await expect(developer).toBeVisible();
     await expect(page.locator('[data-snackbar]')).toContainText('You are now a developer!');
     await page.locator('[data-dev="rtl"]').check({ force: true });

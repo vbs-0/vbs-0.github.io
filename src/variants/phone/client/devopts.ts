@@ -52,7 +52,7 @@ export function initDevOptions(getScene: () => PhoneScene | undefined): { frame(
       }
       toast('You are now a developer!');
     } else if (left <= 3) {
-      toast(`You are now ${left} ${left === 1 ? 'step' : 'steps'} away from being a developer.`);
+      toast(`You are now ${left} ${left === 1 ? 'step' : 'steps'} away from being a developer.`, 4000);
     }
   });
 
