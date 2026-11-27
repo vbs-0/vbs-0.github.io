@@ -25,10 +25,14 @@ test.describe('About phone', () => {
     await page.goto('/phone/');
     const developer = page.locator('[data-developer]');
     await expect(developer).toBeHidden();
-    const build = page.locator('[data-build-number]');
-    for (let i = 0; i < 4; i++) await build.click();
+    // Dispatch the taps directly: seven Playwright clicks under load can outlast the tap window.
+    const tap = (times: number) => page.evaluate((n) => {
+      const button = document.querySelector<HTMLButtonElement>('[data-build-number]');
+      for (let i = 0; i < n; i++) button?.click();
+    }, times);
+    await tap(4);
     await expect(page.locator('[data-snackbar]')).toContainText('steps away');
-    for (let i = 0; i < 3; i++) await build.click();
+    await tap(3);
     await expect(developer).toBeVisible();
     await expect(page.locator('[data-snackbar]')).toContainText('You are now a developer!');
     await page.locator('[data-dev="rtl"]').check({ force: true });
