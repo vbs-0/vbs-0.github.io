@@ -2,6 +2,7 @@
 import type { PhonePartId } from '@/content/types';
 import { flood } from '@/lib/motion/flood';
 import { bootWhenQuiet } from '@/lib/motion/boot';
+import { bootFx } from '@/lib/motion/fx';
 import { initSweep } from '@/lib/motion/sweep';
 import { detectCapabilities } from '@/lib/three/capabilities';
 import { type Theme, palettes } from '@/styles/palettes';
@@ -174,4 +175,5 @@ async function boot(): Promise<void> {
     root.dataset.scene = 'still';
   }
 }
+bootFx();
 bootWhenQuiet(() => void boot());

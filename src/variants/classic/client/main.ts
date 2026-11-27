@@ -1,6 +1,7 @@
 /** Classic: layer accordion, the work filter, section highlighting and the 3D stack and skyline. */
 import type { LayerId } from '@/content/types';
 import { initReveal } from '@/lib/motion/reveal';
+import { bootFx } from '@/lib/motion/fx';
 import { bootWhenQuiet } from '@/lib/motion/boot';
 import { initSweep } from '@/lib/motion/sweep';
 import { withViewTransition } from '@/lib/motion/view-transition';
@@ -137,5 +138,6 @@ async function boot(): Promise<void> {
     root.dataset.scene = 'still';
   }
 }
+bootFx();
 initReveal('.project, .more__row, .contact');
 bootWhenQuiet(() => void boot());

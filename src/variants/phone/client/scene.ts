@@ -211,6 +211,15 @@ export function createPhoneScene(canvas: HTMLCanvasElement, opts: PhoneSceneOpti
   let visible = false;
   let wasVisible = false;
   let drag = 0;
+  // The device turns towards the pointer a little, the way a held object does.
+  const finePointer = matchMedia('(pointer: fine)').matches;
+  let tiltX = 0, tiltY = 0, tiltTX = 0, tiltTY = 0;
+  if (finePointer) {
+    addEventListener('pointermove', (ev) => {
+      tiltTX = (ev.clientX / innerWidth) * 2 - 1;
+      tiltTY = (ev.clientY / innerHeight) * 2 - 1;
+    }, { passive: true });
+  }
   const after: (() => void)[] = [];
 
   const paint = () => {
@@ -274,16 +283,18 @@ export function createPhoneScene(canvas: HTMLCanvasElement, opts: PhoneSceneOpti
     rig.explode = callout ? 1 : 0;
     rig.active = callout ? state.active : null;
     drag = damp(drag, 0, instant ? 1e6 : 1.6, dt);
+    tiltX = damp(tiltX, instant || cheap ? 0 : tiltTX, 4, dt);
+    tiltY = damp(tiltY, instant || cheap ? 0 : tiltTY, 4, dt);
     const sway = instant || cheap ? 0 : Math.sin(elapsed * 0.5 * motion) * 0.14;
     if (callout) {
-      rig.yaw = callout.yaw + drag;
-      rig.pitch = callout.pitch;
+      rig.yaw = callout.yaw + drag + tiltX * 0.1;
+      rig.pitch = callout.pitch + tiltY * 0.05;
     } else if (state.app) {
-      rig.yaw = 0.16 + sway * 0.5 + drag;
-      rig.pitch = 0.04;
+      rig.yaw = 0.16 + sway * 0.5 + drag + tiltX * 0.16;
+      rig.pitch = 0.04 + tiltY * 0.08;
     } else {
-      rig.yaw = 0.42 + sway + drag;
-      rig.pitch = 0.1;
+      rig.yaw = 0.42 + sway + drag + tiltX * 0.16;
+      rig.pitch = 0.1 + tiltY * 0.08;
     }
     model.root.position.y = instant || cheap ? 0 : Math.sin(elapsed * 0.8 * motion) * 0.012;
     rig.update(dt, instant);

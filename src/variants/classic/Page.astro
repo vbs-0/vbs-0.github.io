@@ -8,7 +8,9 @@ import '@fontsource/monaspace-neon/latin-400.css';
 import '@fontsource/monaspace-neon/latin-500.css';
 import fontUrl from '@fontsource-variable/mona-sans/files/mona-sans-latin-wdth-normal.woff2?url';
 import './classic.css';
+import { getImage } from 'astro:assets';
 import { otherBuilds } from '@site';
+import { shotImage } from '@/lib/shots';
 import BaseHead from '@/components/shared/BaseHead.astro';
 import Sweep from '@/components/shared/Sweep.astro';
 import Icon from '@/components/shared/Icon.astro';
@@ -36,6 +38,10 @@ weeks.forEach((week, i) => {
 });
 const sceneData = { weeks: weeks.map((w) => w.map((d) => (d ? { level: d.level, count: d.count } : null))), layers: layers.map((l) => ({ id: l.id, name: l.name })) };
 const builds = otherBuilds('classic');
+const moreShots = new Map<string, string>();
+for (const p of moreProjects) {
+  if (p.shots[0]) moreShots.set(p.id, (await getImage({ src: shotImage(p.shots[0].file), width: 600, format: 'webp' })).src);
+}
 const showcase: Project[] = [...featured, ...mlProjects];
 const NAV = [
   ['#work', 'Work'],
@@ -56,6 +62,7 @@ const NAV = [
     <a class="skip" href="#main">Skip to content</a>
     <Sweep variant="classic" />
     <canvas class="stage-canvas" id="stage" aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
 
     <header class="nav">
       <div class="wrap nav__in">
@@ -70,7 +77,7 @@ const NAV = [
     <main id="main">
       <section class="wrap hero" id="top" aria-labelledby="name">
         <div class="hero__text">
-          <h1 class="display" id="name">{profile.name}</h1>
+          <h1 class="display" id="name" data-split>{profile.name}</h1>
           <p class="hero__role">{profile.role} · {profile.focus} · {experience.employer}</p>
           <p class="lede"><strong>{profile.thesis}</strong> {profile.thesisBody}</p>
           <div class="actions">
@@ -88,11 +95,21 @@ const NAV = [
         </div>
       </section>
 
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          {[0, 1].map(() => (
+            <span class="marquee__chunk">
+              {layers.map((l) => <span class="marquee__item">{l.name}</span>)}
+            </span>
+          ))}
+        </div>
+      </div>
+
       <section class="wrap section" id="about" aria-labelledby="about-t">
         <div class="about">
           <div>
             <h2 class="h2" id="about-t" style="margin-bottom:1.5rem">About</h2>
-            <div class="prose">{profile.about.map((p) => <p>{p}</p>)}</div>
+            <div class="prose">{profile.about.map((p, i) => <p data-scrub={i === 0 ? true : undefined}>{p}</p>)}</div>
           </div>
           <dl class="facts">
             <div><dt>Now</dt><dd>{experience.roles[0]?.title}, {experience.employer}</dd></div>
@@ -201,7 +218,7 @@ const NAV = [
                       <dl class="metrics">
                         {p.metrics.slice(0, 3).map((m) => (
                           <div class="metric">
-                            <dd><b>{m.value}</b></dd>
+                            <dd><b data-countup>{m.value}</b></dd>
                             <dt><span>{m.label}</span>{m.source && <> <a href={m.source} aria-label={`Source for ${m.value} ${m.label}`}>source</a></>}</dt>
                           </div>
                         ))}
@@ -223,7 +240,7 @@ const NAV = [
         <ul class="more" aria-label="More projects">
           {
             moreProjects.map((p) => (
-              <li class="more__row" data-reveal id={`project-${p.id}`} data-layers={p.layers.join(' ')}>
+              <li class="more__row" data-reveal id={`project-${p.id}`} data-layers={p.layers.join(' ')} data-shot={moreShots.get(p.id)}>
                 <p class="more__name">{p.name} <span class="muted mono" style="font-size:0.85rem;font-weight:400">{p.year}</span></p>
                 <p>{p.oneLiner} <span class="muted">{p.stack.join(', ')}.</span></p>
                 <p class="more__links">{p.links.map((l) => <a href={l.url}>{l.label}</a>)}</p>
@@ -281,8 +298,8 @@ const NAV = [
           <div style="display:grid;gap:2rem">
             <dl class="stats">
               <div><dd><b>{originalRepoCount}</b></dd><dt><span>original repositories</span></dt></div>
-              <div><dd><b>{formatInt(stats.total)}</b></dd><dt><span>contributions in the last year</span></dt></div>
-              <div><dd><b>{stats.activeDays}</b></dd><dt><span>active days</span></dt></div>
+              <div><dd><b data-countup>{formatInt(stats.total)}</b></dd><dt><span>contributions in the last year</span></dt></div>
+              <div><dd><b data-countup>{stats.activeDays}</b></dd><dt><span>active days</span></dt></div>
             </dl>
             <div>
               <p class="muted" style="margin-bottom:0.6rem">Languages, by number of repositories that contain them</p>
@@ -305,7 +322,7 @@ const NAV = [
 
       <section class="wrap section" id="contact" aria-labelledby="contact-t">
         <div class="contact" data-reveal>
-          <h2 class="h2" id="contact-t">Get in touch</h2>
+          <h2 class="h2" id="contact-t" data-split>Get in touch</h2>
           <dl class="contact__list">
             {profile.contacts.map((c) => <div><dt>{c.label}</dt><dd><a href={c.href} download={c.kind === 'resume' ? true : undefined}>{c.value}</a></dd></div>)}
           </dl>

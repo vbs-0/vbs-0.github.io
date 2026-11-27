@@ -95,7 +95,7 @@ const letters = 'ABCDEFGH';
       <!-- Sheet 1: general arrangement -->
       <section class="sheet cover" id="sheet-1" aria-labelledby="name">
         <div class="cover__text">
-          <h1 class="display" id="name">{profile.name}</h1>
+          <h1 class="display" id="name" data-split>{profile.name}</h1>
           <p class="cover__role">{profile.role} · {profile.focus} · {experience.employer}</p>
           <p class="lede"><strong>{profile.thesis}</strong> {profile.thesisBody}</p>
           <div class="actions">
@@ -125,7 +125,7 @@ const letters = 'ABCDEFGH';
         <div class="explode__track" data-explode-track>
           <div class="explode__pin">
             <div class="explode__head">
-              <h2 class="h2" id="s2">Exploded view</h2>
+              <h2 class="h2" id="s2" data-split>Exploded view</h2>
               <p class="note muted">Six parts, six layers of the stack. Scroll, or select a part.</p>
             </div>
             <div class="explode__body">
@@ -180,7 +180,7 @@ const letters = 'ABCDEFGH';
       <!-- Sheet 3: figure plates -->
       <section class="sheet" id="sheet-3" aria-labelledby="s3">
         <div class="sheet__head">
-          <h2 class="h2" id="s3">Figure plates</h2>
+          <h2 class="h2" id="s3" data-split>Figure plates</h2>
           <p>Each plate is a project: what it is, what was measured, and where it stops working. Numbers link to the README that reports them.</p>
         </div>
         <div class="plates">
@@ -188,7 +188,7 @@ const letters = 'ABCDEFGH';
         </div>
 
         <div class="sheet__head" style="margin-top:clamp(3rem,7vw,6rem)">
-          <h2 class="h2" id="s3-ml">Machine learning</h2>
+          <h2 class="h2" id="s3-ml" data-split>Machine learning</h2>
           <p>The projects my résumé lists under AI and ML, from reinforcement learning to served classifiers.</p>
         </div>
         <div class="plates plates--small">
@@ -196,7 +196,7 @@ const letters = 'ABCDEFGH';
         </div>
 
         <div class="sheet__head" style="margin-top:clamp(3rem,7vw,6rem)">
-          <h2 class="h2" id="s3-more">Schedule of other work</h2>
+          <h2 class="h2" id="s3-more" data-split>Schedule of other work</h2>
         </div>
         <div class="table-wrap" tabindex="0" role="region" aria-label="Other work, scrollable table">
           <table>
@@ -223,7 +223,7 @@ const letters = 'ABCDEFGH';
       <!-- Sheet 4: revision history -->
       <section class="sheet" id="sheet-4" aria-labelledby="s4">
         <div class="sheet__head">
-          <h2 class="h2" id="s4">Revision history</h2>
+          <h2 class="h2" id="s4" data-split>Revision history</h2>
           <p>Work and study, newest first.</p>
         </div>
         <div class="table-wrap" tabindex="0" role="region" aria-label="Revision history, scrollable table">
@@ -259,7 +259,7 @@ const letters = 'ABCDEFGH';
       <!-- Sheet 5: approvals -->
       <section class="sheet" id="sheet-5" aria-labelledby="s5">
         <div class="sheet__head">
-          <h2 class="h2" id="s5">Approvals</h2>
+          <h2 class="h2" id="s5" data-split>Approvals</h2>
           <p>Hackathon results and certification.</p>
         </div>
         <ul class="approvals">
@@ -288,7 +288,7 @@ const letters = 'ABCDEFGH';
       <!-- Sheet 6: activity and contact -->
       <section class="sheet" id="sheet-6" aria-labelledby="s6">
         <div class="sheet__head">
-          <h2 class="h2" id="s6">Activity log</h2>
+          <h2 class="h2" id="s6" data-split>Activity log</h2>
           <p>Public GitHub data, read on {formatDay(github.fetchedAt)}.</p>
         </div>
         <div class="activity">
@@ -329,7 +329,7 @@ const letters = 'ABCDEFGH';
         </div>
 
         <div class="close" style="margin-top:clamp(3rem,7vw,6rem)">
-          <h2 class="h2" id="contact">Contact</h2>
+          <h2 class="h2" id="contact" data-split>Contact</h2>
           <dl class="contact">
             {
               profile.contacts.map((c) => (

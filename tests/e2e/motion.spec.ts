@@ -55,3 +55,85 @@ test('the work filter leaves no view-transition names behind', async ({ page }) 
   await page.waitForTimeout(1200);
   expect(await page.evaluate(() => [...document.querySelectorAll<HTMLElement>('[data-layers]')].every((el) => !el.style.viewTransitionName))).toBe(true);
 });
+
+test('split headings keep their full text and complete their rise', async ({ page }) => {
+  for (const path of ['/classic/', '/manual/', '/phone/?webgl=off']) {
+    await page.goto(path);
+    await page.waitForTimeout(1600);
+    const state = await page.evaluate(() => {
+      const el = document.querySelector('[data-split]');
+      if (!el) return null;
+      const masks = [...el.querySelectorAll('.fx-mask')];
+      return {
+        inClass: el.classList.contains('fx-in'),
+        words: el.querySelectorAll('.fx-word').length,
+        // the visually-hidden copy carries the text to screen readers, the masks are hidden from them
+        srCopy: (el.firstElementChild?.textContent ?? '').trim(),
+        masksHidden: masks.every((m) => m.getAttribute('aria-hidden') === 'true'),
+        visibleText: masks.map((m) => m.textContent).join(' '),
+      };
+    });
+    expect(state).not.toBeNull();
+    expect(state!.inClass).toBe(true);
+    expect(state!.words).toBeGreaterThan(1);
+    expect(state!.masksHidden).toBe(true);
+    expect(state!.visibleText).toBe(state!.srCopy);
+  }
+});
+
+test('reduced motion leaves split text fully visible', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/classic/');
+  await page.waitForTimeout(800);
+  const hidden = await page.evaluate(() => {
+    const el = document.querySelector('[data-split]');
+    return el ? el.classList.contains('fx-split') && !el.classList.contains('fx-in') : true;
+  });
+  expect(hidden).toBe(false);
+});
+
+test('a button pulls toward the pointer at its edge', async ({ page, isMobile }) => {
+  test.skip(!!isMobile, 'touch devices have no fine pointer to pull towards');
+  await page.goto('/classic/?webgl=off');
+  await page.waitForTimeout(1500);
+  const btn = page.locator('.actions .btn').first();
+  const box = await btn.boundingBox();
+  await page.mouse.move(box!.x + 5, box!.y + box!.height / 2, { steps: 3 });
+  await page.waitForTimeout(350);
+  expect(await btn.evaluate((el) => el.style.transform)).toMatch(/translate\(-?\d/);
+});
+
+test('count-ups never blank the measured value', async ({ page }) => {
+  await page.goto('/phone/?webgl=off#app-pam');
+  await page.waitForTimeout(2500);
+  const first = await page.locator('[data-countup]').first().textContent();
+  expect(first).toContain('318');
+});
+
+test('the scroll-lit paragraph lights as it enters reading position', async ({ page }) => {
+  await page.goto('/classic/?webgl=off');
+  await page.waitForTimeout(1500);
+  const litAtStart = await page.evaluate(() => {
+    const w = [...document.querySelectorAll('.prose [data-scrub] .fx-word')];
+    return w.filter((x) => x.classList.contains('fx-lit')).length;
+  });
+  expect(litAtStart).toBe(0);
+  await page.evaluate(() => document.querySelector('#about')?.scrollIntoView({ block: 'center' }));
+  await page.waitForTimeout(700);
+  const litAfter = await page.evaluate(() => {
+    const w = [...document.querySelectorAll('.prose [data-scrub] .fx-word')];
+    return w.filter((x) => x.classList.contains('fx-lit')).length;
+  });
+  expect(litAfter).toBeGreaterThan(20);
+});
+
+test('the floating preview follows hovering an app row', async ({ page, isMobile }) => {
+  test.skip(!!isMobile, 'touch devices have no hover preview');
+  await page.goto('/phone/?webgl=off');
+  await page.waitForTimeout(1500);
+  const row = page.locator('a.row[data-shot]').first();
+  await row.scrollIntoViewIfNeeded();
+  await row.hover();
+  await page.waitForTimeout(400);
+  await expect(page.locator('.fx-preview')).toHaveClass(/fx-preview--on/);
+});

@@ -1005,3 +1005,35 @@ html:not(.js) .filters {
 :where(main, main *) {
   min-inline-size: 0;
 }
+
+/* The marquee: the six layers as a slow belt of type between the hero and the about. */
+.marquee {
+  border-block: 1px solid color-mix(in srgb, var(--c-line, #2a3247) 80%, transparent);
+  padding-block: 0.85rem;
+  margin-block: clamp(2rem, 6vh, 4rem) 0;
+}
+.marquee__chunk {
+  display: flex;
+  flex-shrink: 0;
+}
+.marquee__item {
+  font-family: 'Monaspace Neon', monospace;
+  font-size: clamp(0.72rem, 1.4vw, 0.85rem);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--c-accent) 78%, transparent);
+  padding-inline: 1.6rem;
+  white-space: nowrap;
+}
+.marquee__item::after {
+  content: '◆';
+  margin-inline-start: 3.2rem;
+  color: color-mix(in srgb, var(--c-text) 26%, transparent);
+  font-size: 0.55em;
+  vertical-align: 0.24em;
+}
+
+/* The unlit words of the scroll-lit paragraph: 6.9:1 on the studio, dimmed but always readable. */
+.prose {
+  --fx-dim: color-mix(in srgb, #eef0f6 62%, #070a13);
+}

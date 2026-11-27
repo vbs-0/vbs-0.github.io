@@ -29,6 +29,10 @@ import AppInfo from './AppInfo.astro';
 const still = async (img: ImageMetadata) => (await getImage({ src: img, width: 800, format: 'webp' })).src;
 const stills = { heroLight: await still(heroLight), heroDark: await still(heroDark), explodedLight: await still(explodedLight), explodedDark: await still(explodedDark) };
 
+const appShots = new Map<string, string>();
+for (const p of projects) {
+  if (p.shots[0]) appShots.set(p.id, (await getImage({ src: shotImage(p.shots[0].file), width: 600, format: 'webp' })).src);
+}
 const logos = new Map<string, string>();
 for (const p of projects) if (p.logo) logos.set(p.id, (await getImage({ src: shotImage(p.logo), width: 96, height: 96, format: 'webp' })).src);
 const glyphOf = (p: Project): IconName => (isIcon(p.glyph) ? p.glyph : 'layers');
@@ -78,6 +82,16 @@ const tiers: { id: string; title: string; list: Project[] }[] = [
     <a class="skip" href="#main">Skip to content</a>
     <div class="shell">
       <aside class="device" aria-hidden="true">
+        <div class="ring">
+          <svg viewBox="0 0 300 300">
+            <defs>
+              <path id="ring-path" d="M150,150 m-122,0 a122,122 0 1,1 244,0 a122,122 0 1,1 -244,0" />
+            </defs>
+            <text class="ring__text">
+              <textPath href="#ring-path">ANDROID · BACKENDS · MACHINE LEARNING · FULL-STACK · VBS-0 · ML · SYSTEMS ·</textPath>
+            </text>
+          </svg>
+        </div>
         <div class="slot" data-slot="device">
           <img class="slot__still for-light" src={stills.heroLight} width="800" height="800" alt="" />
           <img class="slot__still for-dark" src={stills.heroDark} width="800" height="800" alt="" />
@@ -97,7 +111,7 @@ const tiers: { id: string; title: string; list: Project[] }[] = [
 
         <main id="main">
           <div class="view" id="top" data-view="home">
-            <h1 class="title">About vbs</h1>
+            <h1 class="title" data-split>About vbs</h1>
 
             <section class="group" id="contact" aria-label="Device">
               <div class="group__list device-card">
@@ -200,7 +214,7 @@ const tiers: { id: string; title: string; list: Project[] }[] = [
                     {tier.list.map((p) => {
                       const m = headline(p);
                       return (
-                        <a class="row" href={`#app-${p.id}`} data-mini={p.name}>
+                        <a class="row" href={`#app-${p.id}`} data-mini={p.name} data-shot={appShots.get(p.id)}>
                           <span class:list={['app-icon', logos.has(p.id) && 'app-icon--dark']} aria-hidden="true">
                             {logos.has(p.id) ? <img src={logos.get(p.id)} width="48" height="48" alt="" loading="lazy" decoding="async" /> : <Icon name={glyphOf(p)} />}
                           </span>

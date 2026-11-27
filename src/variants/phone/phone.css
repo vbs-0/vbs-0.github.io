@@ -1139,3 +1139,19 @@ details[open] > summary {
 :where(main, main *) {
   min-inline-size: 0;
 }
+
+/* The orbital ring: the device's disciplines turning around it, slowly, in mono. */
+.ring {
+  inset: 0;
+  z-index: 0;
+}
+.ring__text {
+  font-family: 'Roboto Mono Variable', monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  fill: color-mix(in srgb, var(--c-on-surface-variant) 62%, transparent);
+}
+.device .slot {
+  z-index: 1;
+}
