@@ -132,5 +132,10 @@ export function initSweep(onLeave?: (to: VariantId) => void): void {
     };
     // Navigate once the last band has landed: duration plus six stagger steps, plus a frame.
     window.setTimeout(nav, ms('--sweep-ms', 280) + 6 * ms('--sweep-stagger', 14) + 60);
+    // If the navigation never commits (offline, a blocked request), take the cover away again rather
+    // than leaving the visitor looking at a full-screen cover with no page behind it.
+    window.setTimeout(() => {
+      if (document.documentElement.dataset.sweep) delete document.documentElement.dataset.sweep;
+    }, 2600);
   });
 }

@@ -10,7 +10,7 @@ export default defineConfig({
   timeout: 60_000,
   fullyParallel: true,
   // Software WebGL is slow; a few workers keep the 3D pages responsive enough to test.
-  workers: 3,
+  workers: process.env.CI ? 2 : 3,
   retries: process.env.CI ? 1 : 0,
   reporter: [['list']],
   use: {

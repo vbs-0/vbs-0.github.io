@@ -4,12 +4,14 @@ const OTHER: Record<string, string> = { phone: 'manual', manual: 'classic', clas
 
 for (const [from, to] of Object.entries(OTHER)) {
   test(`the sweep carries /${from}/ to /${to}/`, async ({ page }) => {
-    await page.goto(`/${from}/`);
+    // Without the 3D: these tests are about the transition, and software WebGL on a shared runner
+    // can starve the main thread for seconds.
+    await page.goto(`/${from}/?webgl=off`);
     await page.waitForFunction(() => document.documentElement.dataset.scene !== undefined);
     const link = page.locator(`a[data-sweep="${to}"]`).first();
     await link.scrollIntoViewIfNeeded();
     await link.click();
-    await expect(page).toHaveURL(new RegExp(`/${to}/$`), { timeout: 8000 });
+    await expect(page).toHaveURL(new RegExp(`/${to}/$`), { timeout: 15000 });
     // The destination paints covered, then uncovers itself.
     await page.waitForFunction(() => !document.documentElement.dataset.sweep, undefined, { timeout: 12000 });
     await expect(page.locator('.sweep')).toHaveCount(1);
@@ -19,7 +21,7 @@ for (const [from, to] of Object.entries(OTHER)) {
 
 test('with reduced motion there is no sweep, and the page still arrives', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/phone/');
+  await page.goto('/phone/?webgl=off');
   await page.waitForFunction(() => document.documentElement.dataset.scene !== undefined);
   const link = page.locator('a[data-sweep="manual"]').first();
   await link.scrollIntoViewIfNeeded();
