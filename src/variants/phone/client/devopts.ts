@@ -41,7 +41,7 @@ export function initDevOptions(getScene: () => PhoneScene | undefined): { frame(
     }
     taps++;
     window.clearTimeout(tapTimer);
-    tapTimer = window.setTimeout(() => (taps = 0), 3000);
+    tapTimer = window.setTimeout(() => (taps = 0), 6000);
     const left = 7 - taps;
     if (left <= 0) {
       unlocked = true;

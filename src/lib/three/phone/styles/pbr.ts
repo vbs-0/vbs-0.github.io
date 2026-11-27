@@ -194,7 +194,7 @@ export function dressPbr(model: PhoneModel, screenTexture: Texture, colors: PbrC
     cameraBody: () => std(0x1f2226, 0.45, 0.6),
     lensBarrel: () => std(0x0c0d10, 0.3, 0.85),
     lensGlass: () =>
-      new MeshPhysicalMaterial({ color: 0x070a12, roughness: 0.03, metalness: 0.3, clearcoat: high ? 1 : 0, iridescence: high ? 1 : 0, iridescenceIOR: 1.7, iridescenceThicknessRange: [180, 520], ...decal }),
+      new MeshPhysicalMaterial({ color: 0x070a12, roughness: 0.03, metalness: 0.3, clearcoat: high ? 1 : 0, iridescence: high ? 1 : 0, iridescenceIOR: 1.7, iridescenceThicknessMinimum: 180, iridescenceThicknessMaximum: 520, ...decal }),
     lensRing: () => std(0xb9bec4, 0.25, 1),
     flash: () => std(0xfff3c4, 0.3, 0, { emissive: new Color(0xfff1b8), emissiveIntensity: 0.25 }),
     back: () =>

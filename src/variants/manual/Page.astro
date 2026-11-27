@@ -197,7 +197,7 @@ const letters = 'ABCDEFGH';
         <div class="sheet__head" style="margin-top:clamp(3rem,7vw,6rem)">
           <h2 class="h2" id="s3-more">Schedule of other work</h2>
         </div>
-        <div class="table-wrap">
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Other work, scrollable table">
           <table>
             <thead>
               <tr><th scope="col" class="note">Item</th><th scope="col" class="note">What it is</th><th scope="col" class="note">Built with</th><th scope="col" class="note">Reference</th></tr>
@@ -225,7 +225,7 @@ const letters = 'ABCDEFGH';
           <h2 class="h2" id="s4">Revision history</h2>
           <p>Work and study, newest first.</p>
         </div>
-        <div class="table-wrap">
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Revision history, scrollable table">
           <table class="rev">
             <thead>
               <tr><th scope="col" class="note">Rev</th><th scope="col" class="note">When</th><th scope="col" class="note">Description</th><th scope="col" class="note">Where</th></tr>
@@ -297,7 +297,7 @@ const letters = 'ABCDEFGH';
             <div class="stat"><dt class="note muted">Active days</dt><dd><b>{stats.activeDays}</b></dd></div>
             {stats.busiestDay && <div class="stat"><dt class="note muted">Busiest day</dt><dd><b>{stats.busiestDay.count}</b><span class="note muted">{formatDay(stats.busiestDay.date)}</span></dd></div>}
           </dl>
-          <div class="cal">
+          <div class="cal" tabindex="0" role="region" aria-label="Contribution calendar, scrollable">
             <svg viewBox={`-2 -14 ${weeks.length * CELL + 4} ${7 * CELL + 18}`} role="img" aria-label={`Contribution calendar: ${formatInt(stats.total)} contributions on ${stats.activeDays} days between ${formatDay(github.contributions.from)} and ${formatDay(github.contributions.to)}`}>
               {monthLabels.map((m) => <text x={m.x} y="-4">{m.label}</text>)}
               {

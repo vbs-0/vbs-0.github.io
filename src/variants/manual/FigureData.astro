@@ -27,7 +27,7 @@ const max = figure.kind === 'bars' ? Math.max(...figure.items.map((i) => i.value
         ))}
       </ul>
     ) : (
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label={`${figure.title}, scrollable table`}>
         <table>
           <thead>
             <tr>{figure.head.map((h) => <th scope="col" class="note">{h}</th>)}</tr>

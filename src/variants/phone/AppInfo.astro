@@ -114,7 +114,7 @@ const repos = p.repos.map((full) => repoByName(full)).filter((r) => r !== undefi
                 ))}
               </ul>
             ) : (
-              <div class="table-wrap">
+              <div class="table-wrap" tabindex="0" role="region" aria-label={`${p.figure.title}, scrollable table`}>
                 <table class="fig-table">
                   <thead>
                     <tr>{p.figure.head.map((h) => <th scope="col">{h}</th>)}</tr>

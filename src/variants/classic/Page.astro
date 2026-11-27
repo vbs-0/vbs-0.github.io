@@ -176,7 +176,7 @@ const NAV = [
                               ))}
                             </ul>
                           ) : (
-                            <div class="table-wrap">
+                            <div class="table-wrap" tabindex="0" role="region" aria-label={`${p.figure.title}, scrollable table`}>
                               <table>
                                 <thead><tr>{p.figure.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
                                 <tbody>{p.figure.rows.map((row) => <tr>{row.map((cell, i) => (i === 0 ? <th scope="row" class="mono">{cell}</th> : <td>{cell}</td>))}</tr>)}</tbody>

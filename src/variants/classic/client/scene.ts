@@ -138,7 +138,8 @@ export function createClassicScene(canvas: HTMLCanvasElement, opts: ClassicScene
       clearcoatRoughness: 0.06,
       iridescence: high ? 1 : 0,
       iridescenceIOR: 1.35,
-      iridescenceThicknessRange: [140, 380 + i * 70],
+      iridescenceThicknessMinimum: 140,
+      iridescenceThicknessMaximum: 380 + i * 70,
     });
     const mesh = new Mesh(slabGeo, glass);
     mesh.userData.layer = layer.id;

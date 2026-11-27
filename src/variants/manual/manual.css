@@ -1169,3 +1169,8 @@ html:not(.js) .part__detail,
     min-width: 34rem;
   }
 }
+
+/* Grid and flex children may shrink below their content, so a wide table or chart scrolls inside its own box instead of widening the page. */
+:where(main, main *) {
+  min-inline-size: 0;
+}

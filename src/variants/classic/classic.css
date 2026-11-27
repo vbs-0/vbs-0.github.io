@@ -996,3 +996,8 @@ html:not(.js) .filters {
 :root:not([data-scene='live']) [data-live-only] {
   display: none;
 }
+
+/* Grid and flex children may shrink below their content, so a wide table or chart scrolls inside its own box instead of widening the page. */
+:where(main, main *) {
+  min-inline-size: 0;
+}
