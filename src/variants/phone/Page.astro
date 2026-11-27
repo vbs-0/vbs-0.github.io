@@ -1,0 +1,398 @@
+---
+/**
+ * About phone: the portfolio as a custom-ROM Settings screen where the device is the person.
+ * All facts come from src/content; this file only decides how they are laid out.
+ */
+import '@fontsource-variable/roboto-flex/wdth.css';
+import '@fontsource-variable/roboto-mono/wght.css';
+import fontUrl from '@fontsource-variable/roboto-flex/files/roboto-flex-latin-wdth-normal.woff2?url';
+import './phone.css';
+import { execSync } from 'node:child_process';
+import { getImage } from 'astro:assets';
+import { otherBuilds } from '@site';
+import explodedDark from '@/assets/posters/phone-exploded-dark.webp';
+import explodedLight from '@/assets/posters/phone-exploded-light.webp';
+import heroDark from '@/assets/posters/phone-hero-dark.webp';
+import heroLight from '@/assets/posters/phone-hero-light.webp';
+import BaseHead from '@/components/shared/BaseHead.astro';
+import Icon from '@/components/shared/Icon.astro';
+import { certifications, education, experience, featured, hackathons, headline, layers, mlProjects, moreProjects, profile, projectById, projects } from '@/content';
+import type { Project } from '@/content';
+import { formatDay, formatInt, formatMonthYear } from '@/lib/format';
+import { contribStats, contribWeeks, github, languagePresence, originalRepoCount } from '@/lib/github';
+import { type IconName, isIcon, partIcon } from '@/lib/icons';
+import { buildSearchIndex } from '@/lib/search';
+import { shotImage } from '@/lib/shots';
+import AppInfo from './AppInfo.astro';
+
+const still = async (img: ImageMetadata) => (await getImage({ src: img, width: 800, format: 'webp' })).src;
+const stills = { heroLight: await still(heroLight), heroDark: await still(heroDark), explodedLight: await still(explodedLight), explodedDark: await still(explodedDark) };
+
+const logos = new Map<string, string>();
+for (const p of projects) if (p.logo) logos.set(p.id, (await getImage({ src: shotImage(p.logo), width: 96, height: 96, format: 'webp' })).src);
+const glyphOf = (p: Project): IconName => (isIcon(p.glyph) ? p.glyph : 'layers');
+
+const contactIcon: Record<string, IconName> = { email: 'mail', phone: 'phone', github: 'github', telegram: 'telegram', resume: 'download' };
+const contactVerb: Record<string, string> = { email: 'Email', phone: 'Call', github: 'GitHub', telegram: 'Telegram', resume: 'Résumé' };
+
+// Build number, as on a real device: prefix, date, sequence, then the commit it was built from.
+const now = new Date();
+const stamp = now.toISOString().slice(2, 10).replace(/-/g, '');
+let commit = process.env.GITHUB_SHA?.slice(0, 7) ?? '';
+if (!commit) {
+  try {
+    commit = execSync('git rev-parse --short HEAD', { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim();
+  } catch {
+    commit = 'local';
+  }
+}
+const buildNumber = `VBS1.${stamp}.001.${commit}`;
+
+const weeks = contribWeeks();
+const stats = contribStats();
+const langs = languagePresence().slice(0, 7);
+const langMax = langs[0]?.repos ?? 1;
+const CELL = 11;
+const months: { x: number; label: string }[] = [];
+weeks.forEach((week, i) => {
+  const first = week.find((d) => d !== null);
+  if (first && Number(first.date.slice(8, 10)) <= 7) months.push({ x: i * CELL, label: formatMonthYear(first.date).slice(0, 3) });
+});
+const builds = otherBuilds('phone');
+const searchIndex = buildSearchIndex({ section: (id) => `#${id}`, layer: (id) => `#layer-${id}`, project: (id) => `#app-${id}` });
+const tiers: { id: string; title: string; list: Project[] }[] = [
+  { id: 'apps', title: 'Apps', list: featured },
+  { id: 'apps-ml', title: 'Machine learning', list: mlProjects },
+  { id: 'apps-more', title: 'More apps', list: moreProjects },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead variant="phone" />
+    <link rel="preload" as="font" type="font/woff2" href={fontUrl} crossorigin />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="shell">
+      <aside class="device" aria-hidden="true">
+        <div class="slot" data-slot="device">
+          <img class="slot__still for-light" src={stills.heroLight} width="800" height="800" alt="" />
+          <img class="slot__still for-dark" src={stills.heroDark} width="800" height="800" alt="" />
+        </div>
+      </aside>
+
+      <div class="pane">
+        <header class="topbar">
+          <a class="icon-btn needs-js" href="#top" data-back hidden aria-label="Back to About vbs"><Icon name="back" class="flip" /></a>
+          <p class="topbar__title" data-bar-title aria-hidden="true">About vbs</p>
+          <button class="icon-btn needs-js" type="button" data-search-open aria-label="Search this page" aria-keyshortcuts="/"><Icon name="search" /></button>
+          <button class="icon-btn theme-btn needs-js" type="button" data-theme-toggle aria-pressed="false" aria-label="Dark theme">
+            <Icon name="moon" class="for-light-icon" />
+            <Icon name="sun" class="for-dark-icon" />
+          </button>
+        </header>
+
+        <main id="main">
+          <div class="view" id="top" data-view="home">
+            <h1 class="title">About vbs</h1>
+
+            <section class="group" id="contact" aria-label="Device">
+              <div class="group__list device-card">
+                <div class="device-card__stage">
+                  <div class="slot" data-slot="device-inline">
+                    <img class="slot__still for-light" src={stills.heroLight} width="800" height="800" alt="A phone running this page" fetchpriority="high" />
+                    <img class="slot__still for-dark" src={stills.heroDark} width="800" height="800" alt="" />
+                  </div>
+                </div>
+                <dl class="rows">
+                  <div class="row row--plain" data-mini="Device name"><dt class="row__sub">Device name</dt><dd class="row__label">{profile.name}</dd></div>
+                  <div class="row row--plain" data-mini="Model"><dt class="row__sub">Model</dt><dd class="row__label">{profile.role} · {profile.focus}</dd></div>
+                  <div class="row row--plain" data-mini="Phone number"><dt class="row__sub">Phone number</dt><dd class="row__label"><a href={`tel:${profile.phone.e164}`}>{profile.phone.display}</a></dd></div>
+                  <div class="row row--plain" data-mini="Account"><dt class="row__sub">Account</dt><dd class="row__label"><a href={`mailto:${profile.email}`}>{profile.email}</a></dd></div>
+                </dl>
+                <div class="actions">
+                  {
+                    profile.contacts.map((c, i) => (
+                      <a class:list={['btn', i === 0 && 'btn--filled']} href={c.href} download={c.kind === 'resume' ? true : undefined}>
+                        <Icon name={contactIcon[c.kind] ?? 'external'} />
+                        {contactVerb[c.kind] ?? c.label}
+                      </a>
+                    ))
+                  }
+                </div>
+              </div>
+            </section>
+
+            <section class="group" id="about" aria-labelledby="about-t">
+              <h2 class="group__title" id="about-t">About</h2>
+              <div class="group__list">
+                <div class="block">
+                  <p><strong>{profile.thesis}</strong> {profile.thesisBody}</p>
+                  {profile.about.map((para) => <p>{para}</p>)}
+                </div>
+              </div>
+            </section>
+
+            <section class="group" id="experience" aria-labelledby="exp-t">
+              <h2 class="group__title" id="exp-t">Experience</h2>
+              <div class="group__list">
+                {
+                  experience.roles.map((r, i) => (
+                    <div class="row" data-mini={r.title}>
+                      <span class="row__icon" aria-hidden="true"><Icon name="briefcase" size={20} /></span>
+                      <div>
+                        <p class="row__label">{r.title}</p>
+                        <p class="row__sub">{experience.employer} · {r.kind} · {formatMonthYear(r.start)} to {r.end ? formatMonthYear(r.end) : 'now'}</p>
+                      </div>
+                      {i === 0 && <span class="tag">Current build</span>}
+                    </div>
+                  ))
+                }
+                <div class="block">
+                  <p class="block__title">{experience.leadNote}</p>
+                  <ul class="bullets">{experience.bullets.map((b) => <li>{b}</li>)}</ul>
+                </div>
+              </div>
+            </section>
+
+            <section class="group" id="hardware" aria-labelledby="hw-t" data-hardware>
+              <h2 class="group__title" id="hw-t">Hardware: what is inside, and what I build there</h2>
+              <div class="hw-stage needs-js">
+                <div class="slot" data-slot="hardware">
+                  <img class="slot__still for-light" src={stills.explodedLight} width="800" height="800" loading="lazy" alt="The phone taken apart: back cover, battery, logic board, frame, display and glass" />
+                  <img class="slot__still for-dark" src={stills.explodedDark} width="800" height="800" loading="lazy" alt="" />
+                </div>
+              </div>
+              <div class="group__list">
+                {
+                  layers.map((l) => (
+                    <div class="row hw-row" id={`layer-${l.id}`} data-part={l.part} data-mini={l.name}>
+                      <span class="row__icon" aria-hidden="true"><Icon name={partIcon[l.part]} size={20} /></span>
+                      <h3 style="font:inherit">
+                        <button class="hw-btn" type="button" aria-expanded="false" aria-controls={`layer-${l.id}-d`} data-part-button>
+                          <span class="row__label">{l.name}</span>
+                        </button>
+                        <span class="row__sub">{l.partName}. {l.line}</span>
+                      </h3>
+                      <span class="row__end">{l.projectIds.length} apps</span>
+                      <div class="hw-detail" id={`layer-${l.id}-d`}>
+                        <p>{l.body}</p>
+                        {l.workNote && <p>{l.workNote}</p>}
+                        <ul class="chips" aria-label="Skills">{l.skills.map((s) => <li class="chip">{s}</li>)}</ul>
+                        <ul class="linklist" aria-label="Apps at this layer">
+                          {l.projectIds.map((id) => <li><a href={`#app-${id}`}>{projectById(id).name}</a></li>)}
+                        </ul>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </section>
+
+            {
+              tiers.map((tier) => (
+                <section class="group" id={tier.id} aria-labelledby={`${tier.id}-t`}>
+                  <h2 class="group__title" id={`${tier.id}-t`}>{tier.title}</h2>
+                  <div class="group__list">
+                    {tier.list.map((p) => {
+                      const m = headline(p);
+                      return (
+                        <a class="row" href={`#app-${p.id}`} data-mini={p.name}>
+                          <span class:list={['app-icon', logos.has(p.id) && 'app-icon--dark']} aria-hidden="true">
+                            {logos.has(p.id) ? <img src={logos.get(p.id)} width="48" height="48" alt="" loading="lazy" decoding="async" /> : <Icon name={glyphOf(p)} />}
+                          </span>
+                          <div>
+                            <p class="row__label">{p.name}{p.status && <> <span class="tag">{p.status}</span></>}</p>
+                            <p class="row__sub">{p.oneLiner}</p>
+                          </div>
+                          <span class="row__end">
+                            {m ? <span class="metric"><b>{m.value}</b><span>{m.label}</span></span> : <Icon name="chevron" />}
+                          </span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </section>
+              ))
+            }
+
+            <section class="group" id="education" aria-labelledby="edu-t">
+              <h2 class="group__title" id="edu-t">Education and certification</h2>
+              <div class="group__list">
+                {
+                  education.map((e) => (
+                    <div class="row" data-mini={e.degree}>
+                      <span class="row__icon" aria-hidden="true"><Icon name="school" size={20} /></span>
+                      <div>
+                        <p class="row__label">{e.degree}, {e.field}</p>
+                        <p class="row__sub">{e.school} · {e.start} to {e.end}</p>
+                      </div>
+                    </div>
+                  ))
+                }
+                {
+                  certifications.map((c) => (
+                    <div class="row" data-mini={c.issuer}>
+                      <span class="row__icon" aria-hidden="true"><Icon name="check" size={20} /></span>
+                      <div>
+                        <p class="row__label">{c.name}</p>
+                        <p class="row__sub">{c.issuer} · {formatMonthYear(c.date)} · {c.note}</p>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </section>
+
+            <section class="group" id="hackathons" aria-labelledby="hack-t">
+              <h2 class="group__title" id="hack-t">Hackathons</h2>
+              <div class="group__list">
+                {
+                  hackathons.map((h) => (
+                    <div class="row" data-mini={h.name}>
+                      <span class="row__icon" aria-hidden="true"><Icon name="award" size={20} /></span>
+                      <div>
+                        <p class="row__label">{h.name}</p>
+                        <p class="row__sub">{h.detail}</p>
+                      </div>
+                      <span class:list={[h.rank ? 'tag' : 'row__end']}>{h.result}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            </section>
+
+            <section class="group" id="activity" aria-labelledby="act-t">
+              <h2 class="group__title" id="act-t">Activity</h2>
+              <div class="group__list">
+                <div class="block">
+                  <dl class="statline">
+                    <div><dd><b>{originalRepoCount}</b></dd><dt><span>original repositories</span></dt></div>
+                    <div><dd><b>{formatInt(stats.total)}</b></dd><dt><span>contributions in the last year</span></dt></div>
+                    <div><dd><b>{stats.activeDays}</b></dd><dt><span>active days</span></dt></div>
+                  </dl>
+                </div>
+                <div class="block">
+                  <div class="cal" tabindex="0" role="group" aria-label="Contribution calendar, scrollable">
+                    <svg viewBox={`-2 -14 ${weeks.length * CELL + 4} ${7 * CELL + 18}`} role="img" aria-label={`${formatInt(stats.total)} contributions on ${stats.activeDays} days between ${formatDay(github.contributions.from)} and ${formatDay(github.contributions.to)}`}>
+                      {months.map((m) => <text x={m.x} y="-4">{m.label}</text>)}
+                      {weeks.map((week, x) => week.map((d, y) => d && <rect class={`l${d.level}`} x={x * CELL} y={y * CELL} width={CELL - 2} height={CELL - 2} rx="2"><title>{`${d.count} on ${formatDay(d.date)}`}</title></rect>))}
+                    </svg>
+                  </div>
+                  <p class="row__sub">Public GitHub data, read on {formatDay(github.fetchedAt)}.</p>
+                </div>
+                <div class="block">
+                  <p class="block__title">Languages, by number of repositories that contain them</p>
+                  <ul class="langs">
+                    {langs.map((l) => <li class="lang"><span>{l.name}</span><span class="lang__bar" style={`inline-size:${((l.repos / langMax) * 100).toFixed(1)}%`} aria-hidden="true" /><span class="num">{l.repos}</span></li>)}
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <section class="group" id="build" aria-labelledby="build-t">
+              <h2 class="group__title" id="build-t">Build</h2>
+              <div class="group__list">
+                <button class="row row--plain needs-js" type="button" data-build-number>
+                  <span class="row__sub">Build number</span>
+                  <span class="row__label mono">{buildNumber}</span>
+                </button>
+                <noscript><div class="row row--plain"><p class="row__sub">Build number</p><p class="row__label mono">{buildNumber}</p></div></noscript>
+                <details class="block">
+                  <summary class="block__title">Open-source licences</summary>
+                  <ul class="bullets">
+                    <li>three.js, MIT. Draws the phone from procedural geometry; no model file is downloaded.</li>
+                    <li>Astro, MIT. Renders this page to static HTML.</li>
+                    <li>Roboto Flex and Roboto Mono, OFL-1.1, served from this site.</li>
+                  </ul>
+                </details>
+                {
+                  builds.map((b) => (
+                    <a class="row" href={b.path} data-mini={b.name}>
+                      <span class="row__icon" aria-hidden="true"><Icon name="layers" size={20} /></span>
+                      <div>
+                        <p class="row__label">Other build: {b.name}</p>
+                        <p class="row__sub">{b.blurb}. Same content.</p>
+                      </div>
+                      <span class="row__end"><Icon name="chevron" /></span>
+                    </a>
+                  ))
+                }
+              </div>
+            </section>
+
+            <section class="group" id="developer" aria-labelledby="dev-t" data-developer hidden>
+              <h2 class="group__title" id="dev-t">Developer options</h2>
+              <div class="group__list">
+                <label class="row switch-row">
+                  <span class="row__icon" aria-hidden="true"><Icon name="braces" size={20} /></span>
+                  <span><span class="row__label">Show layout bounds</span><span class="row__sub" style="display:block">Outline every box on the page and every part of the phone</span></span>
+                  <span class="toggle"><input type="checkbox" data-dev="bounds" /><span class="toggle__track"></span></span>
+                </label>
+                <label class="row switch-row">
+                  <span class="row__icon" aria-hidden="true"><Icon name="layers" size={20} /></span>
+                  <span><span class="row__label">Debug GPU overdraw</span><span class="row__sub" style="display:block">Colour the 3D phone by how many times each pixel is drawn</span></span>
+                  <span class="toggle"><input type="checkbox" data-dev="overdraw" /><span class="toggle__track"></span></span>
+                </label>
+                <label class="row switch-row">
+                  <span class="row__icon" aria-hidden="true"><Icon name="activity" size={20} /></span>
+                  <span><span class="row__label">Profile HWUI rendering</span><span class="row__sub" style="display:block">Draw frame times as bars, with the 16 ms line</span></span>
+                  <span class="toggle"><input type="checkbox" data-dev="hwui" /><span class="toggle__track"></span></span>
+                </label>
+                <label class="row switch-row">
+                  <span class="row__icon" aria-hidden="true"><Icon name="back" size={20} /></span>
+                  <span><span class="row__label">Force RTL layout direction</span><span class="row__sub" style="display:block">Mirror the whole layout</span></span>
+                  <span class="toggle"><input type="checkbox" data-dev="rtl" /><span class="toggle__track"></span></span>
+                </label>
+                <div class="row">
+                  <span class="row__icon" aria-hidden="true"><Icon name="play" size={20} /></span>
+                  <label for="dev-motion"><span class="row__label">Animator duration scale</span><span class="row__sub" style="display:block">Speed of every animation on this page</span></label>
+                  <select class="select" id="dev-motion" data-dev="motion">
+                    <option value="0">Animation off</option>
+                    <option value="0.5">0.5x</option>
+                    <option value="1" selected>1x</option>
+                    <option value="1.5">1.5x</option>
+                    <option value="2">2x</option>
+                    <option value="5">5x</option>
+                    <option value="10">10x</option>
+                  </select>
+                </div>
+                <button class="row row--plain" type="button" data-dev-reset>
+                  <span class="row__label">Turn off Developer options</span>
+                  <span class="row__sub">Resets every switch above</span>
+                </button>
+              </div>
+            </section>
+
+            <footer class="foot">
+              <p>Built from my résumé and my public GitHub repositories. Source on <a href="https://github.com/vbs-0/vbs-0.github.io">GitHub</a>.</p>
+            </footer>
+          </div>
+
+          {projects.map((p, i) => <AppInfo project={p} next={projects[(i + 1) % projects.length]} />)}
+        </main>
+      </div>
+    </div>
+
+    <dialog class="search" data-search aria-label="Search this page">
+      <div class="search__inner">
+        <div class="search__field">
+          <button class="icon-btn" type="button" data-search-close aria-label="Close search"><Icon name="back" class="flip" /></button>
+          <input type="search" data-search-input placeholder="Search skills, projects, sections" aria-label="Search skills, projects and sections" autocomplete="off" spellcheck="false" enterkeyhint="search" />
+        </div>
+        <p class="search__hint" data-search-hint>Try <span class="kbd">rust</span>, <span class="kbd">django</span> or <span class="kbd">kyber</span>.</p>
+        <div class="group search__results"><ul class="group__list" data-search-results aria-live="polite"></ul></div>
+      </div>
+    </dialog>
+
+    <div class="snackbar" role="status" aria-live="polite"><p data-snackbar></p></div>
+    <canvas class="hwui" data-hwui hidden aria-hidden="true"></canvas>
+    <canvas class="stage-canvas" id="stage" aria-hidden="true"></canvas>
+    <script type="application/json" id="search-index" set:html={JSON.stringify(searchIndex)} />
+    <script>
+      import './client/main.ts';
+    </script>
+  </body>
+</html>

@@ -1,15 +1,9 @@
-/** A small in-page search over the portfolio's own content. No library, no network. */
+/** Builds the search index from the portfolio's own content. Runs at build time only. */
 import { certifications, education, experience, hackathons, layers, profile, projects } from '@/content';
 
-export interface SearchEntry {
-  id: string;
-  group: 'Section' | 'Layer' | 'Project';
-  title: string;
-  subtitle: string;
-  /** Extra words that should match but are not shown. */
-  keywords: string;
-  href: string;
-}
+import type { SearchEntry } from './search-core';
+
+export { type SearchEntry, search } from './search-core';
 
 export interface SearchLinks {
   section(id: 'about' | 'experience' | 'education' | 'hackathons' | 'contact' | 'activity'): string;
@@ -55,29 +49,4 @@ export function buildSearchIndex(links: SearchLinks): SearchEntry[] {
     });
   }
   return entries;
-}
-
-/** Every word of the query must appear somewhere in an entry. Title matches rank first. */
-export function search(index: SearchEntry[], query: string, limit = 8): SearchEntry[] {
-  const words = query.toLowerCase().split(/[^a-z0-9+#.]+/).filter(Boolean);
-  if (words.length === 0) return [];
-  const scored: { entry: SearchEntry; score: number; order: number }[] = [];
-  index.forEach((entry, order) => {
-    const title = entry.title.toLowerCase();
-    const subtitle = entry.subtitle.toLowerCase();
-    const rest = entry.keywords.toLowerCase();
-    let score = 0;
-    for (const w of words) {
-      if (title.startsWith(w)) score += 6;
-      else if (title.includes(w)) score += 4;
-      else if (subtitle.includes(w)) score += 2;
-      else if (rest.includes(w)) score += 1;
-      else return;
-    }
-    scored.push({ entry, score, order });
-  });
-  return scored
-    .sort((a, b) => b.score - a.score || a.order - b.order)
-    .slice(0, limit)
-    .map((s) => s.entry);
 }

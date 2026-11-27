@@ -1,0 +1,196 @@
+---
+/** One project as an Android "App info" page. Hidden until its address (#app-<id>) is opened. */
+import { getImage } from 'astro:assets';
+import Icon from '@/components/shared/Icon.astro';
+import Shot from '@/components/shared/Shot.astro';
+import type { Project, ProjectLink } from '@/content';
+import { formatBytes, formatInt, formatMonthYear } from '@/lib/format';
+import { projectDates, projectLanguages, repoByName } from '@/lib/github';
+import { type IconName, isIcon } from '@/lib/icons';
+import { shotImage } from '@/lib/shots';
+
+interface Props {
+  project: Project;
+  next?: Project;
+}
+const { project: p, next } = Astro.props;
+const dates = projectDates(p);
+const langs = projectLanguages(p).slice(0, 5);
+const logo = p.logo ? await getImage({ src: shotImage(p.logo), width: 144, height: 144, format: 'webp' }) : undefined;
+const phoneShot = p.shots.find((s) => s.kind === 'phone');
+const screen = phoneShot ? (await getImage({ src: shotImage(phoneShot.file), width: 432, format: 'webp' })).src : '';
+const linkIcon: Record<ProjectLink['kind'], IconName> = { repo: 'github', live: 'play', apk: 'package', docs: 'book', evidence: 'evidence' };
+const glyph: IconName = isIcon(p.glyph) ? p.glyph : 'layers';
+const max = p.figure?.kind === 'bars' ? Math.max(...p.figure.items.map((i) => i.value)) : 1;
+const repos = p.repos.map((full) => repoByName(full)).filter((r) => r !== undefined);
+---
+
+<section class="view" id={`app-${p.id}`} data-view="app" data-app={p.id} data-name={p.name} data-screen={screen} data-metric={p.metrics[0]?.value ?? ''} aria-labelledby={`app-${p.id}-t`}>
+  <div class="app-head">
+    <span class:list={['app-icon', 'app-icon--lg', logo && 'app-icon--dark']} aria-hidden="true">
+      {logo ? <img src={logo.src} width="72" height="72" alt="" loading="lazy" decoding="async" /> : <Icon name={glyph} />}
+    </span>
+    <div>
+      <h2 id={`app-${p.id}-t`} tabindex="-1">{p.name}</h2>
+      <p>
+        {p.year}
+        {p.status && <> · <span class="tag">{p.status}</span></>}
+        {p.team && <> · {p.team}</>}
+      </p>
+    </div>
+  </div>
+  <p class="app-lede">{p.summary}</p>
+  <div class="actions app-actions">
+    {
+      p.links.map((l, i) => (
+        <a class:list={['btn', i === 0 && 'btn--filled']} href={l.url}>
+          <Icon name={linkIcon[l.kind]} />
+          {l.label}
+        </a>
+      ))
+    }
+  </div>
+
+  {
+    p.metrics.length > 0 && (
+      <div class="group">
+        <h3 class="group__title">Measured</h3>
+        <dl class="group__list">
+          {p.metrics.map((m) => (
+            <div class="measure">
+              <dt class="vh">{m.label}</dt>
+              <dd>
+                <b>{m.value}</b>
+              </dd>
+              <dd>
+                <span>{m.label}</span>
+                {m.source && <> · <a href={m.source} aria-label={`Source for ${m.value} ${m.label}`}>source</a></>}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    )
+  }
+
+  {
+    p.shots.length > 0 && (
+      <div class="group">
+        <h3 class="group__title">Screens</h3>
+        <div class="group__list">
+          <div class="shots" tabindex="0" role="group" aria-label={`Screenshots of ${p.name}`}>
+            {p.shots.map((s) => (
+              <figure class:list={[s.kind !== 'phone' && 'is-web']}>
+                <Shot shot={s} widths={[320, 640, 960]} sizes={s.kind === 'phone' ? '160px' : '420px'} />
+                {s.caption && <figcaption>{s.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    p.figure && (
+      <div class="group">
+        <h3 class="group__title">{p.figure.title}</h3>
+        <div class="group__list">
+          <div class="block">
+            {p.figure.kind === 'bars' ? (
+              <ul class="bars">
+                {p.figure.items.map((item) => (
+                  <li class="bars__row">
+                    <div class="bars__label">
+                      <span>{item.label}</span>
+                      <span class="num">
+                        {formatBytes(item.value)} ({formatInt(item.value)} B){item.note ? `, ${item.note}` : ''}
+                      </span>
+                    </div>
+                    <div class="bars__track" aria-hidden="true">
+                      <div class="bars__fill" style={`inline-size:${Math.max(0.5, (item.value / max) * 100).toFixed(2)}%`} />
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div class="table-wrap">
+                <table class="fig-table">
+                  <thead>
+                    <tr>{p.figure.head.map((h) => <th scope="col">{h}</th>)}</tr>
+                  </thead>
+                  <tbody>
+                    {p.figure.rows.map((row) => (
+                      <tr>{row.map((cell, i) => (i === 0 ? <th scope="row" class="mono">{cell}</th> : <td>{cell}</td>))}</tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  <div class="group">
+    <h3 class="group__title">What it does</h3>
+    <div class="group__list">
+      <div class="block">
+        <ul class="bullets">{p.highlights.map((h) => <li>{h}</li>)}</ul>
+      </div>
+      <div class="block">
+        <p class="block__title">Built with</p>
+        <ul class="chips">{p.stack.map((s) => <li class="chip">{s}</li>)}</ul>
+      </div>
+    </div>
+  </div>
+
+  {
+    p.limits && (
+      <div class="group">
+        <h3 class="group__title">Limits, as its README states them</h3>
+        <div class="group__list">
+          <div class="block">
+            <ul class="bullets">{p.limits.map((l) => <li>{l}</li>)}</ul>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  <div class="group">
+    <h3 class="group__title">App details</h3>
+    <dl class="group__list">
+      {p.resumeTitle && (
+        <div class="row row--plain">
+          <dt class="row__sub">On the résumé as</dt>
+          <dd class="row__label">{p.resumeTitle}</dd>
+        </div>
+      )}
+      {dates && (
+        <div class="row row--plain">
+          <dt class="row__sub">Created, last pushed</dt>
+          <dd class="row__label">{formatMonthYear(dates.created)}, {formatMonthYear(dates.pushed)}</dd>
+        </div>
+      )}
+      {langs.length > 0 && (
+        <div class="row row--plain">
+          <dt class="row__sub">Languages in the repository</dt>
+          <dd class="row__label">{langs.map((l) => `${l.name} ${Math.round(l.share * 100)}%`).join(', ')}</dd>
+        </div>
+      )}
+      <div class="row row--plain">
+        <dt class="row__sub">{repos.length === 1 ? 'Repository' : 'Repositories'}</dt>
+        <dd class="row__label mono">
+          {repos.map((r, i) => <>{i > 0 && ', '}<a href={r.url}>{r.fullName}</a></>)}
+        </dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="pager">
+    <a class="btn" href="#apps"><Icon name="back" class="flip" />All apps</a>
+    {next && <a class="btn" href={`#app-${next.id}`}>Next: {next.name}<Icon name="chevron" class="flip" /></a>}
+  </div>
+</section>
