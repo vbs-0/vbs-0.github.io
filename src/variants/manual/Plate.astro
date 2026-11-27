@@ -22,7 +22,7 @@ const langs = projectLanguages(p).slice(0, 4).map((l) => `${l.name} ${Math.round
 const linkIcon: Record<ProjectLink['kind'], IconName> = { repo: 'github', live: 'play', apk: 'package', docs: 'book', evidence: 'evidence' };
 ---
 
-<article class:list={['plate', flip && 'plate--flip']} id={`fig-${p.id}`} aria-labelledby={`fig-${p.id}-t`}>
+<article class:list={['plate', flip && 'plate--flip']} id={`fig-${p.id}`} aria-labelledby={`fig-${p.id}-t`} data-reveal>
   <div class="plate__media">
     {
       web.map((s) => (

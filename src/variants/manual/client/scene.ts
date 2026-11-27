@@ -52,11 +52,17 @@ function inkColors(theme: Theme): InkColors {
 }
 
 export function createManualScene(canvas: HTMLCanvasElement, opts: ManualSceneOptions): ManualScene {
+  let cheap = false;
   const engine = createEngine(canvas, {
     maxDpr: opts.tier === 'low' ? 1.5 : 2,
     toneMapping: 'none',
     onContextLost: opts.onContextLost,
     onContextRestored: opts.onContextRestored,
+    // A device that cannot hold the frame rate loses the idle turn, then the idle motion entirely.
+    onDegrade: () => {
+      cheap = true;
+      engine.invalidate(3);
+    },
   });
   const scene = new Scene();
   const camera = new OrthographicCamera(-1, 1, 1, -1, DISTANCE - 2.8, DISTANCE + 2.8);
@@ -101,6 +107,7 @@ export function createManualScene(canvas: HTMLCanvasElement, opts: ManualSceneOp
   const frame = { cx: 0, cy: 0, h: 1, w: 1, ready: false };
   let boxMix = 0;
   let reveal = opts.reducedMotion ? 1 : 0;
+  let wasVisible = false;
   let revealClock = 0;
   let visible = false;
   const after: (() => void)[] = [];
@@ -137,7 +144,7 @@ export function createManualScene(canvas: HTMLCanvasElement, opts: ManualSceneOp
       rig.yaw = callout.yaw;
       rig.pitch = callout.pitch;
     } else {
-      rig.yaw = 0.5 + (instant ? 0 : Math.sin(elapsed * 0.4) * 0.22);
+      rig.yaw = 0.5 + (instant || cheap ? 0 : Math.sin(elapsed * 0.4) * 0.22);
       rig.pitch = 0.17;
     }
     rig.update(dt, instant);
@@ -151,10 +158,14 @@ export function createManualScene(canvas: HTMLCanvasElement, opts: ManualSceneOp
     }
 
     if (!visible) {
-      engine.renderer.clear();
+      if (wasVisible) {
+        engine.renderer.clear();
+        wasVisible = false;
+      }
       for (const cb of after) cb();
       return;
     }
+    wasVisible = true;
 
     // Fit the drawing into the slot; it needs more room once it is apart.
     boxMix = damp(boxMix, rig.amount, instant ? 1e6 : 5, dt);

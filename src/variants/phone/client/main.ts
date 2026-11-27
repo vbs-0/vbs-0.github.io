@@ -1,16 +1,23 @@
 /** About phone: wires the theme, the collapsing title, routing, search, hardware selection and the 3D device. */
 import type { PhonePartId } from '@/content/types';
+import { flood } from '@/lib/motion/flood';
+import { bootWhenQuiet } from '@/lib/motion/boot';
+import { initSweep } from '@/lib/motion/sweep';
 import { detectCapabilities } from '@/lib/three/capabilities';
-import type { Theme } from '@/styles/palettes';
+import { type Theme, palettes } from '@/styles/palettes';
 import { initDevOptions } from './devopts';
 import { createRouter } from './router';
 import type { PhoneScene } from './scene';
 import { initSearch } from './searchbox';
 
+// First: lift the cover if this page arrived through a sweep, before anything else can fail.
+initSweep();
+
 const root = document.documentElement;
 const $ = <T extends Element>(sel: string) => document.querySelector<T>(sel);
 const $$ = <T extends Element>(sel: string) => [...document.querySelectorAll<T>(sel)];
-const caps = detectCapabilities();
+// Probe on the canvas the scene will use: one context, created once.
+const caps = detectCapabilities(document.querySelector<HTMLCanvasElement>('#stage'));
 let scene: PhoneScene | undefined;
 
 // ── Theme ──────────────────────────────────────────────────────────────────
@@ -18,16 +25,22 @@ const systemDark = matchMedia('(prefers-color-scheme: dark)');
 const theme = (): Theme => (root.dataset.theme === 'light' || root.dataset.theme === 'dark' ? root.dataset.theme : systemDark.matches ? 'dark' : 'light');
 const themeButton = $<HTMLButtonElement>('[data-theme-toggle]');
 const showTheme = () => themeButton?.setAttribute('aria-pressed', String(theme() === 'dark'));
-themeButton?.addEventListener('click', () => {
+let switching = false;
+themeButton?.addEventListener('click', (event) => {
+  if (switching) return;
   const next: Theme = theme() === 'dark' ? 'light' : 'dark';
-  root.dataset.theme = next;
-  try {
-    localStorage.setItem('vbs-theme', next);
-  } catch {
-    /* the choice will not persist */
-  }
-  showTheme();
-  scene?.setTheme(next);
+  switching = true;
+  flood(event, palettes.phone[next].bg as string, () => {
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('vbs-theme', next);
+    } catch {
+      /* the choice will not persist */
+    }
+    showTheme();
+    scene?.setTheme(next);
+    switching = false;
+  });
 });
 systemDark.addEventListener('change', () => {
   showTheme();
@@ -161,5 +174,4 @@ async function boot(): Promise<void> {
     root.dataset.scene = 'still';
   }
 }
-if ('requestIdleCallback' in window) requestIdleCallback(() => void boot(), { timeout: 1200 });
-else setTimeout(() => void boot(), 200);
+bootWhenQuiet(() => void boot());

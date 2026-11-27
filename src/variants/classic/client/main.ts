@@ -1,13 +1,21 @@
 /** Classic: layer accordion, the work filter, section highlighting and the 3D stack and skyline. */
 import type { LayerId } from '@/content/types';
+import { initReveal } from '@/lib/motion/reveal';
+import { bootWhenQuiet } from '@/lib/motion/boot';
+import { initSweep } from '@/lib/motion/sweep';
+import { withViewTransition } from '@/lib/motion/view-transition';
 import { detectCapabilities } from '@/lib/three/capabilities';
 import { palettes } from '@/styles/palettes';
 import type { ClassicScene } from './scene';
 
+// First: lift the cover if this page arrived through a sweep, before anything else can fail.
+initSweep();
+
 const root = document.documentElement;
 const $ = <T extends Element>(sel: string) => document.querySelector<T>(sel);
 const $$ = <T extends Element>(sel: string) => [...document.querySelectorAll<T>(sel)];
-const caps = detectCapabilities();
+// Probe on the canvas the scene will use: one context, created once.
+const caps = detectCapabilities(document.querySelector<HTMLCanvasElement>('#stage'));
 const data = JSON.parse($('#scene-data')?.textContent ?? '{"weeks":[],"layers":[]}') as {
   weeks: ({ level: number; count: number } | null)[][];
   layers: { id: LayerId; name: string }[];
@@ -35,15 +43,28 @@ const filters = $$<HTMLButtonElement>('.filter');
 const filterable = $$<HTMLElement>('[data-layers]');
 const count = $<HTMLElement>('[data-count]');
 function applyFilter(id: string): void {
-  let shown = 0;
-  for (const el of filterable) {
-    const match = id === 'all' || (el.dataset.layers ?? '').split(' ').includes(id);
-    el.hidden = !match;
-    if (match) shown++;
-  }
-  for (const f of filters) f.setAttribute('aria-pressed', String(f.dataset.filter === id));
-  const name = data.layers.find((l) => l.id === id)?.name;
-  if (count) count.textContent = name ? `Showing ${shown} ${shown === 1 ? 'project' : 'projects'} in ${name}.` : `Showing all ${shown} projects.`;
+  const keep = filterable.filter((el) => id === 'all' || (el.dataset.layers ?? '').split(' ').includes(id));
+  const update = () => {
+    for (const el of filterable) el.hidden = !keep.includes(el);
+    for (const f of filters) f.setAttribute('aria-pressed', String(f.dataset.filter === id));
+    const name = data.layers.find((l) => l.id === id)?.name;
+    if (count) count.textContent = name ? `Showing ${keep.length} ${keep.length === 1 ? 'project' : 'projects'} in ${name}.` : `Showing all ${keep.length} projects.`;
+  };
+  // The projects that stay keep a name, so the browser moves them to their new places instead of
+  // cross-fading the whole list. One view transition per filter.
+  for (const el of filterable) el.style.viewTransitionName = '';
+  for (const el of keep) if (el.id) el.style.viewTransitionName = `p-${el.id}`;
+  const finished = withViewTransition(update);
+  let cleared = false;
+  const clear = () => {
+    if (cleared) return;
+    cleared = true;
+    for (const el of keep) el.style.viewTransitionName = '';
+  };
+  if (finished) void finished.then(clear);
+  else clear();
+  // A backstop: a transition the browser abandons must never leave names behind.
+  window.setTimeout(clear, 900);
 }
 for (const f of filters) f.addEventListener('click', () => applyFilter(f.dataset.filter ?? 'all'));
 for (const a of $$<HTMLAnchorElement>('[data-filter-link]')) a.addEventListener('click', () => applyFilter(a.dataset.filterLink ?? 'all'));
@@ -116,5 +137,5 @@ async function boot(): Promise<void> {
     root.dataset.scene = 'still';
   }
 }
-if ('requestIdleCallback' in window) requestIdleCallback(() => void boot(), { timeout: 1200 });
-else setTimeout(() => void boot(), 200);
+initReveal('.project, .more__row, .contact');
+bootWhenQuiet(() => void boot());

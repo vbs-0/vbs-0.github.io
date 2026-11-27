@@ -1,0 +1,30 @@
+---
+/**
+ * The sweep between builds, server-rendered so the destination page paints already covered.
+ * Hidden and size-contained while idle; only animated on transform and opacity. See lib/motion/sweep.ts.
+ */
+import type { VariantId } from '@site';
+import { SWEEP_SKINS } from '@/lib/motion/skins';
+
+interface Props {
+  variant: VariantId;
+}
+const { variant } = Astro.props;
+const skin = SWEEP_SKINS[variant];
+const bands = Array.from({ length: 7 }, (_, i) => i);
+const blades = Array.from({ length: 3 }, (_, i) => i);
+---
+
+<div
+  class="sweep"
+  aria-hidden="true"
+  style={`--sweep-paper:${skin.paper};--sweep-paper-alt:${skin.paperAlt};--sweep-ink:${skin.ink};--sweep-accent:${skin.accent};--sweep-font:${skin.font};--sweep-stretch:${skin.stretch};--sweep-case:${skin.transform}`}
+>
+  {bands.map((i) => <span class="sweep__band" style={`--i:${i}`} />)}
+  <div class="sweep__blades">{blades.map((i) => <span class="sweep__blade" style={`--b:${i};inset-inline-start:${4 + i * 34}%;inline-size:${[7, 10, 6][i]}vw`} />)}</div>
+  <span class="sweep__flash" />
+  <div class="sweep__text">
+    <p class="sweep__label">{skin.label}</p>
+    <p class="sweep__caption">{skin.caption}</p>
+  </div>
+</div>

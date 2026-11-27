@@ -99,7 +99,18 @@ function labelTexture(text: string, color: string): CanvasTexture {
 }
 
 export function createClassicScene(canvas: HTMLCanvasElement, opts: ClassicSceneOptions): ClassicScene {
-  const engine = createEngine(canvas, { maxDpr: opts.tier === 'low' ? 1.5 : 2, toneMapping: 'aces', onContextLost: opts.onContextLost, onContextRestored: opts.onContextRestored });
+  let cheap = false;
+  const engine = createEngine(canvas, {
+    maxDpr: opts.tier === 'low' ? 1.5 : 2,
+    toneMapping: 'aces',
+    onContextLost: opts.onContextLost,
+    onContextRestored: opts.onContextRestored,
+    // A device that cannot hold the frame rate loses the idle turn of the stack and the skyline.
+    onDegrade: () => {
+      cheap = true;
+      engine.invalidate(3);
+    },
+  });
   const renderer = engine.renderer;
   const scene = new Scene();
   const camera = new PerspectiveCamera(26, 1, DISTANCE - 4, DISTANCE + 4);
@@ -201,7 +212,9 @@ export function createClassicScene(canvas: HTMLCanvasElement, opts: ClassicScene
   let state: ClassicState = { subject: null, slot: null, open: 0, selected: null };
   const frame = { cx: 0, cy: 0, w: 1, h: 1, ready: false };
   let open = 0;
+  let intro = 0;
   let visible = false;
+  let wasVisible = false;
   const raycaster = new Raycaster();
   const pointer = new Vector2();
 
@@ -225,9 +238,16 @@ export function createClassicScene(canvas: HTMLCanvasElement, opts: ClassicScene
     stack.visible = state.subject === 'stack';
     skyline.visible = state.subject === 'skyline';
     if (!visible) {
-      renderer.clear();
+      if (wasVisible) {
+        renderer.clear();
+        wasVisible = false;
+      }
       return;
     }
+    wasVisible = true;
+    // The stack rises into place once, when it is first on screen.
+    if (intro < 1) intro = Math.min(1, intro + (instant ? 1 : dt / 0.9));
+    stack.position.y = -0.5 * (1 - (1 - intro) ** 3);
 
     let subject = 2.2;
     if (state.subject === 'stack') {
@@ -246,7 +266,7 @@ export function createClassicScene(canvas: HTMLCanvasElement, opts: ClassicScene
         (s.edges.material as LineBasicMaterial).opacity = 0.9 - dimmed * 0.6;
         (s.label.material as MeshBasicMaterial).opacity = 0.95 - dimmed * 0.7;
       });
-      if (!instant) stack.rotation.y = -0.62 + Math.sin(elapsed * 0.3) * 0.2;
+      if (!instant && !cheap) stack.rotation.y = -0.62 + Math.sin(elapsed * 0.3) * 0.2;
       const height = slabs.length * pitch + 0.9;
       subject = Math.max(height, (2.5 * frame.h) / Math.max(1, frame.w));
     } else {
@@ -254,7 +274,7 @@ export function createClassicScene(canvas: HTMLCanvasElement, opts: ClassicScene
         rise = Math.min(1, rise + (instant ? 1 : dt * 0.9));
         layoutBars();
       }
-      if (!instant) skyline.rotation.y = -0.5 + Math.sin(elapsed * 0.25) * 0.16;
+      if (!instant && !cheap) skyline.rotation.y = -0.5 + Math.sin(elapsed * 0.25) * 0.16;
       subject = Math.max(1.5, ((span + 0.6) * frame.h) / Math.max(1, frame.w));
     }
     framePerspective(camera, size.width, size.height, frame.cx, frame.cy, frame.h, subject, DISTANCE, 0.92);

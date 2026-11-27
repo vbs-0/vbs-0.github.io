@@ -6,6 +6,7 @@
 import { type VariantId, siteConfig } from '@site';
 import { experience, layers, profile } from '@/content';
 import { palettes, themeCss } from '@/styles/palettes';
+import '@/styles/motion.css';
 
 interface Props {
   variant: VariantId;
@@ -81,6 +82,18 @@ const jsonLd = {
         if (saved === 'light' || saved === 'dark') root.dataset.theme = saved;
       }
       if (localStorage.getItem('vbs-motion') === 'off') root.dataset.motion = 'off';
+      // Arriving through a sweep: the cover is already on the page, painted before anything else.
+      var flag = sessionStorage.getItem('vbs-sweep');
+      if (flag) {
+        var parsed = JSON.parse(flag);
+        if (Date.now() - parsed.at < 8000) {
+          root.dataset.sweep = 'enter';
+          // A cover that can never lift would hide the whole page: two hard safety timers.
+          setTimeout(function () { if (root.dataset.sweep === 'enter') root.dataset.sweep = 'exit'; }, 2200);
+          setTimeout(function () { if (root.dataset.sweep) delete root.dataset.sweep; }, 3600);
+        }
+        sessionStorage.removeItem('vbs-sweep');
+      }
     } catch (e) {
       /* storage can be blocked; the defaults are fine */
     }

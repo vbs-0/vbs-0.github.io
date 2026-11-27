@@ -13,14 +13,18 @@ export interface Capabilities {
 
 const SOFTWARE_RENDERER = /swiftshader|llvmpipe|software|basic render/i;
 
-function probeWebGL(): { ok: boolean; software: boolean } {
+/**
+ * Checks for WebGL 2 on the canvas the scene will use, so only one context is ever created.
+ * Creating a throwaway context and losing it costs hundreds of milliseconds on a software renderer,
+ * and that lands as a long task on page load.
+ */
+function probeWebGL(canvas?: HTMLCanvasElement | null): { ok: boolean; software: boolean } {
   try {
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl2', { failIfMajorPerformanceCaveat: false });
+    const target = canvas ?? document.createElement('canvas');
+    const gl = target.getContext('webgl2', { failIfMajorPerformanceCaveat: false });
     if (!gl) return { ok: false, software: false };
     const info = gl.getExtension('WEBGL_debug_renderer_info');
     const renderer = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : '';
-    gl.getExtension('WEBGL_lose_context')?.loseContext();
     return { ok: true, software: SOFTWARE_RENDERER.test(renderer) };
   } catch {
     return { ok: false, software: false };
@@ -33,9 +37,19 @@ function probeWebGL(): { ok: boolean; software: boolean } {
  *   ?tier=low    force the cheaper rendering path
  *   ?motion=off  behave as if reduced motion were requested
  */
-export function detectCapabilities(): Capabilities {
+function prefersReduced(): boolean {
+  return (
+    matchMedia('(prefers-reduced-motion: reduce)').matches ||
+    new URLSearchParams(location.search).get('motion') === 'off' ||
+    document.documentElement.dataset.motion === 'off'
+  );
+}
+
+export function detectCapabilities(canvas?: HTMLCanvasElement | null): Capabilities {
   const params = new URLSearchParams(location.search);
-  const probe = probeWebGL();
+  // Switched off by the visitor or by a test: do not touch WebGL at all.
+  if (params.get('webgl') === 'off') return { webgl: false, reducedMotion: prefersReduced(), tier: 'low', touch: matchMedia('(pointer: coarse)').matches };
+  const probe = probeWebGL(canvas);
   const nav = navigator as Navigator & { deviceMemory?: number };
   const cores = nav.hardwareConcurrency ?? 4;
   const memory = nav.deviceMemory ?? 8;
@@ -44,11 +58,8 @@ export function detectCapabilities(): Capabilities {
   const forcedTier = params.get('tier');
 
   return {
-    webgl: probe.ok && params.get('webgl') !== 'off',
-    reducedMotion:
-      matchMedia('(prefers-reduced-motion: reduce)').matches ||
-      params.get('motion') === 'off' ||
-      document.documentElement.dataset.motion === 'off',
+    webgl: probe.ok,
+    reducedMotion: prefersReduced(),
     tier: forcedTier === 'low' || forcedTier === 'high' ? forcedTier : weak ? 'low' : 'high',
     touch,
   };

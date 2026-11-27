@@ -33,11 +33,19 @@ body {
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   caret-color: var(--c-accent);
-  /* Two soft studio lights behind everything. */
+  background: var(--c-bg);
+}
+/* The two studio lights live on one fixed layer, painted once and composited while scrolling.
+   `background-attachment: fixed` would repaint the whole viewport on every scroll frame. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background:
     radial-gradient(60rem 40rem at 85% -5%, color-mix(in srgb, var(--c-layer-system) 16%, transparent), transparent 70%),
-    radial-gradient(50rem 36rem at 0% 30%, color-mix(in srgb, var(--c-accent) 9%, transparent), transparent 70%), var(--c-bg);
-  background-attachment: fixed;
+    radial-gradient(50rem 36rem at 0% 30%, color-mix(in srgb, var(--c-accent) 9%, transparent), transparent 70%);
 }
 ::selection {
   background: var(--c-accent);
@@ -202,13 +210,9 @@ main,
   position: sticky;
   top: 0;
   z-index: 20;
-  background: color-mix(in srgb, var(--c-bg) 86%, transparent);
+  /* A near-solid bar, not a blurred one: a backdrop filter here recomputes on every scroll frame. */
+  background: color-mix(in srgb, var(--c-bg) 94%, transparent);
   border-bottom: 1px solid color-mix(in srgb, var(--c-outline) 60%, transparent);
-}
-@supports (backdrop-filter: blur(1px)) {
-  .nav {
-    backdrop-filter: blur(14px) saturate(1.4);
-  }
 }
 .nav__in {
   display: flex;

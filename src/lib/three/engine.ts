@@ -20,6 +20,11 @@ export interface EngineOptions {
   /** Called when the GPU context is lost, so the page can show its still image. */
   onContextLost?: () => void;
   onContextRestored?: () => void;
+  /**
+   * Called when the device cannot hold the frame rate, so the scene can simplify.
+   * `reduced`: drop the expensive materials and the extra passes. `minimal`: stop idle motion entirely.
+   */
+  onDegrade?: (level: 'reduced' | 'minimal') => void;
 }
 
 export type FrameCallback = (dt: number, elapsed: number) => void;
@@ -64,6 +69,11 @@ export function createEngine(canvas: HTMLCanvasElement, opts: EngineOptions = {}
 
   let continuous = true;
   let pending = 2;
+  // Frame budget: the median of the last 60 frames, checked every 60 frames. A phone that cannot hold
+  // 45 fps gets a smaller drawing buffer first, then simpler materials, then no idle motion at all.
+  const budget: number[] = [];
+  let degrade: 0 | 1 | 2 = 0;
+  const dprCeiling = opts.maxDpr ?? 2;
   let raf = 0;
   let last = 0;
   let elapsed = 0;
@@ -103,6 +113,28 @@ export function createEngine(canvas: HTMLCanvasElement, opts: EngineOptions = {}
     for (const cb of frameCbs) cb(dt, elapsed);
     stats.lastFrameMs = performance.now() - t0;
     stats.frames++;
+    // Watch the real frame interval, not just our own work: the browser's compositing counts too.
+    if (continuous && stats.frames > 30) {
+      budget.push(dt * 1000);
+      if (budget.length > 60) budget.shift();
+      if (budget.length === 60) {
+        const median = [...budget].sort((a, b) => a - b)[30] as number;
+        if (median > 22) {
+          budget.length = 0;
+          if (degrade === 0) {
+            degrade = 1;
+            renderer.setPixelRatio(Math.max(1, Math.min(size.dpr, dprCeiling) * 0.7));
+            opts.onDegrade?.('reduced');
+          } else if (degrade === 1) {
+            degrade = 2;
+            opts.onDegrade?.('minimal');
+            continuous = false;
+          }
+        } else {
+          budget.length = 0;
+        }
+      }
+    }
   };
 
   const ro = new ResizeObserver(measure);

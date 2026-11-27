@@ -1,16 +1,24 @@
 /** Service manual: theme switch, sheet navigation, the parts list, and the scroll that takes the phone apart. */
 import type { PhonePartId } from '@/content/types';
+import { flood } from '@/lib/motion/flood';
+import { initReveal } from '@/lib/motion/reveal';
+import { bootWhenQuiet } from '@/lib/motion/boot';
+import { initSweep } from '@/lib/motion/sweep';
 import { detectCapabilities } from '@/lib/three/capabilities';
 import { clamp01, smoothstep } from '@/lib/three/math';
-import type { Theme } from '@/styles/palettes';
+import { type Theme, palettes } from '@/styles/palettes';
 import type { ManualScene } from './scene';
+
+// First: lift the cover if this page arrived through a sweep, before anything else can fail.
+initSweep();
 
 const root = document.documentElement;
 const $ = <T extends Element>(sel: string) => document.querySelector<T>(sel);
 const $$ = <T extends Element>(sel: string) => [...document.querySelectorAll<T>(sel)];
 
 let scene: ManualScene | undefined;
-const caps = detectCapabilities();
+// Probe on the canvas the scene will use: one context, created once.
+const caps = detectCapabilities(document.querySelector<HTMLCanvasElement>('#stage'));
 if (caps.reducedMotion) root.dataset.motion = 'off';
 
 // ── Theme ──────────────────────────────────────────────────────────────────
@@ -18,16 +26,23 @@ const systemDark = matchMedia('(prefers-color-scheme: dark)');
 const theme = (): Theme => (root.dataset.theme === 'light' || root.dataset.theme === 'dark' ? root.dataset.theme : systemDark.matches ? 'dark' : 'light');
 const themeButton = $<HTMLButtonElement>('[data-theme-toggle]');
 const showTheme = () => themeButton?.setAttribute('aria-pressed', String(theme() === 'dark'));
-themeButton?.addEventListener('click', () => {
+let switching = false;
+themeButton?.addEventListener('click', (event) => {
+  if (switching) return;
   const next: Theme = theme() === 'dark' ? 'light' : 'dark';
-  root.dataset.theme = next;
-  try {
-    localStorage.setItem('vbs-theme', next);
-  } catch {
-    /* the choice simply will not persist */
-  }
-  showTheme();
-  scene?.setTheme(next);
+  switching = true;
+  // The blueprint floods out of the switch, as if the sheet were dipped in ink.
+  flood(event, palettes.manual[next].bg as string, () => {
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('vbs-theme', next);
+    } catch {
+      /* the choice simply will not persist */
+    }
+    showTheme();
+    scene?.setTheme(next);
+    switching = false;
+  });
 });
 systemDark.addEventListener('change', () => {
   showTheme();
@@ -168,5 +183,5 @@ async function boot(): Promise<void> {
     root.dataset.scene = 'still';
   }
 }
-if ('requestIdleCallback' in window) requestIdleCallback(() => void boot(), { timeout: 1200 });
-else setTimeout(() => void boot(), 200);
+initReveal('.plate, .approval');
+bootWhenQuiet(() => void boot());

@@ -164,7 +164,20 @@ void main() {
 }`;
 
 export function createPhoneScene(canvas: HTMLCanvasElement, opts: PhoneSceneOptions): PhoneScene {
-  const engine = createEngine(canvas, { maxDpr: opts.tier === 'low' ? 1.5 : 2, toneMapping: 'neutral', onContextLost: opts.onContextLost, onContextRestored: opts.onContextRestored });
+  let cheap = false;
+  const engine = createEngine(canvas, {
+    maxDpr: opts.tier === 'low' ? 1.5 : 2,
+    toneMapping: 'neutral',
+    onContextLost: opts.onContextLost,
+    onContextRestored: opts.onContextRestored,
+    // A device that cannot hold the frame rate loses the idle sway first, then the idle motion entirely.
+    onDegrade: (level) => {
+      cheap = true;
+      if (level === 'minimal') motion = 0;
+      painted = '';
+      engine.invalidate(3);
+    },
+  });
   const renderer = engine.renderer;
   const scene = new Scene();
   const camera = new PerspectiveCamera(24, 1, DISTANCE - 2.8, DISTANCE + 2.8);
@@ -194,7 +207,9 @@ export function createPhoneScene(canvas: HTMLCanvasElement, opts: PhoneSceneOpti
   let painted = '';
   const frame = { cx: 0, cy: 0, w: 1, h: 1, ready: false };
   let boxMix = 0;
+  let intro = 0;
   let visible = false;
+  let wasVisible = false;
   let drag = 0;
   const after: (() => void)[] = [];
 
@@ -259,7 +274,7 @@ export function createPhoneScene(canvas: HTMLCanvasElement, opts: PhoneSceneOpti
     rig.explode = callout ? 1 : 0;
     rig.active = callout ? state.active : null;
     drag = damp(drag, 0, instant ? 1e6 : 1.6, dt);
-    const sway = instant ? 0 : Math.sin(elapsed * 0.5 * motion) * 0.14;
+    const sway = instant || cheap ? 0 : Math.sin(elapsed * 0.5 * motion) * 0.14;
     if (callout) {
       rig.yaw = callout.yaw + drag;
       rig.pitch = callout.pitch;
@@ -270,16 +285,24 @@ export function createPhoneScene(canvas: HTMLCanvasElement, opts: PhoneSceneOpti
       rig.yaw = 0.42 + sway + drag;
       rig.pitch = 0.1;
     }
-    model.root.position.y = instant ? 0 : Math.sin(elapsed * 0.8 * motion) * 0.012;
+    model.root.position.y = instant || cheap ? 0 : Math.sin(elapsed * 0.8 * motion) * 0.012;
     rig.update(dt, instant);
     pbr.update(rig);
     paint();
 
     if (!visible) {
-      renderer.clear();
+      if (wasVisible) {
+        renderer.clear();
+        wasVisible = false;
+      }
       for (const cb of after) cb();
       return;
     }
+    wasVisible = true;
+    // The device arrives once: a short rise and scale from the moment it is first on screen.
+    if (intro < 1) intro = Math.min(1, intro + (instant ? 1 : dt / 0.75));
+    const eased = 1 - (1 - intro) ** 3;
+    model.root.scale.setScalar(0.01 * (0.9 + 0.1 * eased));
     boxMix = damp(boxMix, rig.amount, instant ? 1e6 : 5, dt);
     const boxW = BOX.assembled.w + (BOX.apart.w - BOX.assembled.w) * boxMix;
     const boxH = BOX.assembled.h + (BOX.apart.h - BOX.assembled.h) * boxMix;

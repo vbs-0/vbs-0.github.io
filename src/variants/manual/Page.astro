@@ -14,6 +14,7 @@ import coverLight from '@/assets/posters/manual-cover-light.webp';
 import explodedDark from '@/assets/posters/manual-exploded-dark.webp';
 import explodedLight from '@/assets/posters/manual-exploded-light.webp';
 import BaseHead from '@/components/shared/BaseHead.astro';
+import Sweep from '@/components/shared/Sweep.astro';
 import Icon from '@/components/shared/Icon.astro';
 import { certifications, education, experience, featured, hackathons, layers, mlProjects, moreProjects, profile, projectById } from '@/content';
 import { formatDay, formatInt, formatMonthYear } from '@/lib/format';
@@ -264,7 +265,7 @@ const letters = 'ABCDEFGH';
         <ul class="approvals">
           {
             hackathons.map((h) => (
-              <li class:list={['approval', h.rank === 1 && 'approval--first']}>
+              <li class:list={['approval', h.rank === 1 && 'approval--first']} data-reveal>
                 <p class="approval__mark">{h.result}</p>
                 <h3 class="h3">{h.name}</h3>
                 <p>{h.detail}</p>
@@ -273,7 +274,7 @@ const letters = 'ABCDEFGH';
           }
           {
             certifications.map((c) => (
-              <li class="approval">
+              <li class="approval" data-reveal>
                 <p class="approval__mark">Certified</p>
                 <h3 class="h3">{c.name}</h3>
                 <p>{c.issuer}, {formatMonthYear(c.date)}. {c.note}</p>
@@ -347,7 +348,7 @@ const letters = 'ABCDEFGH';
             builds.length > 0 && (
               <p class="builds note">
                 <span>Also issued as</span>
-                {builds.map((b) => <a href={b.path}>{b.name}</a>)}
+                {builds.map((b) => <a href={b.path} data-sweep={b.id}>{b.name}</a>)}
               </p>
             )
           }
@@ -360,6 +361,7 @@ const letters = 'ABCDEFGH';
       </section>
     </main>
 
+    <Sweep variant="manual" />
     <canvas class="stage-canvas" id="stage" aria-hidden="true"></canvas>
     <svg class="leader" aria-hidden="true" style="visibility:hidden"><line x1="0" y1="0" x2="0" y2="0"></line><circle r="3.5"></circle></svg>
     <script>

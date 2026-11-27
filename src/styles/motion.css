@@ -1,0 +1,309 @@
+/* Shared motion: the sweep between builds, the theme flood, scroll reveals, and the view-transition tweaks.
+   Everything here animates transform, opacity or a clip only. No filters, no backdrop-filter, no layout. */
+
+:root {
+  --sweep-ms: 280ms;
+  --sweep-stagger: 14ms;
+  --sweep-out: 300ms;
+  --sweep-out-stagger: 16ms;
+  --flood-ms: 520ms;
+  --reveal-ms: 620ms;
+  --ease-sweep: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── The sweep between builds ─────────────────────────────────────────────
+   Seven bands cover the screen from the right, the page swaps underneath, the bands leave to the left.
+   Three blades in the accent colour cross faster, for the whip-pan energy. One thin flash at the start. */
+
+.sweep {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  pointer-events: none;
+  visibility: hidden;
+  contain: strict;
+}
+.sweep__band {
+  position: relative;
+  overflow: hidden;
+  background: var(--sweep-paper, #111);
+  transform: translate3d(101%, 0, 0);
+}
+/* Every other band takes the second tone, so the sweep reads as bands rather than one blank sheet. */
+.sweep__band:nth-child(even) {
+  background: var(--sweep-paper-alt, var(--sweep-paper, #222));
+}
+.sweep__band:nth-child(3n)::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--sweep-accent, #fff) 22%, transparent), transparent 42%);
+}
+/* A hairline of the destination's ink along the leading edge of each band. */
+.sweep__band::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 2px;
+  background: var(--sweep-ink, #fff);
+  opacity: 0.55;
+}
+.sweep__text {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.7rem;
+  padding: 1rem;
+  transform: translate3d(30vw, 0, 0);
+}
+.sweep__caption {
+  color: var(--sweep-ink, #fff);
+  font-family: var(--sweep-font, system-ui, sans-serif);
+  font-size: clamp(0.72rem, 1.1vw, 0.9rem);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  text-align: center;
+}
+.sweep__label {
+  color: var(--sweep-ink, #fff);
+  display: block;
+  font-family: var(--sweep-font, system-ui, sans-serif);
+  font-size: clamp(1.6rem, 5.4vw, 3.4rem);
+  font-weight: 800;
+  font-stretch: var(--sweep-stretch, 100%);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-align: center;
+  text-transform: var(--sweep-case, none);
+}
+/* Promoted only while a sweep is running. */
+:root[data-sweep] .sweep__band,
+:root[data-sweep] .sweep__text,
+:root[data-sweep] .sweep__blade,
+:root[data-sweep] .sweep__flash {
+  will-change: transform, opacity;
+}
+.sweep__blades {
+  position: absolute;
+  inset: -10% -20%;
+  overflow: hidden;
+}
+.sweep__blade {
+  position: absolute;
+  inset-block: 0;
+  background: var(--sweep-accent, #fff);
+  opacity: 0.95;
+  transform: translate3d(120vw, 0, 0) skewX(-14deg);
+}
+.sweep__flash {
+  position: absolute;
+  inset-block: 0;
+  inline-size: 26vw;
+  background: linear-gradient(90deg, transparent, var(--sweep-ink, #fff), transparent);
+  opacity: 0;
+  transform: translate3d(-40vw, 0, 0) skewX(-18deg);
+}
+/* The entrance starts from the covered state, so the first paint of the new page is already hidden. */
+:root[data-sweep='enter'] .sweep {
+  visibility: visible;
+}
+:root[data-sweep='enter'] .sweep__band {
+  transform: translate3d(0, 0, 0);
+}
+:root[data-sweep='enter'] .sweep__text {
+  transform: translate3d(0, 0, 0);
+}
+:root[data-sweep='enter'] body {
+  overflow: hidden;
+}
+/* Leaving: the bands arrive from the right, one after another. */
+:root[data-sweep='leave'] .sweep {
+  visibility: visible;
+}
+:root[data-sweep='leave'] .sweep__band {
+  animation: sweep-in var(--sweep-ms) var(--ease-sweep) both;
+  animation-delay: calc(var(--i) * var(--sweep-stagger));
+}
+:root[data-sweep='leave'] .sweep__text {
+  animation: sweep-label-in calc(var(--sweep-ms) + 160ms) var(--ease-sweep) both;
+}
+:root[data-sweep='leave'] .sweep__blade {
+  animation: sweep-blade-in 780ms var(--ease-sweep) both;
+  animation-delay: calc(var(--b) * 110ms);
+}
+:root[data-sweep='leave'] .sweep__flash {
+  animation: sweep-flash 620ms var(--ease-sweep) both;
+}
+/* Entering: the bands leave to the left, the label follows them. */
+:root[data-sweep='exit'] .sweep {
+  visibility: visible;
+}
+:root[data-sweep='exit'] .sweep__band {
+  animation: sweep-out var(--sweep-out) var(--ease-sweep) both;
+  animation-delay: calc(var(--i) * var(--sweep-out-stagger));
+}
+:root[data-sweep='exit'] .sweep__text {
+  animation: sweep-label-out var(--sweep-out) var(--ease-sweep) both;
+}
+
+@keyframes sweep-in {
+  from {
+    transform: translate3d(101%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes sweep-out {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-101%, 0, 0);
+  }
+}
+@keyframes sweep-label-in {
+  from {
+    transform: translate3d(32vw, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes sweep-label-out {
+  from {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(-38vw, 0, 0);
+    opacity: 0;
+  }
+}
+@keyframes sweep-blade-in {
+  from {
+    transform: translate3d(120vw, 0, 0) skewX(-14deg);
+  }
+  to {
+    transform: translate3d(-140vw, 0, 0) skewX(-14deg);
+  }
+}
+@keyframes sweep-flash {
+  0% {
+    transform: translate3d(-40vw, 0, 0) skewX(-18deg);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(130vw, 0, 0) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+/* ── The theme flood ──────────────────────────────────────────────────────
+   A disc in the new theme's colour grows from the switch and covers the page, then the theme flips
+   underneath it. One transform animation on one layer: nothing repaints while it runs. */
+
+.flood {
+  position: fixed;
+  z-index: 950;
+  inline-size: 320vmax;
+  block-size: 320vmax;
+  margin-inline-start: -160vmax;
+  margin-block-start: -160vmax;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: scale(0);
+  contain: strict;
+}
+.flood--grow {
+  will-change: transform;
+}
+.flood--grow {
+  transition: transform var(--flood-ms) cubic-bezier(0.22, 0.61, 0.24, 1);
+}
+
+/* ── Scroll reveals ───────────────────────────────────────────────────────
+   Hidden only when JavaScript is running, so the page is never blank without it. */
+
+:root.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 1.4rem, 0);
+}
+:root.reveal-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--reveal-ms) var(--ease-reveal),
+    transform var(--reveal-ms) var(--ease-reveal);
+  transition-delay: calc(var(--d, 0) * 70ms);
+}
+
+/* ── View transitions ─────────────────────────────────────────────────────
+   Used for the App info pages and the Classic filter: the browser morphs the named elements. */
+
+::view-transition-group(root) {
+  animation-duration: 380ms;
+  animation-timing-function: var(--ease-sweep);
+}
+::view-transition-old(root) {
+  animation: vt-fade-out 220ms ease both;
+}
+::view-transition-new(root) {
+  animation: vt-fade-in 300ms ease both;
+}
+::view-transition-group(app-icon),
+::view-transition-group(app-title) {
+  animation-duration: 420ms;
+  animation-timing-function: var(--ease-sweep);
+}
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+    transform: translate3d(0, -0.6rem, 0) scale(0.99);
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1rem, 0) scale(0.995);
+  }
+}
+
+/* ── Off, when the visitor asks for less motion ─────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .sweep,
+  .flood {
+    display: none !important;
+  }
+  :root.reveal-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+  ::view-transition-group(root),
+  ::view-transition-group(app-icon),
+  ::view-transition-group(app-title) {
+    animation-duration: 1ms !important;
+  }
+}
+:root[data-motion='off'] .sweep,
+:root[data-motion='off'] .flood {
+  display: none !important;
+}
+:root[data-motion='off'] [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}

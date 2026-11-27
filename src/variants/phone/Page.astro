@@ -15,6 +15,7 @@ import explodedLight from '@/assets/posters/phone-exploded-light.webp';
 import heroDark from '@/assets/posters/phone-hero-dark.webp';
 import heroLight from '@/assets/posters/phone-hero-light.webp';
 import BaseHead from '@/components/shared/BaseHead.astro';
+import Sweep from '@/components/shared/Sweep.astro';
 import Icon from '@/components/shared/Icon.astro';
 import { certifications, education, experience, featured, hackathons, headline, layers, mlProjects, moreProjects, profile, projectById, projects } from '@/content';
 import type { Project } from '@/content';
@@ -310,7 +311,7 @@ const tiers: { id: string; title: string; list: Project[] }[] = [
                 </details>
                 {
                   builds.map((b) => (
-                    <a class="row" href={b.path} data-mini={b.name}>
+                    <a class="row" href={b.path} data-mini={b.name} data-sweep={b.id}>
                       <span class="row__icon" aria-hidden="true"><Icon name="layers" size={20} /></span>
                       <div>
                         <p class="row__label">Other build: {b.name}</p>
@@ -389,6 +390,7 @@ const tiers: { id: string; title: string; list: Project[] }[] = [
 
     <div class="snackbar" role="status" aria-live="polite"><p data-snackbar></p></div>
     <canvas class="hwui" data-hwui hidden aria-hidden="true"></canvas>
+    <Sweep variant="phone" />
     <canvas class="stage-canvas" id="stage" aria-hidden="true"></canvas>
     <script type="application/json" id="search-index" set:html={JSON.stringify(searchIndex)} />
     <script>

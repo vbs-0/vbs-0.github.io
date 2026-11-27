@@ -10,6 +10,7 @@ import fontUrl from '@fontsource-variable/mona-sans/files/mona-sans-latin-wdth-n
 import './classic.css';
 import { otherBuilds } from '@site';
 import BaseHead from '@/components/shared/BaseHead.astro';
+import Sweep from '@/components/shared/Sweep.astro';
 import Icon from '@/components/shared/Icon.astro';
 import Shot from '@/components/shared/Shot.astro';
 import { certifications, education, experience, featured, hackathons, layerById, layers, mlProjects, moreProjects, profile, projects } from '@/content';
@@ -53,6 +54,7 @@ const NAV = [
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
+    <Sweep variant="classic" />
     <canvas class="stage-canvas" id="stage" aria-hidden="true"></canvas>
 
     <header class="nav">
@@ -158,7 +160,7 @@ const NAV = [
               const max = p.figure?.kind === 'bars' ? Math.max(...p.figure.items.map((i) => i.value)) : 1;
               const hasMedia = web.length + phones.length > 0 || p.figure;
               return (
-                <article class="project" id={`project-${p.id}`} data-layers={p.layers.join(' ')} aria-labelledby={`project-${p.id}-t`} style={hasMedia ? undefined : 'grid-template-columns:1fr'}>
+                <article class="project" data-reveal id={`project-${p.id}`} data-layers={p.layers.join(' ')} aria-labelledby={`project-${p.id}-t`} style={hasMedia ? undefined : 'grid-template-columns:1fr'}>
                   {hasMedia && (
                     <div class="project__media">
                       {web.map((s) => <figure class:list={['frame', s.kind === 'web' && 'frame--tall']}><Shot shot={s} sizes="(min-width: 960px) 44vw, 92vw" /></figure>)}
@@ -221,7 +223,7 @@ const NAV = [
         <ul class="more" aria-label="More projects">
           {
             moreProjects.map((p) => (
-              <li class="more__row" id={`project-${p.id}`} data-layers={p.layers.join(' ')}>
+              <li class="more__row" data-reveal id={`project-${p.id}`} data-layers={p.layers.join(' ')}>
                 <p class="more__name">{p.name} <span class="muted mono" style="font-size:0.85rem;font-weight:400">{p.year}</span></p>
                 <p>{p.oneLiner} <span class="muted">{p.stack.join(', ')}.</span></p>
                 <p class="more__links">{p.links.map((l) => <a href={l.url}>{l.label}</a>)}</p>
@@ -302,7 +304,7 @@ const NAV = [
       </section>
 
       <section class="wrap section" id="contact" aria-labelledby="contact-t">
-        <div class="contact">
+        <div class="contact" data-reveal>
           <h2 class="h2" id="contact-t">Get in touch</h2>
           <dl class="contact__list">
             {profile.contacts.map((c) => <div><dt>{c.label}</dt><dd><a href={c.href} download={c.kind === 'resume' ? true : undefined}>{c.value}</a></dd></div>)}
@@ -318,7 +320,7 @@ const NAV = [
     <footer class="foot">
       <div class="wrap foot__in">
         <p>Drawn live with three.js. Set in Mona Sans and Monaspace Neon. Source on <a href="https://github.com/vbs-0/vbs-0.github.io">GitHub</a>.</p>
-        {builds.length > 0 && <p class="foot__builds"><span>Same content, other builds:</span>{builds.map((b) => <a href={b.path}>{b.name}</a>)}</p>}
+        {builds.length > 0 && <p class="foot__builds"><span>Same content, other builds:</span>{builds.map((b) => <a href={b.path} data-sweep={b.id}>{b.name}</a>)}</p>}
       </div>
     </footer>
 
