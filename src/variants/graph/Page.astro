@@ -1,0 +1,326 @@
+---
+/**
+ * System map: the portfolio as one chart. Every layer, project and tool is a node in a 3D graph; the
+ * camera flies to whatever you pick, a command palette finds anything by name, and the panel gives the
+ * facts. No phone, no film: this one is a map you read.
+ * The map is drawn twice from the same coordinates: an SVG chart in the HTML (which is what ships without
+ * WebGL or JavaScript) and the live 3D scene on top of it when the device can run it.
+ */
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource-variable/chivo-mono/wght.css';
+import displayFont from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import monoFont from '@fontsource-variable/chivo-mono/files/chivo-mono-latin-wght-normal.woff2?url';
+import './graph.css';
+import { otherBuilds } from '@site';
+import BaseHead from '@/components/shared/BaseHead.astro';
+import Icon from '@/components/shared/Icon.astro';
+import Sweep from '@/components/shared/Sweep.astro';
+import { experience, layers, moreProjects, profile, projects } from '@/content';
+import type { Project, ProjectLink } from '@/content';
+import { formatInt } from '@/lib/format';
+import { contribStats, originalRepoCount } from '@/lib/github';
+import type { IconName } from '@/lib/icons';
+import { buildMap, projectIso } from '@/lib/map/layout';
+
+const email = profile.contacts.find((c) => c.kind === 'email');
+const resume = profile.contacts.find((c) => c.kind === 'resume');
+const linkIcon: Record<ProjectLink['kind'], IconName> = { repo: 'github', live: 'play', apk: 'package', docs: 'book', evidence: 'evidence' };
+const contactIcon: Record<string, IconName> = { email: 'mail', phone: 'phone', github: 'github', telegram: 'telegram', resume: 'download' };
+
+// The chart: layers, every project, and the tools that connect them. Skills are the ones most projects share.
+const layerNodes = layers.map((l) => ({ id: l.id, label: l.name }));
+const projectNodes = projects.map((p) => ({
+  id: p.id,
+  label: p.name,
+  layers: p.layers,
+  stack: p.stack,
+  weight: p.tier === 'featured' ? 1 : p.tier === 'ml' ? 0.7 : 0.4,
+}));
+const counts = new Map<string, number>();
+for (const p of projects) for (const s of p.stack) counts.set(s, (counts.get(s) ?? 0) + 1);
+const skills = [...counts.entries()]
+  .filter(([, n]) => n >= 3)
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  .slice(0, 14)
+  .map(([s]) => s);
+const { nodes, edges } = buildMap({ layers: layerNodes, projects: projectNodes, skills });
+
+const iso = new Map(nodes.map((n) => [n.id, projectIso(n)]));
+const xs = [...iso.values()].map((p) => p.x);
+const ys = [...iso.values()].map((p) => p.y);
+const minX = Math.min(...xs);
+const maxX = Math.max(...xs);
+const minY = Math.min(...ys);
+const maxY = Math.max(...ys);
+/** The SVG viewBox, padded so no node sits on the edge. */
+const VB = { x: minX - 0.8, y: minY - 0.8, w: maxX - minX + 1.6, h: maxY - minY + 1.6 };
+
+// Everything the panel and the palette need, once.
+const details = Object.fromEntries(
+  nodes.map((n) => {
+    if (n.kind === 'project') {
+      const p = projects.find((x) => x.id === n.id.slice(8)) as Project;
+      return [
+        n.id,
+        {
+          kind: 'project' as const,
+          title: p.name,
+          meta: `${p.year} · ${layers.find((l) => l.id === p.layers[0])?.name ?? ''}${p.status ? ` · ${p.status}` : ''}`,
+          line: p.oneLiner,
+          metric: p.metrics[0] ? { value: p.metrics[0].value, label: p.metrics[0].label } : null,
+          stack: p.stack.slice(0, 8),
+          links: p.links.slice(0, 3).map((l) => ({ label: l.label, url: l.url, icon: linkIcon[l.kind] })),
+          href: `/work/${p.id}/`,
+          layer: p.layers[0],
+        },
+      ];
+    }
+    if (n.kind === 'layer') {
+      const l = layers.find((x) => x.id === n.id.slice(6));
+      return [
+        n.id,
+        {
+          kind: 'layer' as const,
+          title: l?.name ?? '',
+          meta: `Layer · ${l?.partName ?? ''}`,
+          line: l?.line ?? '',
+          body: l?.body ?? '',
+          stack: l?.skills.slice(0, 8) ?? [],
+          projects: (l?.projectIds ?? []).map((id) => projects.find((p) => p.id === id)?.name ?? id),
+          href: '/film/#' + (l?.id ?? ''),
+          layer: l?.id ?? '',
+        },
+      ];
+    }
+    const skill = n.id.slice(6);
+    return [
+      n.id,
+      {
+        kind: 'skill' as const,
+        title: skill,
+        meta: `Tool · used in ${counts.get(skill) ?? 0} projects`,
+        line: '',
+        stack: [],
+        projects: projects.filter((p) => p.stack.includes(skill)).map((p) => p.name),
+        href: '',
+        layer: n.layer,
+      },
+    ];
+  }),
+);
+
+const stats = contribStats();
+const builds = otherBuilds('graph');
+const ORDER = ['layer', 'project', 'skill'] as const;
+const ordered = ORDER.flatMap((kind) => nodes.filter((n) => n.kind === kind).sort((a, b) => b.weight - a.weight));
+const paletteIndex = [
+  ...nodes.map((n) => ({ id: n.id, label: n.label, kind: n.kind, layer: n.layer })),
+  { id: 'action:email', label: `Email ${profile.email}`, kind: 'action' as const, layer: 'interface' },
+  { id: 'action:resume', label: 'Résumé, PDF', kind: 'action' as const, layer: 'interface' },
+  { id: 'action:github', label: 'GitHub, github.com/vbs-0', kind: 'action' as const, layer: 'interface' },
+  ...builds.map((b) => ({ id: `action:${b.id}`, label: `${b.name}: ${b.blurb}`, kind: 'action' as const, layer: 'interface' })),
+];
+const hrefOf: Record<string, string> = {
+  'action:email': email?.href ?? '',
+  'action:resume': resume?.href ?? '',
+  'action:github': profile.github,
+  ...Object.fromEntries(builds.map((b) => [`action:${b.id}`, b.path])),
+};
+const payload = { nodes, edges, details, palette: paletteIndex, hrefs: hrefOf, actions: { email: email?.href ?? '', resume: resume?.href ?? '', github: profile.github } };
+const cell = (v: number, span: number) => `${(((v - (span === VB.w ? VB.x : VB.y)) / span) * 100).toFixed(2)}%`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead variant="graph" />
+    <link rel="preload" as="font" type="font/woff2" href={displayFont} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={monoFont} crossorigin />
+  </head>
+  <body>
+    <a class="skip" href="#index">Skip to the index</a>
+    <Sweep variant="graph" />
+
+    <header class="bar">
+      <a class="bar__mark" href="#map" aria-label="vbs, the system map">VBS<span>.</span>0</a>
+      <p class="bar__sub">System map</p>
+      <button class="bar__find" type="button" data-open-palette aria-haspopup="dialog">
+        <Icon name="search" size={18} />
+        <span class="bar__find-text">Find anything</span>
+        <kbd>⌘K</kbd>
+      </button>
+      <nav class="bar__actions" aria-label="Contact">
+        {email && <a class="bar__link" href={email.href}><Icon name="mail" size={18} /><span>Email</span></a>}
+        {resume && <a class="bar__link" href={resume.href} download><Icon name="download" size={18} /><span>Résumé</span></a>}
+      </nav>
+    </header>
+
+    <main>
+      <section class="map" id="map" aria-label="System map: every layer, project and tool as a node">
+        <canvas class="map__stage" id="map-canvas" aria-hidden="true"></canvas>
+
+        <svg class="map__svg" viewBox={`${VB.x} ${VB.y} ${VB.w} ${VB.h}`} aria-hidden="true" focusable="false">
+          <g class="map__edges">
+            {
+              edges.map((e) => {
+                const a = iso.get(e.a);
+                const b = iso.get(e.b);
+                if (!a || !b) return null;
+                return <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} style={`--w:${e.weight}`} />;
+              })
+            }
+          </g>
+          <g class="map__dots">
+            {
+              nodes.map((n) => {
+                const p = iso.get(n.id);
+                if (!p) return null;
+                return <circle cx={p.x} cy={p.y} r={n.kind === 'layer' ? 0.19 : n.kind === 'project' ? 0.13 + n.weight * 0.06 : 0.09} class={`n-${n.kind}`} style={`--h:var(--c-layer-${n.layer})`} />;
+              })
+            }
+          </g>
+        </svg>
+
+        <div class="map__nodes" data-nodes>
+          {
+            ordered.map((n) => {
+              const p = iso.get(n.id);
+              return (
+                <button
+                  type="button"
+                  class:list={['node', `node--${n.kind}`]}
+                  data-node={n.id}
+                  data-layer={n.layer}
+                  data-label={n.label}
+                  style={`--h:var(--c-layer-${n.layer});--x:${cell(p?.x ?? 0, VB.w)};--y:${cell(p?.y ?? 0, VB.h)};--r:${n.kind === 'layer' ? 1 : 0.6 + n.weight * 0.5}`}
+                  aria-label={`${n.label}, ${n.kind}`}
+                >
+                  <span class="node__dot" aria-hidden="true"></span>
+                  <span class="node__label">{n.label}</span>
+                </button>
+              );
+            })
+          }
+        </div>
+
+        <aside class="panel" id="panel" aria-live="polite">
+          <p class="panel__kicker">System map</p>
+          <h1 class="panel__title">Everything I build, on one chart.</h1>
+          <p class="panel__line">{profile.thesis} {profile.thesisBody}</p>
+          <p class="panel__hint">
+            Pick a node, or press <kbd>⌘K</kbd> and type. Six layers, {projects.length} projects and {skills.length} tools, joined where they are used together.
+          </p>
+          <dl class="panel__facts">
+            <div><dt>Public repos</dt><dd>{formatInt(originalRepoCount)}</dd></div>
+            <div><dt>Contributions</dt><dd>{formatInt(stats.total)}</dd></div>
+            <div><dt>Now</dt><dd>{experience.roles[0]?.title}, {experience.employer}</dd></div>
+          </dl>
+          <div class="panel__actions">
+            {email && <a class="btn btn--signal" href={email.href}><Icon name="mail" size={18} />Email me</a>}
+            {resume && <a class="btn" href={resume.href} download><Icon name="download" size={18} />Résumé</a>}
+          </div>
+        </aside>
+
+        <div class="legend" aria-hidden="true">
+          <span><i class="legend__dot legend__dot--layer"></i>Layer</span>
+          <span><i class="legend__dot legend__dot--project"></i>Project</span>
+          <span><i class="legend__dot legend__dot--skill"></i>Tool</span>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter by layer">
+          <button type="button" class="chip is-on" data-filter="all" aria-pressed="true">All</button>
+          {
+            layers.map((l) => (
+              <button type="button" class="chip" data-filter={l.id} aria-pressed="false" style={`--h:var(--c-layer-${l.id})`}>
+                <i aria-hidden="true"></i>{l.name}
+              </button>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="index" id="index" aria-labelledby="index-t">
+        <div class="wrap">
+          <p class="kicker">The index</p>
+          <h2 class="h2" id="index-t">Every project, in plain text</h2>
+          <p class="index__lede">The map above is a way in, not the only one. Here is the whole body of work with the number each project is measured by.</p>
+          <ol class="rows">
+            {
+              projects.map((p) => (
+                <li class="row" data-row={p.id} style={`--h:var(--c-layer-${p.layers[0]})`}>
+                  <p class="row__year">{p.year}</p>
+                  <h3 class="row__name"><a href={`/work/${p.id}/`}>{p.name}</a></h3>
+                  <p class="row__line">{p.oneLiner}</p>
+                  <p class="row__metric">{p.metrics[0] ? <><b>{p.metrics[0].value}</b> {p.metrics[0].label}</> : null}</p>
+                  <p class="row__links">{p.links.slice(0, 2).map((l) => <a href={l.url}><Icon name={linkIcon[l.kind]} size={15} />{l.label}</a>)}</p>
+                </li>
+              ))
+            }
+          </ol>
+          <p class="index__more">Plus {moreProjects.length} more in the alternate cuts and on <a href={profile.github}>GitHub</a>.</p>
+        </div>
+      </section>
+
+      <section class="contact" aria-labelledby="contact-t">
+        <div class="wrap">
+          <p class="kicker">Contact</p>
+          <h2 class="h2" id="contact-t">Pick a way to reach me</h2>
+          <ul class="contact__list">
+            {
+              profile.contacts.map((c) => (
+                <li>
+                  <a href={c.href} download={c.kind === 'resume' ? true : undefined}>
+                    <Icon name={contactIcon[c.kind] ?? 'external'} size={20} />
+                    <span class="contact__k">{c.label}</span>
+                    <span class="contact__v">{c.value}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap foot__in">
+        {
+          builds.length > 0 && (
+            <nav class="cuts" aria-label="Other versions of this site">
+              <p class="cuts__head">Other versions</p>
+              <ul>
+                {builds.map((b) => (
+                  <li>
+                    <a href={b.path} data-sweep={b.id}>
+                      <span class="cuts__name">{b.name}</span>
+                      <span class="cuts__blurb">{b.blurb}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )
+        }
+        <p class="foot__made">Drawn in three.js from the same content as every other version. Set in Archivo and Chivo Mono. © {profile.name}.</p>
+      </div>
+    </footer>
+
+    <dialog class="palette" data-palette aria-label="Find anything">
+      <div class="palette__box">
+        <label class="palette__field">
+          <Icon name="search" size={20} />
+          <input type="search" placeholder="Search projects, layers, tools…" autocomplete="off" spellcheck="false" data-palette-input aria-label="Search projects, layers, tools" />
+          <kbd>esc</kbd>
+        </label>
+        <ul class="palette__list" data-palette-list role="listbox" aria-label="Results"></ul>
+        <p class="palette__empty" data-palette-empty hidden>Nothing matches. Try a project, a layer or a tool.</p>
+        <p class="palette__foot"><kbd>↑</kbd><kbd>↓</kbd> move · <kbd>↵</kbd> open · <kbd>esc</kbd> close</p>
+      </div>
+    </dialog>
+
+    <script type="application/json" id="map-data" set:html={JSON.stringify(payload)} />
+    <script>
+      import './client/main';
+    </script>
+  </body>
+</html>

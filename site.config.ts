@@ -5,7 +5,7 @@
  *   manual  — "Service manual": an exploded-view drawing in ink lines
  *   classic — "Classic": dark studio, glass layer stack, project grid
  */
-export const VARIANTS = ['film', 'phone', 'manual', 'classic'] as const;
+export const VARIANTS = ['film', 'graph', 'phone', 'manual', 'classic'] as const;
 export type VariantId = (typeof VARIANTS)[number];
 
 export const siteConfig = {
@@ -22,6 +22,7 @@ export const siteConfig = {
 
 export const variantMeta: Record<VariantId, { path: string; name: string; blurb: string }> = {
   film: { path: '/film/', name: 'Film', blurb: 'Opening titles: one camera move through every layer' },
+  graph: { path: '/graph/', name: 'System map', blurb: 'Every project as a node in one 3D chart, with a command palette' },
   phone: { path: '/phone/', name: 'About phone', blurb: 'A Settings screen with a live 3D phone' },
   manual: { path: '/manual/', name: 'Service manual', blurb: 'An exploded-view drawing in ink lines' },
   classic: { path: '/classic/', name: 'Classic', blurb: 'Dark studio with a glass layer stack' },

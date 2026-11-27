@@ -15,6 +15,24 @@ the three.js scenes read the same values.
 - **Floor:** one `h1`, a skip link, visible focus, 44 px touch targets, AA contrast checked by unit test,
   no sideways scrolling from 320 px, a print stylesheet that drops the 3D.
 
+## System map (`/graph/`)
+
+- **World:** the work as one chart you read. Every layer, project and tool is a node in a 3D field; six
+  planes of depth hold the six layers; the camera flies to whatever you pick. No phone, no film, no page
+  of prose first: it is a map, and the command palette is how you move through it.
+- **Colour:** a deep chart ground `#0b1018`, one signal cyan `#5fe3d0` for anything you can act on, and
+  the six layer hues as the only other colour. Nothing else is tinted.
+- **Type:** Archivo, condensed and heavy, for the wordmark and headings; Chivo Mono for every label,
+  count and hint. Both already shipped with the site.
+- **Composition:** a bar (wordmark, find, contact), the chart filling everything left of a fixed panel,
+  the panel carrying whatever is selected, and the layer chips along the bottom. Below the fold the same
+  facts as plain rows, then contact.
+- **The chart:** nodes are HTML buttons riding on projected 3D positions, so the map is keyboard-first and
+  readable by a screen reader; three.js draws the edges, a ring at each layer and the dust, and owns the
+  camera. Without WebGL the same coordinates are drawn as an isometric SVG in the HTML.
+- **Signature:** the palette (`⌘K`, `/`, or the bar) searches every node and action by name and opens it
+  on the map, and the camera flight from node to node.
+
 ## Film (`/` and `/film/`)
 
 - **World:** the opening titles of a film about one engineer. A countdown leader splits open like a

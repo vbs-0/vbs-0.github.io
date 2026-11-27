@@ -8,6 +8,7 @@ Pick a version per application; each is a complete page at its own address.
 | `/` | the default | Whatever `defaultVariant` in `site.config.ts` names. Today: Film. |
 | `/phone/` | About phone | A custom-ROM Settings screen where the device is the person. The 3D phone mirrors the page, comes apart under Hardware, and its display shows the open app. |
 | `/manual/` | Service manual | A drawing sheet: an ink-line phone that takes itself apart as you scroll, a numbered parts list, and figure plates for the projects. |
+| `/graph/` | System map | Every layer, project and tool as a node in one 3D chart, with a command palette (⌘K) and a panel of facts. |
 | `/film/` | Film | Opening titles: a countdown leader, one camera move through six scenes, a sideways reel of measured projects, credits. |
 | `/work/<id>/` | — | One page per project in the Film world. |
 | `/classic/` | Classic | Dark studio, a stack of six glass slabs (one per layer of the stack), a work list you can filter by layer, and a 3D contribution skyline. |

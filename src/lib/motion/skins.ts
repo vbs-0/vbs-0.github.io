@@ -6,6 +6,7 @@ import { type VariantId, variantMeta } from '@site';
 import { palettes } from '@/styles/palettes';
 
 const film = palettes.film.dark;
+const graph = palettes.graph.dark;
 
 export interface SweepSkin {
   paper: string;
@@ -31,6 +32,17 @@ export const SWEEP_SKINS: Record<VariantId, SweepSkin> = {
     caption: variantMeta.film.blurb,
     font: "'League Gothic Variable', 'League Gothic', 'Arial Narrow', sans-serif",
     stretch: '100%',
+    transform: 'uppercase',
+  },
+  graph: {
+    paper: graph.bg as string,
+    paperAlt: graph.surface as string,
+    ink: graph.text as string,
+    accent: graph.signal as string,
+    label: 'System map',
+    caption: variantMeta.graph.blurb,
+    font: "'Archivo Variable', 'Archivo', system-ui, sans-serif",
+    stretch: '68%',
     transform: 'uppercase',
   },
   phone: {

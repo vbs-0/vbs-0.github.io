@@ -183,3 +183,33 @@ test.describe('Film', () => {
     expect(later).toMatch(/^00:\d{2}:\d{2}:\d{2}$/);
   });
 });
+
+test.describe('System map', () => {
+  test('a node opens its facts and the panel offers the whole scene', async ({ page }) => {
+    await page.goto('/graph/');
+    await page.waitForFunction(() => document.documentElement.dataset.scene !== undefined);
+    await page.locator('[data-node="project:pam"]').click();
+    const panel = page.locator('#panel');
+    await expect(panel.getByRole('heading', { name: 'PAM' })).toBeVisible();
+    await expect(panel.getByText('97.99%')).toBeVisible();
+    await expect(panel.getByRole('link', { name: /whole scene/i })).toHaveAttribute('href', '/work/pam/');
+  });
+
+  test('the palette finds a project and opens it on the map', async ({ page }) => {
+    await page.goto('/graph/');
+    await page.waitForFunction(() => document.documentElement.dataset.scene !== undefined);
+    await page.keyboard.press('Control+k');
+    await page.locator('[data-palette-input]').fill('quantum');
+    await page.locator('[data-palette-list] .palette__item').first().click();
+    await expect(page.locator('#panel').getByRole('heading', { name: 'QuantumLink-PQC' })).toBeVisible();
+  });
+
+  test('a layer chip filters the map', async ({ page }) => {
+    await page.goto('/graph/');
+    await page.waitForFunction(() => document.documentElement.dataset.scene !== undefined);
+    await page.locator('[data-filter="models"]').click();
+    await expect(page.locator('[data-filter="models"]')).toHaveAttribute('aria-pressed', 'true');
+    const dimmed = await page.locator('.node.is-dim').count();
+    expect(dimmed).toBeGreaterThan(0);
+  });
+});

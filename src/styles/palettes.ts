@@ -120,10 +120,49 @@ const filmDark: Palette = {
 };
 const film: Record<Theme, Palette> = { light: filmDark, dark: filmDark };
 
-export const palettes: Record<VariantId, Record<Theme, Palette>> = { film, phone, manual, classic };
+/**
+ * System map: a deep chart ground, one signal cyan for anything you can act on, and the six layer hues
+ * as the only other colour. Dark only: it is a chart on a dark field.
+ */
+const graphDark: Palette = {
+  bg: oklch(0.145, 0.02, 255),
+  surface: oklch(0.185, 0.022, 255),
+  surfaceHi: oklch(0.235, 0.026, 255),
+  text: oklch(0.945, 0.012, 250),
+  textMuted: oklch(0.755, 0.03, 250),
+  outline: oklch(0.33, 0.03, 255),
+  signal: oklch(0.86, 0.11, 185),
+  onSignal: oklch(0.19, 0.03, 190),
+  layerInterface: oklch(0.83, 0.1, 245),
+  layerProtocol: oklch(0.79, 0.12, 295),
+  layerServices: oklch(0.85, 0.13, 160),
+  layerModels: oklch(0.82, 0.11, 355),
+  layerSystem: oklch(0.87, 0.12, 88),
+  layerOps: oklch(0.83, 0.11, 48),
+};
+const graph: Record<Theme, Palette> = { light: graphDark, dark: graphDark };
+
+export const palettes: Record<VariantId, Record<Theme, Palette>> = { film, graph, phone, manual, classic };
 
 /** Text-on-background pairs that must hold a WCAG contrast ratio. [foreground, background, minimum]. */
 export const contrastPairs: Record<VariantId, Array<[string, string, number]>> = {
+  graph: [
+    ['text', 'bg', 4.5],
+    ['text', 'surface', 4.5],
+    ['text', 'surfaceHi', 4.5],
+    ['textMuted', 'bg', 4.5],
+    ['textMuted', 'surface', 4.5],
+    ['textMuted', 'surfaceHi', 4.5],
+    ['signal', 'bg', 4.5],
+    ['signal', 'surface', 4.5],
+    ['onSignal', 'signal', 4.5],
+    ...(['layerInterface', 'layerProtocol', 'layerServices', 'layerModels', 'layerSystem', 'layerOps'] as const).flatMap(
+      (l): Array<[string, string, number]> => [
+        [l, 'bg', 4.5],
+        [l, 'surface', 4.5],
+      ],
+    ),
+  ],
   film: [
     ['text', 'bg', 4.5],
     ['text', 'surface', 4.5],
