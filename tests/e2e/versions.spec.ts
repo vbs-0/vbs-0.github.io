@@ -45,6 +45,8 @@ test.describe('About phone', () => {
 
   test('the theme switch changes and remembers the theme', async ({ page }) => {
     await page.goto('/phone/');
+    // The toggle's handler is attached by the page script; on a loaded runner the click can beat it.
+    await page.waitForFunction(() => document.documentElement.dataset.scene !== undefined);
     await page.getByRole('button', { name: 'Dark theme' }).click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     await page.reload();
