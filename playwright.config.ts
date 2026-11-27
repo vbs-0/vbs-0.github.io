@@ -20,10 +20,11 @@ export default defineConfig({
     launchOptions: { args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] },
   },
   webServer: {
-    command: 'npx astro preview --port 4322',
+    // A standard-library static server: no framework start-up to time out on.
+    command: 'node scripts/serve-dist.mjs 4322',
     url: 'http://127.0.0.1:4322/',
     reuseExistingServer: !process.env.CI,
-    timeout: 60_000,
+    timeout: 120_000,
     env: { ASTRO_TELEMETRY_DISABLED: '1' },
   },
   projects: [
