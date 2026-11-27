@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+test-results/
+playwright-report/
+.superpowers/
+.impeccable/concept-seed-*.txt
+.impeccable/config.local.json
+.impeccable/review/
+*.log
+.DS_Store
+Thumbs.db
