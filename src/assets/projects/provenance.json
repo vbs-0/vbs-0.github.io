@@ -1,0 +1,152 @@
+[
+  {
+    "file": "studease/logo.png",
+    "repo": "vbs-0/studease",
+    "ref": "main",
+    "path": "frontend/public/icon-512.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/studease/main/frontend/public/icon-512.png",
+    "sha256": "1f05a3c24cd863be4b60fb56b942273aa47d390e789c1d568516b8902c53dbf3",
+    "bytes": 340124,
+    "fetchedAt": "2026-11-27"
+  },
+  {
+    "file": "studease/web-overview.png",
+    "repo": "vbs-0/studease",
+    "ref": "main",
+    "path": "docs/screenshots/overview.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/studease/main/docs/screenshots/overview.png",
+    "sha256": "1b677387660ad9d4b3a2fa47b8fa30218af38707586996cd34aa0e039bbfd43b",
+    "bytes": 140944,
+    "fetchedAt": "2026-11-27"
+  },
+  {
+    "file": "studease/web-account.png",
+    "repo": "vbs-0/studease",
+    "ref": "main",
+    "path": "docs/screenshots/learner-account.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/studease/main/docs/screenshots/learner-account.png",
+    "sha256": "730c095117452c9b079339f6244415cae79e6ddd3f9e948a9a4ceb4be9d6d69c",
+    "bytes": 145467,
+    "fetchedAt": "2026-11-27"
+  },
+  {
+    "file": "studease/phone-overview.png",
+    "repo": "vbs-0/studease",
+    "ref": "main",
+    "path": "docs/screenshots/mobile/overview.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/studease/main/docs/screenshots/mobile/overview.png",
+    "sha256": "58eb468e5018c9d09f0fcb1e540471eb1178eca611b2090284fdc17c0f72a1aa",
+    "bytes": 229752,
+    "fetchedAt": "2026-11-27"
+  },
+  {
+    "file": "studease/phone-scholarships.png",
+    "repo": "vbs-0/studease",
+    "ref": "main",
+    "path": "docs/screenshots/mobile/scholarships.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/studease/main/docs/screenshots/mobile/scholarships.png",
+    "sha256": "f2660d94137b8b539f212533cf3952a7cf30914d79287a851ff027cfaf789036",
+    "bytes": 173703,
+    "fetchedAt": "2026-11-27"
+  },
+  {
+    "file": "pam/logo.png",
+    "repo": "vbs-0/pam",
+    "ref": "main",
+    "path": "docs/brand/logo-transparent.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/pam/main/docs/brand/logo-transparent.png",
+    "sha256": "515d05500e13412f70c79e654232a301563a624263993f9b9f35fa1daa3d870b",
+    "bytes": 259106,
+    "fetchedAt": "2026-11-27"
+  },
+  {
+    "file": "pam/web-folio.png",
+    "repo": "vbs-0/pam",
+    "ref": "main",
+    "path": "docs/screenshots/web/02-home.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/pam/main/docs/screenshots/web/02-home.png",
+    "sha256": "fcf818b9db03eeeedabb1e5516c7af974465b81f4b137a7480211350288fe1d0",
+    "bytes": 344393,
+    "fetchedAt": "2026-11-27"
+  },
+  {
+    "file": "pam/web-budgets.png",
+    "repo": "vbs-0/pam",
+    "ref": "main",
+    "path": "docs/screenshots/web/04-budgets.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/pam/main/docs/screenshots/web/04-budgets.png",
+    "sha256": "4d4637785d79b89555d7d71d17b5b0cb8b91e1d7fed88f437867a322e32c33e4",
+    "bytes": 108716,
+    "fetchedAt": "2026-11-27"
+  },
+  {
+    "file": "pam/phone-folio.png",
+    "repo": "vbs-0/pam",
+    "ref": "main",
+    "path": "docs/screenshots/android/01-home.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/pam/main/docs/screenshots/android/01-home.png",
+    "sha256": "9ac395718fbba4554226262688ed341ca6be25f455b149ea921c170f4f369b56",
+    "bytes": 224026,
+    "fetchedAt": "2026-11-27"
+  },
+  {
+    "file": "pam/phone-spend.png",
+    "repo": "vbs-0/pam",
+    "ref": "main",
+    "path": "docs/screenshots/android/04-spend.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/pam/main/docs/screenshots/android/04-spend.png",
+    "sha256": "36a18bf7c6ee4da3800ea16fe564f6ab24b9418a4673550ef5629eb8ac54ba4a",
+    "bytes": 186283,
+    "fetchedAt": "2026-11-27"
+  },
+  {
+    "file": "quantumlink/web-chat.png",
+    "repo": "vbs-0/QuantumLink-PQC",
+    "ref": "main",
+    "path": "evidence/2026-11-11/screenshots/06-final-alice-desktop.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/QuantumLink-PQC/main/evidence/2026-11-11/screenshots/06-final-alice-desktop.png",
+    "sha256": "1a498b7d303f15bbacb7b5fb493ea881420379ee9ea32df6d7a909bf949dc2db",
+    "bytes": 158220,
+    "fetchedAt": "2026-11-27"
+  },
+  {
+    "file": "quantumlink/web-handshake.png",
+    "repo": "vbs-0/QuantumLink-PQC",
+    "ref": "main",
+    "path": "evidence/2026-11-11/screenshots/03-incoming-handshake.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/QuantumLink-PQC/main/evidence/2026-11-11/screenshots/03-incoming-handshake.png",
+    "sha256": "76388640eacf45e11b3156f6f25db4eb3e40956abd468d43c7df60b086f1a268",
+    "bytes": 198104,
+    "fetchedAt": "2026-11-27"
+  },
+  {
+    "file": "termadb/phone-help.png",
+    "repo": "vbs-0/termadb",
+    "ref": "main",
+    "path": "live-05-help-clean.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/termadb/main/live-05-help-clean.png",
+    "sha256": "0923ecb349a4c211c7b690094ec1099428a27da9b26981beb3bfa9e18b0b3a03",
+    "bytes": 288496,
+    "fetchedAt": "2026-11-27"
+  },
+  {
+    "file": "predoctor/chart-roc.png",
+    "repo": "vbs-0/predoctor1.2",
+    "ref": "main",
+    "path": "models/static/images/roc_curves.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/predoctor1.2/main/models/static/images/roc_curves.png",
+    "sha256": "2595a3f1af549129705b30cf2891c59b2b215fbd63f68714e47202c5d1119722",
+    "bytes": 358350,
+    "fetchedAt": "2026-11-27"
+  },
+  {
+    "file": "dsaallocator/web-verified.png",
+    "repo": "vbs-0/DSAAllocator",
+    "ref": "main",
+    "path": "images/image8.png",
+    "source": "https://raw.githubusercontent.com/vbs-0/DSAAllocator/main/images/image8.png",
+    "sha256": "48373046b9ffc4b0a66c6ca7bd8d7cb9465fb39f2693dc23784bfaf2c8b72d47",
+    "bytes": 167930,
+    "fetchedAt": "2026-11-27"
+  }
+]

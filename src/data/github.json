@@ -1,0 +1,2602 @@
+{
+ "fetchedAt": "2026-11-27T04:35:55.312Z",
+ "user": {
+  "login": "vbs-0",
+  "name": "vbs",
+  "url": "https://github.com/vbs-0",
+  "publicRepos": 33,
+  "createdAt": "2020-04-25T02:40:12Z"
+ },
+ "repos": [
+  {
+   "fullName": "vbs-0/pam",
+   "name": "pam",
+   "description": "PAM (Payment Account Manager): categorizes household transactions, maps recurring payments and compares spending with budgets. FastAPI, React, Flutter.",
+   "url": "https://github.com/vbs-0/pam",
+   "homepage": "https://pam.is-cool.dev",
+   "language": "PLpgSQL",
+   "languages": {
+    "PLpgSQL": 6115088,
+    "Python": 628204,
+    "Dart": 289234,
+    "TypeScript": 256359,
+    "CSS": 39428,
+    "Kotlin": 4188,
+    "JavaScript": 3061,
+    "HTML": 2093,
+    "Shell": 1312,
+    "Mako": 704,
+    "Makefile": 553
+   },
+   "topics": [
+    "android",
+    "apk",
+    "budget-tracker",
+    "budgeting",
+    "expense-tracker",
+    "fastapi",
+    "flutter",
+    "india",
+    "personal-finance",
+    "react",
+    "upi",
+    "upi-payments"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2026-11-04T18:36:05Z",
+   "pushedAt": "2026-11-26T06:23:39Z"
+  },
+  {
+   "fullName": "vbs-0/vbs-0",
+   "name": "vbs-0",
+   "description": "Profile README",
+   "url": "https://github.com/vbs-0/vbs-0",
+   "homepage": "",
+   "language": "",
+   "languages": {},
+   "topics": [],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2025-01-25T16:10:26Z",
+   "pushedAt": "2026-11-26T06:22:22Z"
+  },
+  {
+   "fullName": "vbs-0/Raw-x663",
+   "name": "Raw-x663",
+   "description": "Magisk module enabling Camera RAW on Infinix X663/X663C/X663D.",
+   "url": "https://github.com/vbs-0/Raw-x663",
+   "homepage": "",
+   "language": "Shell",
+   "languages": {
+    "Shell": 7933
+   },
+   "topics": [
+    "android",
+    "camera",
+    "infinix",
+    "magisk",
+    "magisk-module"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2025-02-25T14:49:17Z",
+   "pushedAt": "2026-11-26T06:22:16Z"
+  },
+  {
+   "fullName": "vbs-0/TWRP-X663",
+   "name": "TWRP-X663",
+   "description": "TWRP recovery images for Infinix X663/X663C (Android 12).",
+   "url": "https://github.com/vbs-0/TWRP-X663",
+   "homepage": "",
+   "language": "",
+   "languages": {},
+   "topics": [
+    "android",
+    "infinix",
+    "recovery",
+    "twrp"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2025-02-25T15:27:14Z",
+   "pushedAt": "2026-11-26T06:22:10Z"
+  },
+  {
+   "fullName": "vbs-0/twrp_xiaomi_air",
+   "name": "twrp_xiaomi_air",
+   "description": "(WIP) TWRP Tree for Redmi 13C 5G | POCO M6 5G",
+   "url": "https://github.com/vbs-0/twrp_xiaomi_air",
+   "homepage": "",
+   "language": "C++",
+   "languages": {
+    "C++": 22042,
+    "Makefile": 8263,
+    "C": 3472
+   },
+   "topics": [
+    "android",
+    "mediatek",
+    "poco-m6-5g",
+    "recovery",
+    "redmi-13c-5g",
+    "twrp"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2026-02-04T12:26:47Z",
+   "pushedAt": "2026-11-26T06:22:03Z"
+  },
+  {
+   "fullName": "Garuda-Technologies/pulse",
+   "name": "pulse",
+   "description": "Pulse: no-root app freezer and system monitor for Android",
+   "url": "https://github.com/Garuda-Technologies/pulse",
+   "homepage": "",
+   "language": "Kotlin",
+   "languages": {
+    "Kotlin": 24243
+   },
+   "topics": [],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2026-11-26T06:11:34Z",
+   "pushedAt": "2026-11-26T06:16:00Z"
+  },
+  {
+   "fullName": "vbs-0/termadb",
+   "name": "termadb",
+   "description": "TermADB: an ADB and Fastboot client that runs on the phone itself, over Wi-Fi",
+   "url": "https://github.com/vbs-0/termadb",
+   "homepage": "",
+   "language": "Java",
+   "languages": {
+    "Java": 268760
+   },
+   "topics": [],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2026-11-26T05:52:49Z",
+   "pushedAt": "2026-11-26T05:53:01Z"
+  },
+  {
+   "fullName": "vbs-0/ai-bridge-mcp",
+   "name": "ai-bridge-mcp",
+   "description": "Local MCP bridge and dashboard that lets several coding agents work as a team: shared board, patterns, usage ledger, live PTY terminal",
+   "url": "https://github.com/vbs-0/ai-bridge-mcp",
+   "homepage": "",
+   "language": "JavaScript",
+   "languages": {
+    "JavaScript": 28994,
+    "HTML": 15494,
+    "Batchfile": 873
+   },
+   "topics": [],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2026-11-26T05:51:13Z",
+   "pushedAt": "2026-11-26T05:51:23Z"
+  },
+  {
+   "fullName": "vbs-0/notepad-showdown",
+   "name": "notepad-showdown",
+   "description": "One notepad app built four times — Kotlin, Flutter, Rust+Slint and no_std Rust — to measure what each Android stack adds on top of your own code",
+   "url": "https://github.com/vbs-0/notepad-showdown",
+   "homepage": "",
+   "language": "Rust",
+   "languages": {
+    "Rust": 79495,
+    "Dart": 17658,
+    "Kotlin": 17635,
+    "Slint": 13549,
+    "Shell": 829,
+    "Java": 293
+   },
+   "topics": [],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2026-11-26T05:50:01Z",
+   "pushedAt": "2026-11-26T05:50:11Z"
+  },
+  {
+   "fullName": "vbs-0/clipbridge",
+   "name": "clipbridge",
+   "description": "Clipboard and screenshot bridge between Windows and Android over your own Wi-Fi. Rust + Kotlin, AES-256-GCM, no cloud.",
+   "url": "https://github.com/vbs-0/clipbridge",
+   "homepage": "",
+   "language": "Rust",
+   "languages": {
+    "Rust": 40885,
+    "Kotlin": 39352
+   },
+   "topics": [],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2026-11-26T05:47:40Z",
+   "pushedAt": "2026-11-26T05:47:49Z"
+  },
+  {
+   "fullName": "vbs-0/smart-crop-management",
+   "name": "smart-crop-management",
+   "description": "Smart crop management: crop and fertilizer recommendations and leaf-disease prediction (Flask).",
+   "url": "https://github.com/vbs-0/smart-crop-management",
+   "homepage": "",
+   "language": "HTML",
+   "languages": {
+    "HTML": 74374,
+    "Python": 17084
+   },
+   "topics": [
+    "agriculture",
+    "flask",
+    "machine-learning",
+    "plant-disease-detection",
+    "python"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2025-01-25T01:52:52Z",
+   "pushedAt": "2026-11-26T05:27:37Z"
+  },
+  {
+   "fullName": "vbs-0/Distraction-Free-Social",
+   "name": "Distraction-Free-Social",
+   "description": "Distraction-free social platform for students to share and discover educational content (Flask).",
+   "url": "https://github.com/vbs-0/Distraction-Free-Social",
+   "homepage": "",
+   "language": "HTML",
+   "languages": {
+    "HTML": 43694,
+    "Python": 22028
+   },
+   "topics": [
+    "education",
+    "flask",
+    "python",
+    "social-network",
+    "students"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2025-01-26T02:55:01Z",
+   "pushedAt": "2026-11-26T05:27:08Z"
+  },
+  {
+   "fullName": "vbs-0/predoctor1.2",
+   "name": "predoctor1.2",
+   "description": "Predoctor: ML app that predicts how foods affect menstrual symptoms and recommends better choices.",
+   "url": "https://github.com/vbs-0/predoctor1.2",
+   "homepage": "http://140.245.220.240:5000",
+   "language": "CSS",
+   "languages": {
+    "CSS": 114498,
+    "Python": 67808,
+    "Java": 19781,
+    "JavaScript": 13376,
+    "Shell": 2747,
+    "Batchfile": 2446,
+    "HTML": 1659
+   },
+   "topics": [
+    "flask",
+    "healthcare",
+    "machine-learning",
+    "python",
+    "recommendation-system",
+    "womens-health"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2025-03-26T17:23:43Z",
+   "pushedAt": "2026-11-26T05:26:28Z"
+  },
+  {
+   "fullName": "vbs-0/DSAAllocator",
+   "name": "DSAAllocator",
+   "description": "Assigns DSA problems to students and verifies submitted solution screenshots automatically (Flask).",
+   "url": "https://github.com/vbs-0/DSAAllocator",
+   "homepage": "",
+   "language": "Python",
+   "languages": {
+    "Python": 105241,
+    "HTML": 105181
+   },
+   "topics": [
+    "admin-panel",
+    "dsa",
+    "education",
+    "flask",
+    "ocr",
+    "python"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2025-01-26T03:44:03Z",
+   "pushedAt": "2026-11-26T05:25:56Z"
+  },
+  {
+   "fullName": "vbs-0/RL",
+   "name": "RL",
+   "description": "RL car game: DreamerV3-inspired world-model agent learning to drive, with a web interface.",
+   "url": "https://github.com/vbs-0/RL",
+   "homepage": "",
+   "language": "Python",
+   "languages": {
+    "Python": 81199,
+    "HTML": 15818
+   },
+   "topics": [
+    "dreamerv3",
+    "game",
+    "python",
+    "pytorch",
+    "reinforcement-learning",
+    "world-models"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2025-03-03T17:57:41Z",
+   "pushedAt": "2026-11-26T05:03:05Z"
+  },
+  {
+   "fullName": "vbs-0/device_xiaomi_air",
+   "name": "device_xiaomi_air",
+   "description": "Device tree for Redmi 13C 5G (air) - MT6835",
+   "url": "https://github.com/vbs-0/device_xiaomi_air",
+   "homepage": "",
+   "language": "Makefile",
+   "languages": {
+    "Makefile": 4911,
+    "PowerShell": 4698,
+    "Shell": 1774
+   },
+   "topics": [
+    "android",
+    "aosp",
+    "custom-rom",
+    "device-tree",
+    "mediatek",
+    "mt6835",
+    "poco-m6-5g",
+    "redmi-13c-5g"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2025-12-09T06:41:02Z",
+   "pushedAt": "2026-11-26T05:02:41Z"
+  },
+  {
+   "fullName": "vbs-0/vendor_xiaomi_air",
+   "name": "vendor_xiaomi_air",
+   "description": "Proprietary vendor blobs for Redmi 13C 5G / POCO M6 5G (air, MT6835).",
+   "url": "https://github.com/vbs-0/vendor_xiaomi_air",
+   "homepage": "",
+   "language": "Makefile",
+   "languages": {
+    "Makefile": 788
+   },
+   "topics": [
+    "android",
+    "aosp",
+    "mediatek",
+    "redmi-13c-5g",
+    "vendor"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2025-12-08T07:57:39Z",
+   "pushedAt": "2026-11-26T05:02:34Z"
+  },
+  {
+   "fullName": "vbs-0/air-kernel",
+   "name": "air-kernel",
+   "description": "Prebuilt stock kernel, DTB/DTBO and vendor ramdisk for Redmi 13C 5G / POCO M6 5G (air, MT6835).",
+   "url": "https://github.com/vbs-0/air-kernel",
+   "homepage": "",
+   "language": "",
+   "languages": {},
+   "topics": [
+    "android",
+    "kernel",
+    "mediatek",
+    "mt6835",
+    "poco-m6-5g",
+    "redmi-13c-5g"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2026-04-16T09:32:06Z",
+   "pushedAt": "2026-11-26T05:02:27Z"
+  },
+  {
+   "fullName": "vbs-0/crop_recomendation",
+   "name": "crop_recomendation",
+   "description": "Crop recommendation model comparison: Decision Tree, KNN, Logistic Regression, Random Forest and SVM.",
+   "url": "https://github.com/vbs-0/crop_recomendation",
+   "homepage": "",
+   "language": "Jupyter Notebook",
+   "languages": {
+    "Jupyter Notebook": 374595,
+    "Python": 2292
+   },
+   "topics": [
+    "agriculture",
+    "classification",
+    "jupyter-notebook",
+    "machine-learning",
+    "scikit-learn"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2024-11-15T05:52:39Z",
+   "pushedAt": "2026-11-26T04:58:18Z"
+  },
+  {
+   "fullName": "vbs-0/Disease_detection",
+   "name": "Disease_detection",
+   "description": "Deep-learning notebook for plant nutrient-deficiency and disease detection.",
+   "url": "https://github.com/vbs-0/Disease_detection",
+   "homepage": "",
+   "language": "Python",
+   "languages": {
+    "Python": 965
+   },
+   "topics": [
+    "agriculture",
+    "computer-vision",
+    "deep-learning",
+    "jupyter-notebook",
+    "plant-disease-detection"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2024-11-15T06:14:50Z",
+   "pushedAt": "2026-11-26T04:57:18Z"
+  },
+  {
+   "fullName": "vbs-0/Travel_companion",
+   "name": "Travel_companion",
+   "description": "AI travel companion web app by Team GARUDA (Flask + LLM).",
+   "url": "https://github.com/vbs-0/Travel_companion",
+   "homepage": "",
+   "language": "HTML",
+   "languages": {
+    "HTML": 35678,
+    "Python": 9701,
+    "CSS": 1778
+   },
+   "topics": [
+    "chatbot",
+    "flask",
+    "llm",
+    "python",
+    "travel"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2024-11-02T05:36:42Z",
+   "pushedAt": "2026-11-26T04:55:21Z"
+  },
+  {
+   "fullName": "vbs-0/light_inv",
+   "name": "light_inv",
+   "description": "Lightweight inventory management with reports (Flask + SQL, Dockerized).",
+   "url": "https://github.com/vbs-0/light_inv",
+   "homepage": "",
+   "language": "HTML",
+   "languages": {
+    "HTML": 245182,
+    "Python": 171826,
+    "CSS": 8558,
+    "Dockerfile": 385
+   },
+   "topics": [
+    "docker",
+    "flask",
+    "inventory-management",
+    "python",
+    "sql"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2025-02-12T15:54:45Z",
+   "pushedAt": "2026-11-26T04:54:26Z"
+  },
+  {
+   "fullName": "vbs-0/bomber",
+   "name": "bomber",
+   "description": "Full-stack TypeScript web app (React + Vite + Drizzle ORM).",
+   "url": "https://github.com/vbs-0/bomber",
+   "homepage": "https://bomber-five.vercel.app",
+   "language": "TypeScript",
+   "languages": {
+    "TypeScript": 351761,
+    "JavaScript": 634,
+    "HTML": 482,
+    "CSS": 189,
+    "Nix": 48
+   },
+   "topics": [
+    "drizzle-orm",
+    "react",
+    "tailwindcss",
+    "typescript",
+    "vite"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2025-04-06T11:55:35Z",
+   "pushedAt": "2026-11-26T04:53:33Z"
+  },
+  {
+   "fullName": "vbs-0/studease",
+   "name": "studease",
+   "description": "Tuition, scholarships and payments reconciled three ways against an append-only ledger. FastAPI + PostgreSQL + React web app and Flutter Android app. ",
+   "url": "https://github.com/vbs-0/studease",
+   "homepage": "https://studease.is-cool.dev",
+   "language": "PLpgSQL",
+   "languages": {
+    "PLpgSQL": 5861849,
+    "Python": 429126,
+    "Dart": 136237,
+    "TypeScript": 120771,
+    "CSS": 23409,
+    "Batchfile": 4959,
+    "HTML": 3906,
+    "Shell": 2191,
+    "Dockerfile": 951,
+    "Mako": 440,
+    "Makefile": 403,
+    "Kotlin": 129
+   },
+   "topics": [
+    "education",
+    "fastapi",
+    "fintech",
+    "flutter",
+    "ledger",
+    "postgresql",
+    "react",
+    "reconciliation"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2026-11-14T08:33:34Z",
+   "pushedAt": "2026-11-14T12:41:26Z"
+  },
+  {
+   "fullName": "vbs-0/QuantumLink-PQC",
+   "name": "QuantumLink-PQC",
+   "description": "Post-quantum messaging, made visible: Kyber-512, Dilithium-2 and AES-256-GCM with a TensorFlow seed model.",
+   "url": "https://github.com/vbs-0/QuantumLink-PQC",
+   "homepage": "",
+   "language": "Python",
+   "languages": {
+    "Python": 204623,
+    "CSS": 113750,
+    "HTML": 95971,
+    "JavaScript": 78429
+   },
+   "topics": [
+    "aes-gcm",
+    "cryptography",
+    "dilithium",
+    "kyber",
+    "post-quantum-cryptography",
+    "python",
+    "tensorflow"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2025-09-29T13:38:03Z",
+   "pushedAt": "2026-11-11T06:47:24Z"
+  },
+  {
+   "fullName": "vbs-0/commit-hygiene",
+   "name": "commit-hygiene",
+   "description": "commit-msg hook + CI check that strips AI-tool attribution from commit messages",
+   "url": "https://github.com/vbs-0/commit-hygiene",
+   "homepage": "",
+   "language": "Shell",
+   "languages": {
+    "Shell": 6531
+   },
+   "topics": [
+    "ci",
+    "commit-msg",
+    "git",
+    "git-hooks",
+    "github-actions",
+    "shell"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2026-10-12T02:44:05Z",
+   "pushedAt": "2026-10-12T03:05:04Z"
+  },
+  {
+   "fullName": "vbs-0/shannon",
+   "name": "shannon",
+   "description": "Shannon Lite is an autonomous, white-box AI pentester for web applications and APIs. It analyzes your source code, identifies attack vectors, and executes real exploits to prove vulnerabilities before they reach production.",
+   "url": "https://github.com/vbs-0/shannon",
+   "homepage": "https://keygraph.io/",
+   "language": "",
+   "languages": {},
+   "topics": [],
+   "fork": true,
+   "archived": true,
+   "createdAt": "2026-04-28T04:40:36Z",
+   "pushedAt": "2026-04-27T12:48:31Z"
+  },
+  {
+   "fullName": "vbs-0/Action-Recovery-builder",
+   "name": "Action-Recovery-builder",
+   "description": "Build Recovery for Android with GitHub Workflow",
+   "url": "https://github.com/vbs-0/Action-Recovery-builder",
+   "homepage": "",
+   "language": "Shell",
+   "languages": {},
+   "topics": [],
+   "fork": true,
+   "archived": true,
+   "createdAt": "2022-10-10T06:53:35Z",
+   "pushedAt": "2026-03-06T04:20:49Z"
+  },
+  {
+   "fullName": "vbs-0/3D-Driving-AI-PPO",
+   "name": "3D-Driving-AI-PPO",
+   "description": "🚗 3D web app that combines Proximal Policy Optimization with Three.js, enabling users to directly interact with or train AI models on a virtual racetrack.",
+   "url": "https://github.com/vbs-0/3D-Driving-AI-PPO",
+   "homepage": "https://3d-driving-ai.vercel.app/",
+   "language": "JavaScript",
+   "languages": {},
+   "topics": [],
+   "fork": true,
+   "archived": true,
+   "createdAt": "2025-05-31T04:58:43Z",
+   "pushedAt": "2025-05-31T05:07:15Z"
+  },
+  {
+   "fullName": "vbs-0/DebateMate",
+   "name": "DebateMate",
+   "description": "",
+   "url": "https://github.com/vbs-0/DebateMate",
+   "homepage": "https://debate-mate-mauve.vercel.app",
+   "language": "TypeScript",
+   "languages": {},
+   "topics": [],
+   "fork": true,
+   "archived": true,
+   "createdAt": "2025-05-14T12:02:59Z",
+   "pushedAt": "2025-05-15T14:15:41Z"
+  },
+  {
+   "fullName": "vbs-0/OpenHands",
+   "name": "OpenHands",
+   "description": "🙌 OpenHands: Code Less, Make More",
+   "url": "https://github.com/vbs-0/OpenHands",
+   "homepage": "https://all-hands.dev",
+   "language": "Python",
+   "languages": {},
+   "topics": [],
+   "fork": true,
+   "archived": true,
+   "createdAt": "2025-05-13T08:13:54Z",
+   "pushedAt": "2025-05-14T03:02:29Z"
+  },
+  {
+   "fullName": "vbs-0/taskverse",
+   "name": "taskverse",
+   "description": "Taskverse: animated drag-and-drop task manager (Next.js, Tailwind).",
+   "url": "https://github.com/vbs-0/taskverse",
+   "homepage": "https://taskverse3.vercel.app",
+   "language": "TypeScript",
+   "languages": {
+    "TypeScript": 240479,
+    "CSS": 4856,
+    "JavaScript": 1163
+   },
+   "topics": [
+    "drag-and-drop",
+    "nextjs",
+    "react",
+    "tailwindcss",
+    "task-manager",
+    "typescript"
+   ],
+   "fork": false,
+   "archived": false,
+   "createdAt": "2025-04-17T01:33:14Z",
+   "pushedAt": "2025-04-17T01:42:50Z"
+  },
+  {
+   "fullName": "vbs-0/advanced_inventory-management",
+   "name": "advanced_inventory-management",
+   "description": "",
+   "url": "https://github.com/vbs-0/advanced_inventory-management",
+   "homepage": "",
+   "language": "HTML",
+   "languages": {
+    "HTML": 157159,
+    "Python": 97080,
+    "CSS": 8909
+   },
+   "topics": [],
+   "fork": false,
+   "archived": true,
+   "createdAt": "2025-02-10T17:56:33Z",
+   "pushedAt": "2025-02-12T07:40:15Z"
+  },
+  {
+   "fullName": "vbs-0/djangox",
+   "name": "djangox",
+   "description": "Django starter project with 🔋",
+   "url": "https://github.com/vbs-0/djangox",
+   "homepage": "",
+   "language": "",
+   "languages": {},
+   "topics": [],
+   "fork": true,
+   "archived": true,
+   "createdAt": "2024-04-26T16:12:44Z",
+   "pushedAt": "2024-04-17T02:34:50Z"
+  }
+ ],
+ "contributions": {
+  "total": 520,
+  "from": "2025-11-23",
+  "to": "2026-11-27",
+  "days": [
+   [
+    "2025-11-23",
+    0,
+    0
+   ],
+   [
+    "2025-11-24",
+    0,
+    0
+   ],
+   [
+    "2025-11-25",
+    0,
+    0
+   ],
+   [
+    "2025-11-26",
+    0,
+    0
+   ],
+   [
+    "2025-11-27",
+    0,
+    0
+   ],
+   [
+    "2025-11-28",
+    0,
+    0
+   ],
+   [
+    "2025-11-29",
+    0,
+    0
+   ],
+   [
+    "2025-11-30",
+    0,
+    0
+   ],
+   [
+    "2025-12-01",
+    0,
+    0
+   ],
+   [
+    "2025-12-02",
+    0,
+    0
+   ],
+   [
+    "2025-12-03",
+    0,
+    0
+   ],
+   [
+    "2025-12-04",
+    0,
+    0
+   ],
+   [
+    "2025-12-05",
+    0,
+    0
+   ],
+   [
+    "2025-12-06",
+    0,
+    0
+   ],
+   [
+    "2025-12-07",
+    0,
+    0
+   ],
+   [
+    "2025-12-08",
+    9,
+    1
+   ],
+   [
+    "2025-12-09",
+    4,
+    1
+   ],
+   [
+    "2025-12-10",
+    3,
+    1
+   ],
+   [
+    "2025-12-11",
+    0,
+    0
+   ],
+   [
+    "2025-12-12",
+    0,
+    0
+   ],
+   [
+    "2025-12-13",
+    4,
+    1
+   ],
+   [
+    "2025-12-14",
+    0,
+    0
+   ],
+   [
+    "2025-12-15",
+    0,
+    0
+   ],
+   [
+    "2025-12-16",
+    0,
+    0
+   ],
+   [
+    "2025-12-17",
+    0,
+    0
+   ],
+   [
+    "2025-12-18",
+    0,
+    0
+   ],
+   [
+    "2025-12-19",
+    0,
+    0
+   ],
+   [
+    "2025-12-20",
+    0,
+    0
+   ],
+   [
+    "2025-12-21",
+    0,
+    0
+   ],
+   [
+    "2025-12-22",
+    0,
+    0
+   ],
+   [
+    "2025-12-23",
+    0,
+    0
+   ],
+   [
+    "2025-12-24",
+    0,
+    0
+   ],
+   [
+    "2025-12-25",
+    0,
+    0
+   ],
+   [
+    "2025-12-26",
+    0,
+    0
+   ],
+   [
+    "2025-12-27",
+    0,
+    0
+   ],
+   [
+    "2025-12-28",
+    7,
+    1
+   ],
+   [
+    "2025-12-29",
+    0,
+    0
+   ],
+   [
+    "2025-12-30",
+    0,
+    0
+   ],
+   [
+    "2025-12-31",
+    0,
+    0
+   ],
+   [
+    "2026-01-01",
+    0,
+    0
+   ],
+   [
+    "2026-01-02",
+    0,
+    0
+   ],
+   [
+    "2026-01-03",
+    0,
+    0
+   ],
+   [
+    "2026-01-04",
+    0,
+    0
+   ],
+   [
+    "2026-01-05",
+    0,
+    0
+   ],
+   [
+    "2026-01-06",
+    0,
+    0
+   ],
+   [
+    "2026-01-07",
+    0,
+    0
+   ],
+   [
+    "2026-01-08",
+    0,
+    0
+   ],
+   [
+    "2026-01-09",
+    0,
+    0
+   ],
+   [
+    "2026-01-10",
+    0,
+    0
+   ],
+   [
+    "2026-01-11",
+    0,
+    0
+   ],
+   [
+    "2026-01-12",
+    0,
+    0
+   ],
+   [
+    "2026-01-13",
+    0,
+    0
+   ],
+   [
+    "2026-01-14",
+    0,
+    0
+   ],
+   [
+    "2026-01-15",
+    0,
+    0
+   ],
+   [
+    "2026-01-16",
+    0,
+    0
+   ],
+   [
+    "2026-01-17",
+    0,
+    0
+   ],
+   [
+    "2026-01-18",
+    0,
+    0
+   ],
+   [
+    "2026-01-19",
+    0,
+    0
+   ],
+   [
+    "2026-01-20",
+    0,
+    0
+   ],
+   [
+    "2026-01-21",
+    0,
+    0
+   ],
+   [
+    "2026-01-22",
+    0,
+    0
+   ],
+   [
+    "2026-01-23",
+    0,
+    0
+   ],
+   [
+    "2026-01-24",
+    0,
+    0
+   ],
+   [
+    "2026-01-25",
+    0,
+    0
+   ],
+   [
+    "2026-01-26",
+    0,
+    0
+   ],
+   [
+    "2026-01-27",
+    0,
+    0
+   ],
+   [
+    "2026-01-28",
+    0,
+    0
+   ],
+   [
+    "2026-01-29",
+    0,
+    0
+   ],
+   [
+    "2026-01-30",
+    0,
+    0
+   ],
+   [
+    "2026-01-31",
+    0,
+    0
+   ],
+   [
+    "2026-02-01",
+    0,
+    0
+   ],
+   [
+    "2026-02-02",
+    0,
+    0
+   ],
+   [
+    "2026-02-03",
+    0,
+    0
+   ],
+   [
+    "2026-02-04",
+    7,
+    1
+   ],
+   [
+    "2026-02-05",
+    1,
+    1
+   ],
+   [
+    "2026-02-06",
+    0,
+    0
+   ],
+   [
+    "2026-02-07",
+    0,
+    0
+   ],
+   [
+    "2026-02-08",
+    0,
+    0
+   ],
+   [
+    "2026-02-09",
+    0,
+    0
+   ],
+   [
+    "2026-02-10",
+    0,
+    0
+   ],
+   [
+    "2026-02-11",
+    0,
+    0
+   ],
+   [
+    "2026-02-12",
+    0,
+    0
+   ],
+   [
+    "2026-02-13",
+    0,
+    0
+   ],
+   [
+    "2026-02-14",
+    0,
+    0
+   ],
+   [
+    "2026-02-15",
+    0,
+    0
+   ],
+   [
+    "2026-02-16",
+    0,
+    0
+   ],
+   [
+    "2026-02-17",
+    1,
+    1
+   ],
+   [
+    "2026-02-18",
+    0,
+    0
+   ],
+   [
+    "2026-02-19",
+    0,
+    0
+   ],
+   [
+    "2026-02-20",
+    0,
+    0
+   ],
+   [
+    "2026-02-21",
+    0,
+    0
+   ],
+   [
+    "2026-02-22",
+    0,
+    0
+   ],
+   [
+    "2026-02-23",
+    0,
+    0
+   ],
+   [
+    "2026-02-24",
+    0,
+    0
+   ],
+   [
+    "2026-02-25",
+    0,
+    0
+   ],
+   [
+    "2026-02-26",
+    0,
+    0
+   ],
+   [
+    "2026-02-27",
+    0,
+    0
+   ],
+   [
+    "2026-02-28",
+    0,
+    0
+   ],
+   [
+    "2026-03-01",
+    0,
+    0
+   ],
+   [
+    "2026-03-02",
+    0,
+    0
+   ],
+   [
+    "2026-03-03",
+    0,
+    0
+   ],
+   [
+    "2026-03-04",
+    0,
+    0
+   ],
+   [
+    "2026-03-05",
+    0,
+    0
+   ],
+   [
+    "2026-03-06",
+    13,
+    2
+   ],
+   [
+    "2026-03-07",
+    0,
+    0
+   ],
+   [
+    "2026-03-08",
+    0,
+    0
+   ],
+   [
+    "2026-03-09",
+    0,
+    0
+   ],
+   [
+    "2026-03-10",
+    0,
+    0
+   ],
+   [
+    "2026-03-11",
+    0,
+    0
+   ],
+   [
+    "2026-03-12",
+    0,
+    0
+   ],
+   [
+    "2026-03-13",
+    0,
+    0
+   ],
+   [
+    "2026-03-14",
+    0,
+    0
+   ],
+   [
+    "2026-03-15",
+    0,
+    0
+   ],
+   [
+    "2026-03-16",
+    0,
+    0
+   ],
+   [
+    "2026-03-17",
+    1,
+    1
+   ],
+   [
+    "2026-03-18",
+    0,
+    0
+   ],
+   [
+    "2026-03-19",
+    0,
+    0
+   ],
+   [
+    "2026-03-20",
+    0,
+    0
+   ],
+   [
+    "2026-03-21",
+    0,
+    0
+   ],
+   [
+    "2026-03-22",
+    0,
+    0
+   ],
+   [
+    "2026-03-23",
+    0,
+    0
+   ],
+   [
+    "2026-03-24",
+    0,
+    0
+   ],
+   [
+    "2026-03-25",
+    0,
+    0
+   ],
+   [
+    "2026-03-26",
+    0,
+    0
+   ],
+   [
+    "2026-03-27",
+    0,
+    0
+   ],
+   [
+    "2026-03-28",
+    0,
+    0
+   ],
+   [
+    "2026-03-29",
+    0,
+    0
+   ],
+   [
+    "2026-03-30",
+    0,
+    0
+   ],
+   [
+    "2026-03-31",
+    0,
+    0
+   ],
+   [
+    "2026-04-01",
+    0,
+    0
+   ],
+   [
+    "2026-04-02",
+    0,
+    0
+   ],
+   [
+    "2026-04-03",
+    0,
+    0
+   ],
+   [
+    "2026-04-04",
+    0,
+    0
+   ],
+   [
+    "2026-04-05",
+    0,
+    0
+   ],
+   [
+    "2026-04-06",
+    0,
+    0
+   ],
+   [
+    "2026-04-07",
+    0,
+    0
+   ],
+   [
+    "2026-04-08",
+    0,
+    0
+   ],
+   [
+    "2026-04-09",
+    0,
+    0
+   ],
+   [
+    "2026-04-10",
+    0,
+    0
+   ],
+   [
+    "2026-04-11",
+    0,
+    0
+   ],
+   [
+    "2026-04-12",
+    0,
+    0
+   ],
+   [
+    "2026-04-13",
+    0,
+    0
+   ],
+   [
+    "2026-04-14",
+    0,
+    0
+   ],
+   [
+    "2026-04-15",
+    0,
+    0
+   ],
+   [
+    "2026-04-16",
+    6,
+    1
+   ],
+   [
+    "2026-04-17",
+    0,
+    0
+   ],
+   [
+    "2026-04-18",
+    0,
+    0
+   ],
+   [
+    "2026-04-19",
+    0,
+    0
+   ],
+   [
+    "2026-04-20",
+    0,
+    0
+   ],
+   [
+    "2026-04-21",
+    2,
+    1
+   ],
+   [
+    "2026-04-22",
+    0,
+    0
+   ],
+   [
+    "2026-04-23",
+    0,
+    0
+   ],
+   [
+    "2026-04-24",
+    0,
+    0
+   ],
+   [
+    "2026-04-25",
+    0,
+    0
+   ],
+   [
+    "2026-04-26",
+    0,
+    0
+   ],
+   [
+    "2026-04-27",
+    0,
+    0
+   ],
+   [
+    "2026-04-28",
+    1,
+    1
+   ],
+   [
+    "2026-04-29",
+    0,
+    0
+   ],
+   [
+    "2026-04-30",
+    0,
+    0
+   ],
+   [
+    "2026-05-01",
+    0,
+    0
+   ],
+   [
+    "2026-05-02",
+    0,
+    0
+   ],
+   [
+    "2026-05-03",
+    0,
+    0
+   ],
+   [
+    "2026-05-04",
+    0,
+    0
+   ],
+   [
+    "2026-05-05",
+    0,
+    0
+   ],
+   [
+    "2026-05-06",
+    0,
+    0
+   ],
+   [
+    "2026-05-07",
+    0,
+    0
+   ],
+   [
+    "2026-05-08",
+    0,
+    0
+   ],
+   [
+    "2026-05-09",
+    0,
+    0
+   ],
+   [
+    "2026-05-10",
+    0,
+    0
+   ],
+   [
+    "2026-05-11",
+    0,
+    0
+   ],
+   [
+    "2026-05-12",
+    0,
+    0
+   ],
+   [
+    "2026-05-13",
+    0,
+    0
+   ],
+   [
+    "2026-05-14",
+    0,
+    0
+   ],
+   [
+    "2026-05-15",
+    0,
+    0
+   ],
+   [
+    "2026-05-16",
+    3,
+    1
+   ],
+   [
+    "2026-05-17",
+    0,
+    0
+   ],
+   [
+    "2026-05-18",
+    0,
+    0
+   ],
+   [
+    "2026-05-19",
+    1,
+    1
+   ],
+   [
+    "2026-05-20",
+    6,
+    1
+   ],
+   [
+    "2026-05-21",
+    0,
+    0
+   ],
+   [
+    "2026-05-22",
+    0,
+    0
+   ],
+   [
+    "2026-05-23",
+    0,
+    0
+   ],
+   [
+    "2026-05-24",
+    0,
+    0
+   ],
+   [
+    "2026-05-25",
+    0,
+    0
+   ],
+   [
+    "2026-05-26",
+    0,
+    0
+   ],
+   [
+    "2026-05-27",
+    0,
+    0
+   ],
+   [
+    "2026-05-28",
+    0,
+    0
+   ],
+   [
+    "2026-05-29",
+    0,
+    0
+   ],
+   [
+    "2026-05-30",
+    0,
+    0
+   ],
+   [
+    "2026-05-31",
+    0,
+    0
+   ],
+   [
+    "2026-06-01",
+    0,
+    0
+   ],
+   [
+    "2026-06-02",
+    0,
+    0
+   ],
+   [
+    "2026-06-03",
+    0,
+    0
+   ],
+   [
+    "2026-06-04",
+    0,
+    0
+   ],
+   [
+    "2026-06-05",
+    2,
+    1
+   ],
+   [
+    "2026-06-06",
+    0,
+    0
+   ],
+   [
+    "2026-06-07",
+    0,
+    0
+   ],
+   [
+    "2026-06-08",
+    1,
+    1
+   ],
+   [
+    "2026-06-09",
+    0,
+    0
+   ],
+   [
+    "2026-06-10",
+    2,
+    1
+   ],
+   [
+    "2026-06-11",
+    0,
+    0
+   ],
+   [
+    "2026-06-12",
+    0,
+    0
+   ],
+   [
+    "2026-06-13",
+    0,
+    0
+   ],
+   [
+    "2026-06-14",
+    0,
+    0
+   ],
+   [
+    "2026-06-15",
+    5,
+    1
+   ],
+   [
+    "2026-06-16",
+    0,
+    0
+   ],
+   [
+    "2026-06-17",
+    2,
+    1
+   ],
+   [
+    "2026-06-18",
+    0,
+    0
+   ],
+   [
+    "2026-06-19",
+    0,
+    0
+   ],
+   [
+    "2026-06-20",
+    0,
+    0
+   ],
+   [
+    "2026-06-21",
+    0,
+    0
+   ],
+   [
+    "2026-06-22",
+    0,
+    0
+   ],
+   [
+    "2026-06-23",
+    0,
+    0
+   ],
+   [
+    "2026-06-24",
+    0,
+    0
+   ],
+   [
+    "2026-06-25",
+    2,
+    1
+   ],
+   [
+    "2026-06-26",
+    0,
+    0
+   ],
+   [
+    "2026-06-27",
+    0,
+    0
+   ],
+   [
+    "2026-06-28",
+    0,
+    0
+   ],
+   [
+    "2026-06-29",
+    0,
+    0
+   ],
+   [
+    "2026-06-30",
+    0,
+    0
+   ],
+   [
+    "2026-07-01",
+    0,
+    0
+   ],
+   [
+    "2026-07-02",
+    0,
+    0
+   ],
+   [
+    "2026-07-03",
+    0,
+    0
+   ],
+   [
+    "2026-07-04",
+    0,
+    0
+   ],
+   [
+    "2026-07-05",
+    0,
+    0
+   ],
+   [
+    "2026-07-06",
+    0,
+    0
+   ],
+   [
+    "2026-07-07",
+    0,
+    0
+   ],
+   [
+    "2026-07-08",
+    0,
+    0
+   ],
+   [
+    "2026-07-09",
+    0,
+    0
+   ],
+   [
+    "2026-07-10",
+    0,
+    0
+   ],
+   [
+    "2026-07-11",
+    0,
+    0
+   ],
+   [
+    "2026-07-12",
+    0,
+    0
+   ],
+   [
+    "2026-07-13",
+    0,
+    0
+   ],
+   [
+    "2026-07-14",
+    1,
+    1
+   ],
+   [
+    "2026-07-15",
+    1,
+    1
+   ],
+   [
+    "2026-07-16",
+    3,
+    1
+   ],
+   [
+    "2026-07-17",
+    18,
+    2
+   ],
+   [
+    "2026-07-18",
+    9,
+    1
+   ],
+   [
+    "2026-07-19",
+    18,
+    2
+   ],
+   [
+    "2026-07-20",
+    3,
+    1
+   ],
+   [
+    "2026-07-21",
+    6,
+    1
+   ],
+   [
+    "2026-07-22",
+    0,
+    0
+   ],
+   [
+    "2026-07-23",
+    6,
+    1
+   ],
+   [
+    "2026-07-24",
+    0,
+    0
+   ],
+   [
+    "2026-07-25",
+    0,
+    0
+   ],
+   [
+    "2026-07-26",
+    0,
+    0
+   ],
+   [
+    "2026-07-27",
+    3,
+    1
+   ],
+   [
+    "2026-07-28",
+    9,
+    1
+   ],
+   [
+    "2026-07-29",
+    3,
+    1
+   ],
+   [
+    "2026-07-30",
+    0,
+    0
+   ],
+   [
+    "2026-07-31",
+    6,
+    1
+   ],
+   [
+    "2026-08-01",
+    44,
+    4
+   ],
+   [
+    "2026-08-02",
+    25,
+    3
+   ],
+   [
+    "2026-08-03",
+    2,
+    1
+   ],
+   [
+    "2026-08-04",
+    0,
+    0
+   ],
+   [
+    "2026-08-05",
+    0,
+    0
+   ],
+   [
+    "2026-08-06",
+    4,
+    1
+   ],
+   [
+    "2026-08-07",
+    0,
+    0
+   ],
+   [
+    "2026-08-08",
+    0,
+    0
+   ],
+   [
+    "2026-08-09",
+    0,
+    0
+   ],
+   [
+    "2026-08-10",
+    15,
+    2
+   ],
+   [
+    "2026-08-11",
+    13,
+    2
+   ],
+   [
+    "2026-08-12",
+    10,
+    1
+   ],
+   [
+    "2026-08-13",
+    26,
+    3
+   ],
+   [
+    "2026-08-14",
+    13,
+    2
+   ],
+   [
+    "2026-08-15",
+    2,
+    1
+   ],
+   [
+    "2026-08-16",
+    0,
+    0
+   ],
+   [
+    "2026-08-17",
+    43,
+    4
+   ],
+   [
+    "2026-08-18",
+    5,
+    1
+   ],
+   [
+    "2026-08-19",
+    1,
+    1
+   ],
+   [
+    "2026-08-20",
+    17,
+    2
+   ],
+   [
+    "2026-08-21",
+    17,
+    2
+   ],
+   [
+    "2026-08-22",
+    2,
+    1
+   ],
+   [
+    "2026-08-23",
+    0,
+    0
+   ],
+   [
+    "2026-08-24",
+    5,
+    1
+   ],
+   [
+    "2026-08-25",
+    0,
+    0
+   ],
+   [
+    "2026-08-26",
+    22,
+    3
+   ],
+   [
+    "2026-08-27",
+    7,
+    1
+   ],
+   [
+    "2026-08-28",
+    1,
+    1
+   ],
+   [
+    "2026-08-29",
+    2,
+    1
+   ],
+   [
+    "2026-08-30",
+    1,
+    1
+   ],
+   [
+    "2026-08-31",
+    0,
+    0
+   ],
+   [
+    "2026-09-01",
+    0,
+    0
+   ],
+   [
+    "2026-09-02",
+    0,
+    0
+   ],
+   [
+    "2026-09-03",
+    0,
+    0
+   ],
+   [
+    "2026-09-04",
+    0,
+    0
+   ],
+   [
+    "2026-09-05",
+    0,
+    0
+   ],
+   [
+    "2026-09-06",
+    0,
+    0
+   ],
+   [
+    "2026-09-07",
+    0,
+    0
+   ],
+   [
+    "2026-09-08",
+    0,
+    0
+   ],
+   [
+    "2026-09-09",
+    0,
+    0
+   ],
+   [
+    "2026-09-10",
+    0,
+    0
+   ],
+   [
+    "2026-09-11",
+    0,
+    0
+   ],
+   [
+    "2026-09-12",
+    0,
+    0
+   ],
+   [
+    "2026-09-13",
+    0,
+    0
+   ],
+   [
+    "2026-09-14",
+    0,
+    0
+   ],
+   [
+    "2026-09-15",
+    0,
+    0
+   ],
+   [
+    "2026-09-16",
+    0,
+    0
+   ],
+   [
+    "2026-09-17",
+    0,
+    0
+   ],
+   [
+    "2026-09-18",
+    0,
+    0
+   ],
+   [
+    "2026-09-19",
+    0,
+    0
+   ],
+   [
+    "2026-09-20",
+    0,
+    0
+   ],
+   [
+    "2026-09-21",
+    0,
+    0
+   ],
+   [
+    "2026-09-22",
+    0,
+    0
+   ],
+   [
+    "2026-09-23",
+    0,
+    0
+   ],
+   [
+    "2026-09-24",
+    0,
+    0
+   ],
+   [
+    "2026-09-25",
+    15,
+    2
+   ],
+   [
+    "2026-09-26",
+    0,
+    0
+   ],
+   [
+    "2026-09-27",
+    0,
+    0
+   ],
+   [
+    "2026-09-28",
+    0,
+    0
+   ],
+   [
+    "2026-09-29",
+    0,
+    0
+   ],
+   [
+    "2026-09-30",
+    0,
+    0
+   ],
+   [
+    "2026-10-01",
+    0,
+    0
+   ],
+   [
+    "2026-10-02",
+    0,
+    0
+   ],
+   [
+    "2026-10-03",
+    0,
+    0
+   ],
+   [
+    "2026-10-04",
+    0,
+    0
+   ],
+   [
+    "2026-10-05",
+    2,
+    1
+   ],
+   [
+    "2026-10-06",
+    0,
+    0
+   ],
+   [
+    "2026-10-07",
+    0,
+    0
+   ],
+   [
+    "2026-10-08",
+    0,
+    0
+   ],
+   [
+    "2026-10-09",
+    1,
+    1
+   ],
+   [
+    "2026-10-10",
+    8,
+    1
+   ],
+   [
+    "2026-10-11",
+    18,
+    2
+   ],
+   [
+    "2026-10-12",
+    5,
+    1
+   ],
+   [
+    "2026-10-13",
+    0,
+    0
+   ],
+   [
+    "2026-10-14",
+    0,
+    0
+   ],
+   [
+    "2026-10-15",
+    0,
+    0
+   ],
+   [
+    "2026-10-16",
+    0,
+    0
+   ],
+   [
+    "2026-10-17",
+    0,
+    0
+   ],
+   [
+    "2026-10-18",
+    0,
+    0
+   ],
+   [
+    "2026-10-19",
+    0,
+    0
+   ],
+   [
+    "2026-10-20",
+    0,
+    0
+   ],
+   [
+    "2026-10-21",
+    0,
+    0
+   ],
+   [
+    "2026-10-22",
+    0,
+    0
+   ],
+   [
+    "2026-10-23",
+    1,
+    1
+   ],
+   [
+    "2026-10-24",
+    0,
+    0
+   ],
+   [
+    "2026-10-25",
+    0,
+    0
+   ],
+   [
+    "2026-10-26",
+    0,
+    0
+   ],
+   [
+    "2026-10-27",
+    0,
+    0
+   ],
+   [
+    "2026-10-28",
+    0,
+    0
+   ],
+   [
+    "2026-10-29",
+    0,
+    0
+   ],
+   [
+    "2026-10-30",
+    0,
+    0
+   ],
+   [
+    "2026-10-31",
+    0,
+    0
+   ],
+   [
+    "2026-11-01",
+    0,
+    0
+   ],
+   [
+    "2026-11-02",
+    0,
+    0
+   ],
+   [
+    "2026-11-03",
+    0,
+    0
+   ],
+   [
+    "2026-11-04",
+    1,
+    1
+   ],
+   [
+    "2026-11-05",
+    0,
+    0
+   ],
+   [
+    "2026-11-06",
+    1,
+    1
+   ],
+   [
+    "2026-11-07",
+    2,
+    1
+   ],
+   [
+    "2026-11-08",
+    0,
+    0
+   ],
+   [
+    "2026-11-09",
+    0,
+    0
+   ],
+   [
+    "2026-11-10",
+    0,
+    0
+   ],
+   [
+    "2026-11-11",
+    0,
+    0
+   ],
+   [
+    "2026-11-12",
+    1,
+    1
+   ],
+   [
+    "2026-11-13",
+    0,
+    0
+   ],
+   [
+    "2026-11-14",
+    3,
+    1
+   ],
+   [
+    "2026-11-15",
+    2,
+    1
+   ],
+   [
+    "2026-11-16",
+    0,
+    0
+   ],
+   [
+    "2026-11-17",
+    0,
+    0
+   ],
+   [
+    "2026-11-18",
+    0,
+    0
+   ],
+   [
+    "2026-11-19",
+    0,
+    0
+   ],
+   [
+    "2026-11-20",
+    0,
+    0
+   ],
+   [
+    "2026-11-21",
+    0,
+    0
+   ],
+   [
+    "2026-11-22",
+    0,
+    0
+   ],
+   [
+    "2026-11-23",
+    0,
+    0
+   ],
+   [
+    "2026-11-24",
+    0,
+    0
+   ],
+   [
+    "2026-11-25",
+    1,
+    1
+   ],
+   [
+    "2026-11-26",
+    13,
+    2
+   ],
+   [
+    "2026-11-27",
+    0,
+    0
+   ]
+  ]
+ }
+}
