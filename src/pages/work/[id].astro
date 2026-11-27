@@ -1,0 +1,13 @@
+---
+/** One page per project, in the Film build's world. The reel on the main page links here. */
+import { projects } from '@/content';
+import ProjectPage from '@/variants/film/ProjectPage.astro';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+---
+
+<ProjectPage project={project} />

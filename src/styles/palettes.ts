@@ -96,10 +96,50 @@ const classicDark: Palette = {
 };
 const classic: Record<Theme, Palette> = { light: classicDark, dark: classicDark };
 
-export const palettes: Record<VariantId, Record<Theme, Palette>> = { phone, manual, classic };
+/**
+ * Film: projection black and title white, and one grade per scene, never two on screen at once.
+ * The grades follow the part each scene looks at: display azure, antenna violet, board green, lens rose,
+ * silicon amber, battery ember. Dark only: it is a screening room.
+ */
+const filmDark: Palette = {
+  bg: oklch(0.13, 0.004, 75),
+  surface: oklch(0.18, 0.006, 75),
+  surfaceHi: oklch(0.235, 0.008, 75),
+  text: oklch(0.955, 0.012, 85),
+  textMuted: oklch(0.75, 0.014, 85),
+  outline: oklch(0.36, 0.01, 80),
+  gTitle: oklch(0.87, 0.07, 78),
+  gInterface: oklch(0.8, 0.115, 235),
+  gProtocol: oklch(0.77, 0.13, 300),
+  gServices: oklch(0.8, 0.14, 155),
+  gModels: oklch(0.77, 0.13, 355),
+  gSystem: oklch(0.85, 0.13, 88),
+  gOps: oklch(0.77, 0.14, 45),
+  phoneBody: oklch(0.25, 0.006, 260),
+  phoneFrame: oklch(0.62, 0.012, 80),
+};
+const film: Record<Theme, Palette> = { light: filmDark, dark: filmDark };
+
+export const palettes: Record<VariantId, Record<Theme, Palette>> = { film, phone, manual, classic };
 
 /** Text-on-background pairs that must hold a WCAG contrast ratio. [foreground, background, minimum]. */
 export const contrastPairs: Record<VariantId, Array<[string, string, number]>> = {
+  film: [
+    ['text', 'bg', 4.5],
+    ['text', 'surface', 4.5],
+    ['text', 'surfaceHi', 4.5],
+    ['textMuted', 'bg', 4.5],
+    ['textMuted', 'surface', 4.5],
+    ['textMuted', 'surfaceHi', 4.5],
+    ['bg', 'text', 4.5],
+    ...(['gTitle', 'gInterface', 'gProtocol', 'gServices', 'gModels', 'gSystem', 'gOps'] as const).flatMap(
+      (g): Array<[string, string, number]> => [
+        [g, 'bg', 4.5],
+        [g, 'surface', 4.5],
+        ['bg', g, 4.5],
+      ],
+    ),
+  ],
   phone: [
     ['text', 'bg', 4.5],
     ['text', 'surface', 4.5],

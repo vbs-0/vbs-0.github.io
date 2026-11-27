@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { siteConfig } from './site.config.ts';
@@ -22,6 +23,12 @@ export default defineConfig({
     },
   ],
   vite: {
+    resolve: {
+      alias: {
+        // The root page imports only the default build, so only that build's stylesheet ships on it.
+        '@default-page': fileURLToPath(new URL(`./src/variants/${siteConfig.defaultVariant}/Page.astro`, import.meta.url)),
+      },
+    },
     build: { chunkSizeWarningLimit: 900 },
   },
 });

@@ -5,9 +5,11 @@ Pick a version per application; each is a complete page at its own address.
 
 | Address | Version | What it is |
 |---|---|---|
-| `/` | the default | Whatever `defaultVariant` in `site.config.ts` names. Today: About phone. |
+| `/` | the default | Whatever `defaultVariant` in `site.config.ts` names. Today: Film. |
 | `/phone/` | About phone | A custom-ROM Settings screen where the device is the person. The 3D phone mirrors the page, comes apart under Hardware, and its display shows the open app. |
 | `/manual/` | Service manual | A drawing sheet: an ink-line phone that takes itself apart as you scroll, a numbered parts list, and figure plates for the projects. |
+| `/film/` | Film | Opening titles: a countdown leader, one camera move through six scenes, a sideways reel of measured projects, credits. |
+| `/work/<id>/` | — | One page per project in the Film world. |
 | `/classic/` | Classic | Dark studio, a stack of six glass slabs (one per layer of the stack), a work list you can filter by layer, and a 3D contribution skyline. |
 
 Live site: <https://vbs-0.github.io>.
@@ -16,7 +18,8 @@ Live site: <https://vbs-0.github.io>.
 
 - Applying for a mobile, Android or full-stack role: `/phone/`. It shows range and playfulness.
 - Applying somewhere that values rigour, systems or hardware: `/manual/`. It shows how you think.
-- Applying for an AI/ML role, or sending it cold: `/classic/`. It is the expected shape, done properly.
+- Sending a link to anyone: `/`, the Film. It is the most distinctive and the fastest to read.
+- Applying for an AI/ML role at a company that likes the expected shape: `/classic/`, done properly.
 
 To change what `/` shows, edit `defaultVariant` in `site.config.ts` and push. The other addresses never change.
 

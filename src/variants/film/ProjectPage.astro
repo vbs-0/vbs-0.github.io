@@ -1,0 +1,267 @@
+---
+/**
+ * One project, in the Film build's world: the whole scene behind a frame of the reel.
+ * What it does, the numbers it is measured by with their sources, what it is built with, and its limits.
+ */
+import '@fontsource-variable/league-gothic/wdth.css';
+import '@fontsource-variable/jost/wght.css';
+import '@fontsource/courier-prime/latin-400.css';
+import 'lenis/dist/lenis.css';
+import displayFont from '@fontsource-variable/league-gothic/files/league-gothic-latin-wdth-normal.woff2?url';
+import bodyFont from '@fontsource-variable/jost/files/jost-latin-wght-normal.woff2?url';
+import './film.css';
+import BaseHead from '@/components/shared/BaseHead.astro';
+import Icon from '@/components/shared/Icon.astro';
+import Shot from '@/components/shared/Shot.astro';
+import Sweep from '@/components/shared/Sweep.astro';
+import { featured, layerById, mlProjects, moreProjects, profile } from '@/content';
+import type { Project, ProjectLink } from '@/content';
+import { formatBytes, formatInt, formatMonthYear } from '@/lib/format';
+import { projectDates, projectLanguages } from '@/lib/github';
+import type { IconName } from '@/lib/icons';
+
+interface Props {
+  project: Project;
+}
+const { project: p } = Astro.props;
+const order: Project[] = [...featured, ...mlProjects, ...moreProjects];
+const index = Math.max(0, order.findIndex((x) => x.id === p.id));
+const next = order[(index + 1) % order.length] as Project;
+const lead = p.metrics[0];
+const layer = layerById(p.layers[0] ?? 'interface');
+const linkIcon: Record<ProjectLink['kind'], IconName> = { repo: 'github', live: 'play', apk: 'package', docs: 'book', evidence: 'evidence' };
+const web = p.shots.filter((s) => s.kind === 'web');
+const phones = p.shots.filter((s) => s.kind === 'phone');
+const charts = p.shots.filter((s) => s.kind === 'chart');
+const heroShot = web[0] ?? charts[0];
+const restShots = [...web, ...charts].filter((s) => s !== heroShot);
+const dates = projectDates(p);
+const langs = projectLanguages(p);
+const email = profile.contacts.find((c) => c.kind === 'email');
+const resume = profile.contacts.find((c) => c.kind === 'resume');
+const barMax = p.figure?.kind === 'bars' ? Math.max(...p.figure.items.map((i) => i.value)) : 1;
+const description = `${p.oneLiner}${lead ? ` ${lead.value} ${lead.label}.` : ''}`;
+const grade = `--g:var(--c-g-${p.layers[0] ?? 'title'});--g-now:var(--c-g-${p.layers[0] ?? 'title'})`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead variant="film" path={`/work/${p.id}/`} title={`${p.name} · ${profile.name}`} description={description} />
+    <link rel="preload" as="font" type="font/woff2" href={displayFont} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={bodyFont} crossorigin />
+  </head>
+  <body class="work" style={grade}>
+    <a class="skip" href="#main">Skip to content</a>
+    <Sweep variant="film" />
+    <div class="film-grain" aria-hidden="true"></div>
+
+    <header class="bar bar--top">
+      <a class="bar__back" href={`/#frame-${p.id}`}><Icon name="back" size={18} />The reel</a>
+      <p class="bar__scene" aria-hidden="true"><span class="bar__dot"></span><span>Scene {index + 1} of {order.length}</span></p>
+      <nav class="bar__actions" aria-label="Contact">
+        {email && <a class="bar__link" href={email.href}><Icon name="mail" size={18} /><span>Email</span></a>}
+        {resume && <a class="bar__link" href={resume.href} download><Icon name="download" size={18} /><span>Résumé</span></a>}
+      </nav>
+    </header>
+
+    <main id="main" class="work__main wrap">
+      <header class="work__hero">
+        <p class="slug rise">
+          <span>Int.</span> {layer.partName} <span class="slug__dash">—</span> <span class="slug__n">{p.year}</span>
+          {p.status && <span class="badge">{p.status}</span>}
+        </p>
+        <h1 class="work__title" style={`view-transition-name:title-${p.id}`}>{p.name}</h1>
+        <p class="work__line rise">{p.oneLiner}</p>
+        {
+          lead && (
+            <p class="work__metric rise">
+              <b data-odo>{lead.value}</b>
+              <span>{lead.label}</span>
+            </p>
+          )
+        }
+        <div class="actions rise">
+          {
+            p.links.map((l, i) => (
+              <a class:list={['btn', i === 0 && 'btn--key']} href={l.url}>
+                <Icon name={linkIcon[l.kind]} size={20} />
+                {l.label}
+              </a>
+            ))
+          }
+        </div>
+      </header>
+
+      {
+        heroShot && (
+          <figure class:list={['work__lead', heroShot.kind === 'chart' && 'work__shots--chart']} style={`view-transition-name:shot-${p.id}`}>
+            <Shot shot={heroShot} widths={[640, 960, 1280, 1600]} sizes="(min-width: 1400px) 1300px, 94vw" loading="eager" />
+            {heroShot.caption && <figcaption>{heroShot.caption}</figcaption>}
+          </figure>
+        )
+      }
+      {
+        restShots.length > 0 && (
+          <div class="work__shots">
+            {restShots.map((s) => (
+              <figure class:list={[s.kind === 'chart' && 'work__shots--chart']}>
+                <Shot shot={s} widths={[640, 960, 1280]} sizes="(min-width: 1400px) 1300px, 94vw" />
+                {s.caption && <figcaption>{s.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        )
+      }
+      {
+        phones.length > 0 && (
+          <div class="work__shots work__shots--phone">
+            {phones.map((s) => (
+              <figure>
+                <Shot shot={s} widths={[360, 540, 720]} sizes="(min-width: 900px) 240px, 46vw" />
+                {s.caption && <figcaption>{s.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        )
+      }
+
+      <div class="work__grid">
+        <section class="work__sec" aria-labelledby="w-scene">
+          <h2 id="w-scene">The scene</h2>
+          <p>{p.summary}</p>
+          <ul class="work__list work__list--gap">{p.highlights.map((h) => <li>{h}</li>)}</ul>
+        </section>
+
+        {
+          p.metrics.length > 0 && (
+            <section class="work__sec" aria-labelledby="w-measured">
+              <h2 id="w-measured">Measured</h2>
+              <dl class="metrics">
+                {p.metrics.map((m) => (
+                  <div>
+                    <dt>{m.value}</dt>
+                    <dd>
+                      {m.label}
+                      {m.source && (
+                        <>
+                          {' · '}
+                          <a href={m.source} aria-label={`Source for ${m.value} ${m.label}`}>
+                            source
+                          </a>
+                        </>
+                      )}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )
+        }
+
+        <section class="work__sec" aria-labelledby="w-built">
+          <h2 id="w-built">Built with</h2>
+          <ul class="chips">{p.stack.map((s) => <li>{s}</li>)}</ul>
+          {langs.length > 0 && <p class="work__note">Languages in the repository: {langs.map((l) => `${l.name} ${Math.round(l.share * 100)}%`).join(', ')}.</p>}
+          <p class="work__note">Layers: {p.layers.map((id) => layerById(id).name).join(', ')}.</p>
+        </section>
+
+        {
+          p.limits && (
+            <section class="work__sec" aria-labelledby="w-limits">
+              <h2 id="w-limits">Limits, as its README states them</h2>
+              <div class="limits">
+                <ul class="work__list">{p.limits.map((l) => <li>{l}</li>)}</ul>
+              </div>
+            </section>
+          )
+        }
+
+        {
+          p.figure && (
+            <section class="work__sec" aria-labelledby="w-figure">
+              <h2 id="w-figure">{p.figure.title}</h2>
+              {p.figure.kind === 'bars' ? (
+                <div class="bars">
+                  {p.figure.items.map((item) => (
+                    <div class="bars__row">
+                      <p class="bars__label">
+                        <span>{item.label}</span>
+                        <span>
+                          {formatBytes(item.value)} ({formatInt(item.value)} B){item.note ? `, ${item.note}` : ''}
+                        </span>
+                      </p>
+                      <div class="bars__track">
+                        <div class="bars__fill" style={`inline-size:${Math.max(0.5, (item.value / barMax) * 100).toFixed(2)}%`} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div class="table-wrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        {p.figure.head.map((h) => (
+                          <th scope="col">{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {p.figure.rows.map((row) => (
+                        <tr>
+                          {row.map((cell) => (
+                            <td>{cell}</td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </section>
+          )
+        }
+
+        {
+          p.repos.length > 0 && (
+            <section class="work__sec" aria-labelledby="w-repos">
+              <h2 id="w-repos">Repositories</h2>
+              <ul class="work__list">
+                {p.repos.map((r) => (
+                  <li>
+                    <a href={`https://github.com/${r}`}>{r}</a>
+                  </li>
+                ))}
+              </ul>
+              {dates && <p class="work__note">First commit {formatMonthYear(dates.created)}, last push {formatMonthYear(dates.pushed)}.</p>}
+              {p.team && <p class="work__note">{p.team}</p>}
+            </section>
+          )
+        }
+      </div>
+    </main>
+
+    <nav class="next wrap" aria-label="Next project">
+      <a href={`/work/${next.id}/`}>
+        <span class="next__k">Next scene</span>
+        <span class="next__title">{next.name}</span>
+      </a>
+    </nav>
+
+    <footer class="foot">
+      <div class="wrap foot__in">
+        <p class="foot__made">
+          <a href="/">The whole film</a>
+          {email && <> · <a href={email.href}>{email.value}</a></>} · Shot in three.js. Set in League Gothic, Jost and Courier Prime. © {profile.name}.
+        </p>
+      </div>
+    </footer>
+
+    <div class="af" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+    <script>
+      import './client/work';
+    </script>
+  </body>
+</html>

@@ -1,10 +1,11 @@
 /**
- * The three builds of the portfolio. Each one is a complete page with the same content.
+ * The builds of the portfolio. Each one is a complete page with the same content.
+ *   film    — "Film": opening titles, one camera move through every layer of a phone (the flagship)
  *   phone   — "About phone": a custom-ROM Settings screen with a live 3D phone
  *   manual  — "Service manual": an exploded-view drawing in ink lines
  *   classic — "Classic": dark studio, glass layer stack, project grid
  */
-export const VARIANTS = ['phone', 'manual', 'classic'] as const;
+export const VARIANTS = ['film', 'phone', 'manual', 'classic'] as const;
 export type VariantId = (typeof VARIANTS)[number];
 
 export const siteConfig = {
@@ -12,14 +13,15 @@ export const siteConfig = {
   site: 'https://vbs-0.github.io',
   /**
    * Which build the root URL (/) shows. Every build also keeps its own address
-   * (/phone/, /manual/, /classic/), so a link you already sent never changes.
+   * (/film/, /phone/, /manual/, /classic/), so a link you already sent never changes.
    */
-  defaultVariant: 'phone' as VariantId,
+  defaultVariant: 'film' as VariantId,
   /** Show the small "other builds" links in each footer. */
   showVariantSwitcher: true,
 } as const;
 
 export const variantMeta: Record<VariantId, { path: string; name: string; blurb: string }> = {
+  film: { path: '/film/', name: 'Film', blurb: 'Opening titles: one camera move through every layer' },
   phone: { path: '/phone/', name: 'About phone', blurb: 'A Settings screen with a live 3D phone' },
   manual: { path: '/manual/', name: 'Service manual', blurb: 'An exploded-view drawing in ink lines' },
   classic: { path: '/classic/', name: 'Classic', blurb: 'Dark studio with a glass layer stack' },

@@ -15,6 +15,31 @@ the three.js scenes read the same values.
 - **Floor:** one `h1`, a skip link, visible focus, 44 px touch targets, AA contrast checked by unit test,
   no sideways scrolling from 320 px, a print stylesheet that drops the 3D.
 
+## Film (`/` and `/film/`)
+
+- **World:** the opening titles of a film about one engineer. A countdown leader splits open like a
+  letterbox onto a main title over the live phone; six scenes then follow one camera move into the part
+  each layer of the stack lives in; a reel of measured projects runs sideways; the credits and an end
+  card close it. It refuses the category's dark grid of project cards beside a floating 3D object.
+- **Colour:** projection black `#0f0e0d` and title white `#f6f1e8`, and one grade per scene, never two at
+  once: display azure `#67b8ee`, antenna violet `#b891f5`, board green `#6ad895`, lens rose `#ec8fbe`,
+  silicon amber `#f2c14e`, battery ember `#f0956a`. The grade tints the set's rim light, the scene's slug,
+  the strip segment and the project's accent; the light leak that covers a cut is the incoming grade.
+- **Type:** League Gothic for every title card (condensed, uppercase, 0.86 to 0.92 leading, up to 13rem),
+  Jost for body and credits, Courier Prime for sluglines, timecode and measured values. All self-hosted.
+- **Composition:** a fixed top bar (mark, live scene name, contact) and a fixed bottom bar (the film's acts
+  as a scrubber, the playhead, a running timecode). Nothing scrolls the chrome; the picture moves behind it.
+- **The set:** the same procedural phone, lit cinematically rather than as a studio product shot: a key that
+  travels with the camera, a rim in the scene's grade, a soft pool of that grade behind the subject, and
+  ACES tone mapping. The camera dives to each part in turn, blending between neighbouring shots as you scroll.
+- **Signature:** the six-scene camera move, cut with masked wipes and light leaks, each scene named by a
+  slugline and credited with its projects.
+- **Project pages** (`/work/<id>/`): one page per project in the same world: the headline number rolling,
+  the whole scene, every metric with its source, the stack, the stated limits and all the shots.
+- **Details:** a vbs cameo hidden in every act (finding them all opens a director's HUD with live frame
+  statistics), a film-grain layer, autofocus brackets that lock onto whatever can be pressed, and
+  "alternate cuts" linking the three earlier builds.
+
 ## About phone (`/phone/`)
 
 - **World:** a custom-ROM Settings screen where the device is the person. Grouped list cards with a large
@@ -68,7 +93,21 @@ the three.js scenes read the same values.
 
 ## Motion
 
-One motion system, three voices. Everything animates `transform`, `opacity` or a view transition; nothing animates layout, filters or shadows.
+One motion system, four voices. Everything animates `transform`, `opacity`, a clip or a view transition;
+nothing animates layout, filters or shadows.
+
+- **The countdown leader** (`src/variants/film`): a 1.3 s count from 8 that runs on the compositor while the
+  3D boots behind it, then one bright frame and the leader opens as a letterbox. It plays once per visit,
+  never after a sweep, on a deep link, for automation or with reduced motion, any key or click skips it, and
+  the head script decides before first paint so the page never flashes behind it. If the page script never
+  runs, a timer in the head takes it away.
+- **The director:** scroll positions are measured once per layout change and read from cache each frame, so
+  a scroll frame writes a transform, a few attributes and a timecode. The camera's shot index is continuous
+  (0 is the title, 1 to 6 the layers) and the rig, the camera and the grade all blend between neighbours.
+- **The reel:** sideways on wide screens, pinned and driven by scroll; a frame is graded until it is in
+  focus and its counter rolls when it arrives. On phones it is a column, which is the honest layout there.
+- **Wheel smoothing** (Lenis, 1.3.27) on desktop only, native touch, and off with reduced motion. Jumping to
+  a scene moves focus with it.
 
 - **The sweep between builds** (`src/lib/motion/sweep.ts`, `src/styles/motion.css`): seven bands slide in from the right, one every 14 ms, in two alternating tones of the destination's paper; three blades in its accent cross faster; one flash leads. The screen is covered at 280 ms and the page navigates. The destination paints covered (its head script reads a flag) and the bands leave to the left over 300 ms, with the build's name and one line about it riding across. Each build skins the sweep in its own colours and lettering. The destination is prefetched on hover or focus, so the swap happens under the cover.
 - **The theme flood** (`src/lib/motion/flood.ts`): a disc in the new theme's colour grows from the switch, the theme flips underneath it and the disc is removed in the same frame. One composited layer.

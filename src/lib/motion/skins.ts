@@ -3,6 +3,9 @@
  * No DOM access here: components/shared/Sweep.astro imports this at build time.
  */
 import { type VariantId, variantMeta } from '@site';
+import { palettes } from '@/styles/palettes';
+
+const film = palettes.film.dark;
 
 export interface SweepSkin {
   paper: string;
@@ -19,6 +22,17 @@ export interface SweepSkin {
 }
 
 export const SWEEP_SKINS: Record<VariantId, SweepSkin> = {
+  film: {
+    paper: film.bg as string,
+    paperAlt: film.surface as string,
+    ink: film.text as string,
+    accent: film.gTitle as string,
+    label: 'Film',
+    caption: variantMeta.film.blurb,
+    font: "'League Gothic Variable', 'League Gothic', 'Arial Narrow', sans-serif",
+    stretch: '100%',
+    transform: 'uppercase',
+  },
   phone: {
     paper: '#e3f1e8',
     paperAlt: '#d3e8dc',

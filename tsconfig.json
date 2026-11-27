@@ -4,7 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@site": ["site.config.ts"]
+      "@site": ["site.config.ts"],
+      "@default-page": ["src/variants/film/Page.astro"]
     },
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,

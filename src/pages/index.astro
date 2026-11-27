@@ -1,14 +1,11 @@
 ---
 /**
  * The root address shows the build named by `defaultVariant` in site.config.ts.
- * Every build also keeps its own address: /phone/, /manual/, /classic/.
+ * Every build also keeps its own address: /film/, /phone/, /manual/, /classic/.
+ * Only the default build is imported (the `@default-page` alias in astro.config.mjs), so only its
+ * stylesheet ships here: importing every build and picking one loads all four stylesheets onto one page.
  */
-import { siteConfig } from '@site';
-import Classic from '@/variants/classic/Page.astro';
-import Manual from '@/variants/manual/Page.astro';
-import Phone from '@/variants/phone/Page.astro';
-
-const Page = { phone: Phone, manual: Manual, classic: Classic }[siteConfig.defaultVariant];
+import Page from '@default-page';
 ---
 
 <Page />

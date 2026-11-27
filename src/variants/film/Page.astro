@@ -1,0 +1,372 @@
+---
+/**
+ * Film: the portfolio as the opening titles of a film about one engineer.
+ * A countdown leader, a main title over the live phone, six scenes in which the camera dives into the part
+ * each layer of the stack lives in, a reel of measured projects, the credits and an end card.
+ * All facts come from src/content; this file only decides how they are laid out.
+ */
+import '@fontsource-variable/league-gothic/wdth.css';
+import '@fontsource-variable/jost/wght.css';
+import '@fontsource/courier-prime/latin-400.css';
+import 'lenis/dist/lenis.css';
+import displayFont from '@fontsource-variable/league-gothic/files/league-gothic-latin-wdth-normal.woff2?url';
+import bodyFont from '@fontsource-variable/jost/files/jost-latin-wght-normal.woff2?url';
+import './film.css';
+import { getImage } from 'astro:assets';
+import { otherBuilds } from '@site';
+import explodedDark from '@/assets/posters/phone-exploded-dark.webp';
+import heroDark from '@/assets/posters/phone-hero-dark.webp';
+import BaseHead from '@/components/shared/BaseHead.astro';
+import Icon from '@/components/shared/Icon.astro';
+import Shot from '@/components/shared/Shot.astro';
+import Sweep from '@/components/shared/Sweep.astro';
+import { certifications, education, experience, featured, hackathons, layerById, layers, mlProjects, moreProjects, profile, projectById } from '@/content';
+import type { LayerId, Project, ProjectLink } from '@/content';
+import { formatDay, formatInt, formatMonthYear } from '@/lib/format';
+import { contribStats, contribWeeks, github, languagePresence, originalRepoCount } from '@/lib/github';
+import type { IconName } from '@/lib/icons';
+
+const still = async (img: ImageMetadata) => (await getImage({ src: img, width: 900, format: 'webp' })).src;
+const stills = { hero: await still(heroDark), exploded: await still(explodedDark) };
+
+const email = profile.contacts.find((c) => c.kind === 'email');
+const resume = profile.contacts.find((c) => c.kind === 'resume');
+const linkIcon: Record<ProjectLink['kind'], IconName> = { repo: 'github', live: 'play', apk: 'package', docs: 'book', evidence: 'evidence' };
+const contactIcon: Record<string, IconName> = { email: 'mail', phone: 'phone', github: 'github', telegram: 'telegram', resume: 'download' };
+
+const SHORT: Record<LayerId, string> = { interface: 'Interface', protocol: 'Protocols', services: 'Services', models: 'Models', system: 'System', ops: 'Ops' };
+const acts = [
+  { id: 'title', label: 'Title', grade: 'title' },
+  ...layers.map((l) => ({ id: l.id, label: SHORT[l.id], grade: l.id })),
+  { id: 'reel', label: 'Reel', grade: 'title' },
+  { id: 'more', label: 'More', grade: 'title' },
+  { id: 'credits', label: 'Credits', grade: 'title' },
+  { id: 'contact', label: 'Contact', grade: 'title' },
+];
+const grade = (id: string) => `--g:var(--c-g-${id})`;
+
+const reel: Project[] = [...featured, ...mlProjects];
+const frameShot = (p: Project) => p.shots.find((s) => s.kind === 'web') ?? p.shots.find((s) => s.kind === 'chart') ?? p.shots[0];
+const pad2 = (n: number) => String(n).padStart(2, '0');
+
+const weeks = contribWeeks();
+const stats = contribStats();
+const langs = languagePresence().slice(0, 6);
+const CELL = 11;
+const builds = otherBuilds('film');
+const dates = (start: string, end: string | null) => `${formatMonthYear(start)} to ${end ? formatMonthYear(end) : 'now'}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead variant="film" leader />
+    <link rel="preload" as="font" type="font/woff2" href={displayFont} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={bodyFont} crossorigin />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Sweep variant="film" />
+
+    <div class="leader" aria-hidden="true">
+      <p class="leader__start">Picture start</p>
+      <div class="leader__dial">
+        <svg class="leader__rings" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="96"></circle>
+          <circle cx="100" cy="100" r="78"></circle>
+          <path d="M100 0V200M0 100H200"></path>
+        </svg>
+        <span class="leader__sweep"></span>
+        <ol class="leader__nums">{[8, 7, 6, 5, 4, 3, 2].map((n, i) => <li style={`--i:${i}`}>{n}</li>)}</ol>
+      </div>
+      <p class="leader__skip">Press any key to skip</p>
+      <span class="leader__half leader__half--top"></span>
+      <span class="leader__half leader__half--bottom"></span>
+    </div>
+
+    <canvas class="stage" id="stage" aria-hidden="true"></canvas>
+    <img class="still still--exploded" src={stills.exploded} width="900" height="900" alt="" aria-hidden="true" decoding="async" loading="lazy" />
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="leak" aria-hidden="true"></div>
+    <div class="film-grain" aria-hidden="true"></div>
+
+    <header class="bar bar--top">
+      <a class="bar__mark" href="#title" aria-label="vbs, back to the main title">VBS<span aria-hidden="true">—</span>0</a>
+      <p class="bar__scene" aria-hidden="true"><span class="bar__dot"></span><span data-scene-label>Main title</span></p>
+      <nav class="bar__actions" aria-label="Contact">
+        {email && <a class="bar__link" href={email.href}><Icon name="mail" size={18} /><span>Email</span></a>}
+        {resume && <a class="bar__link" href={resume.href} download><Icon name="download" size={18} /><span>Résumé</span></a>}
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="act act--title" id="title" data-act="title" style={grade('title')} aria-labelledby="name">
+        <img class="title__still" src={stills.hero} width="900" height="900" alt="A phone, standing, lit from the side" fetchpriority="high" />
+        <div class="title">
+          <h1 class="title__name" id="name">
+            <span class="ln"><span>Veerabhadra </span></span>
+            <span class="ln"><span>Swami </span></span>
+            <span class="ln"><span>Challagali</span></span>
+          </h1>
+          <p class="title__role rise">{profile.role} · {profile.focus} · {experience.employer}</p>
+          <p class="title__thesis rise"><strong>{profile.thesis}</strong> {profile.thesisBody}</p>
+          <div class="actions rise">
+            {email && <a class="btn btn--key" href={email.href}><Icon name="mail" size={20} />Email me</a>}
+            {resume && <a class="btn" href={resume.href} download><Icon name="download" size={20} />Résumé, PDF</a>}
+            <a class="btn btn--ghost" href="#interface"><Icon name="play" size={20} />Watch the stack</a>
+          </div>
+        </div>
+        <span class="cameo" data-cameo="title" aria-hidden="true">vbs</span>
+      </section>
+
+      <div class="scenes">
+        {
+          layers.map((l, i) => (
+            <article class="act act--scene" id={l.id} data-act={l.id} style={grade(l.id)} aria-labelledby={`${l.id}-t`}>
+              <div class="card">
+                <p class="slug rise">
+                  <span>Int.</span> {l.partName} <span class="slug__dash">—</span> <span class="slug__n">Scene {i + 1} of {layers.length}</span>
+                </p>
+                <h2 class="card__title" id={`${l.id}-t`}>
+                  <span class="ln"><span>{l.name}</span></span>
+                </h2>
+                <p class="card__line rise">{l.line}</p>
+                <p class="card__body rise">{l.body}</p>
+                <dl class="roll rise">
+                  <div>
+                    <dt>Featuring</dt>
+                    <dd>
+                      <ul class="roll__list">
+                        {l.projectIds.map((id) => (
+                          <li><a href={`/work/${id}/`}>{projectById(id).name}</a></li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>With</dt>
+                    <dd>{l.skills.join(' · ')}</dd>
+                  </div>
+                  {l.workNote && (
+                    <div>
+                      <dt>Also</dt>
+                      <dd>{l.workNote}</dd>
+                    </div>
+                  )}
+                </dl>
+              </div>
+              <span class="cameo" data-cameo={l.id} aria-hidden="true">vbs</span>
+            </article>
+          ))
+        }
+      </div>
+
+      <section class="act act--reel" id="reel" data-act="reel" style={grade('title')} aria-labelledby="reel-t">
+        <div class="reel__pin">
+          <header class="reel__head">
+            <p class="slug rise"><span>Ext.</span> The work <span class="slug__dash">—</span> {reel.length} projects</p>
+            <h2 class="reel__title" id="reel-t"><span class="ln"><span>The reel</span></span></h2>
+            <p class="reel__lede rise">Every project with the number it is measured by. Open a frame for the whole scene: what it does, how it was checked, and where it stops working.</p>
+          </header>
+          <div class="reel__view">
+          <ol class="reel__track">
+            {
+              reel.map((p, i) => {
+                const shot = frameShot(p);
+                const lead = p.metrics[0];
+                return (
+                  <li class="frame" id={`frame-${p.id}`} data-frame={p.id} style={grade(p.layers[0] ?? 'title')}>
+                    <div class:list={['frame__media', shot ? `frame__media--${shot.kind}` : 'frame__media--card']}>
+                      {shot ? (
+                        <Shot shot={shot} widths={[480, 720, 960, 1280]} sizes="(min-width: 900px) 46vw, 92vw" class="frame__img" />
+                      ) : (
+                        <div class="frame__card" aria-hidden="true">
+                          {lead && <p class="frame__big"><span class="odo" data-odo>{lead.value}</span></p>}
+                          {lead && <p class="frame__biglabel">{lead.label}</p>}
+                          <ul class="frame__also">{p.metrics.slice(1, 3).map((m) => <li><b>{m.value}</b> {m.label}</li>)}</ul>
+                        </div>
+                      )}
+                      <span class="frame__no" aria-hidden="true">{pad2(i + 1)} / {pad2(reel.length)}</span>
+                    </div>
+                    <div class="frame__text">
+                      <p class="frame__meta">
+                        {p.year} · {layerById(p.layers[0] ?? 'interface').name}
+                        {p.status && <span class="badge">{p.status}</span>}
+                      </p>
+                      <h3 class="frame__title"><a href={`/work/${p.id}/`} data-morph={p.id}>{p.name}</a></h3>
+                      {shot && lead && (
+                        <p class="frame__metric">
+                          <b class="odo" data-odo>{lead.value}</b> <span>{lead.label}</span>
+                        </p>
+                      )}
+                      <p class="frame__line">{p.oneLiner}</p>
+                      <p class="frame__links">
+                        <a class="frame__open" href={`/work/${p.id}/`} aria-label={`The whole scene: ${p.name}`}>Whole scene<Icon name="chevron" size={16} /></a>
+                        {p.links.slice(0, 2).map((l) => <a href={l.url}><Icon name={linkIcon[l.kind]} size={16} />{l.label}</a>)}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })
+            }
+          </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="act act--more" id="more" data-act="more" style={grade('title')} aria-labelledby="more-t">
+        <div class="wrap">
+          <p class="slug rise"><span>Ext.</span> Also in this film</p>
+          <h2 class="h2" id="more-t"><span class="ln"><span>More work</span></span></h2>
+          <ul class="more">
+            {
+              moreProjects.map((p) => (
+                <li class="more__row" style={grade(p.layers[0] ?? 'title')}>
+                  <p class="more__year">{p.year}</p>
+                  <h3 class="more__name"><a href={`/work/${p.id}/`}>{p.name}</a></h3>
+                  <p class="more__line">{p.oneLiner}</p>
+                  <p class="more__links">{p.links.slice(0, 2).map((l) => <a href={l.url}><Icon name={linkIcon[l.kind]} size={16} />{l.label}</a>)}</p>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+
+      <section class="act act--credits" id="credits" data-act="credits" style={grade('title')} aria-labelledby="credits-t">
+        <div class="wrap">
+          <p class="slug rise"><span>Int.</span> The cast and crew</p>
+          <h2 class="h2" id="credits-t"><span class="ln"><span>Credits</span></span></h2>
+
+          <div class="credits">
+            <section class="credits__group" aria-labelledby="cr-work">
+              <h3 class="credits__head" id="cr-work">Experience, {experience.employer}</h3>
+              <dl class="credits__rows">
+                {experience.roles.map((r) => (
+                  <div><dt>{r.title}</dt><dd>{r.kind}, {dates(r.start, r.end)}</dd></div>
+                ))}
+                <div><dt>Team</dt><dd>{experience.leadNote}</dd></div>
+                <div><dt>Product</dt><dd>{experience.product}, a multi-tenant HRMS on Django with an Android app</dd></div>
+              </dl>
+              <ul class="credits__notes">{experience.bullets.map((b) => <li>{b}</li>)}</ul>
+            </section>
+
+            <section class="credits__group" aria-labelledby="cr-edu">
+              <h3 class="credits__head" id="cr-edu">Education</h3>
+              <dl class="credits__rows">
+                {education.map((e) => (
+                  <div><dt>{e.degree}, {e.field}</dt><dd>{e.school}, {e.start} to {e.end}</dd></div>
+                ))}
+              </dl>
+            </section>
+
+            <section class="credits__group" aria-labelledby="cr-cert">
+              <h3 class="credits__head" id="cr-cert">Certification</h3>
+              <dl class="credits__rows">
+                {certifications.map((c) => (
+                  <div><dt>{c.issuer}</dt><dd>{c.name}, {formatMonthYear(c.date)}</dd></div>
+                ))}
+              </dl>
+            </section>
+
+            <section class="credits__group" aria-labelledby="cr-awards">
+              <h3 class="credits__head" id="cr-awards">Hackathons</h3>
+              <dl class="credits__rows">
+                {hackathons.map((h) => (
+                  <div><dt>{h.name}</dt><dd>{h.result}, {h.detail}</dd></div>
+                ))}
+              </dl>
+            </section>
+
+            <section class="credits__group credits__group--wide" aria-labelledby="cr-notes">
+              <h3 class="credits__head" id="cr-notes">Production notes</h3>
+              <dl class="credits__rows">
+                <div><dt>Public repositories</dt><dd><b class="odo" data-odo>{formatInt(originalRepoCount)}</b> of my own on GitHub</dd></div>
+                <div><dt>Contributions</dt><dd><b class="odo" data-odo>{formatInt(stats.total)}</b> in the last year, on {stats.activeDays} days</dd></div>
+                <div><dt>Most used</dt><dd>{langs.map((l) => l.name).join(' · ')}</dd></div>
+              </dl>
+              <figure class="calendar">
+                <svg viewBox={`0 0 ${weeks.length * CELL} ${7 * CELL}`} role="img" aria-label={`${formatInt(stats.total)} contributions on ${stats.activeDays} days between ${formatDay(github.contributions.from)} and ${formatDay(github.contributions.to)}`}>
+                  {weeks.map((week, x) => week.map((d, y) => d && <rect x={x * CELL + 1} y={y * CELL + 1} width={CELL - 2} height={CELL - 2} rx="1.5" class={`lv${d.level}`} />))}
+                </svg>
+                <figcaption>Every day of the last year is one frame; the brighter, the more was committed. {formatDay(github.contributions.from)} to {formatDay(github.contributions.to)}.</figcaption>
+              </figure>
+            </section>
+          </div>
+          <span class="cameo" data-cameo="credits" aria-hidden="true">vbs</span>
+        </div>
+      </section>
+
+      <section class="act act--end" id="contact" data-act="contact" style={grade('title')} aria-labelledby="contact-t">
+        <div class="wrap end">
+          <p class="slug rise"><span>Fade in.</span> The next scene</p>
+          <h2 class="end__title" id="contact-t"><span class="ln"><span>Get in touch</span></span></h2>
+          {email && <a class="end__mail" href={email.href} data-magnetic="0.2">{email.value}</a>}
+          <ul class="end__links">
+            {
+              profile.contacts
+                .filter((c) => c.kind !== 'email')
+                .map((c) => (
+                  <li>
+                    <a href={c.href} download={c.kind === 'resume' ? true : undefined}>
+                      <Icon name={contactIcon[c.kind] ?? 'external'} size={20} />
+                      <span class="end__k">{c.label}</span>
+                      <span class="end__v">{c.value}</span>
+                    </a>
+                  </li>
+                ))
+            }
+          </ul>
+          <p class="end__note">Email is the fastest way to reach me. The résumé is a two-page PDF.</p>
+          <span class="cameo" data-cameo="contact" aria-hidden="true">vbs</span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap foot__in">
+        {
+          builds.length > 0 && (
+            <nav class="cuts" aria-label="Other versions of this site">
+              <p class="cuts__head">Alternate cuts</p>
+              <ul>
+                {builds.map((b) => (
+                  <li>
+                    <a href={b.path} data-sweep={b.id}>
+                      <span class="cuts__name">{b.name}</span>
+                      <span class="cuts__blurb">{b.blurb}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )
+        }
+        <p class="foot__made">Shot live in three.js. Set in League Gothic, Jost and Courier Prime. Source on <a href="https://github.com/vbs-0/vbs-0.github.io">GitHub</a>. © {profile.name}.</p>
+      </div>
+    </footer>
+
+    <nav class="bar bar--bottom strip" aria-label="Scenes">
+      <ol class="strip__acts">
+        {
+          acts.map((a) => (
+            <li>
+              <a href={`#${a.id}`} data-strip={a.id} style={grade(a.grade)}>
+                <span class="strip__label">{a.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+      <span class="strip__head" aria-hidden="true"></span>
+      <p class="strip__tc" aria-hidden="true"><span data-timecode>00:00:00:00</span></p>
+    </nav>
+
+    <div class="af" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <p class="toast" role="status" aria-live="polite"></p>
+
+    <script>
+      import './client/main';
+    </script>
+  </body>
+</html>
