@@ -138,6 +138,20 @@ let stripWidth = 1;
 let activeIdx = -1;
 let shotNow = 0;
 
+let lastCut = -1;
+/**
+ * The cut, as in the reference: skewed banners of the incoming scene's grade whip across the frame, one
+ * after another, and the world behind them is a different scene by the time they leave.
+ */
+function wipe(color: string): void {
+  const el = document.querySelector<HTMLElement>('.wipe');
+  if (!el || reduced) return;
+  el.style.setProperty('--wc', color);
+  el.classList.add('is-on');
+  const bands = el.children.length;
+  window.setTimeout(() => el.classList.remove('is-on'), 640 + bands * 42 + 60);
+}
+
 function leak(color: string): void {
   if (!leakEl || reduced) return;
   leakEl.style.setProperty('--leak', color);
@@ -190,6 +204,15 @@ function update(quiet = false): void {
   // The camera: scene k is fully on when its act is centred (on a phone, when its picture fills the top).
   const centers = camActs.map((a) => a.top + (mobile ? vh * 0.5 : a.height * 0.5));
   shotNow = playhead(centers, center);
+  // A cut at every scene boundary: the banners cross, and the scene behind them has changed.
+  const cut = Math.round(shotNow);
+  if (!quiet && cut !== lastCut) {
+    if (lastCut >= 0 && cut !== lastCut) {
+      const target = camActs[Math.min(camActs.length - 1, cut)];
+      if (target) wipe(target.grade);
+    }
+    lastCut = cut;
+  }
   const last = camActs[camActs.length - 1];
   const end = last ? last.top + last.height : 0;
   const presence = 1 - clamp01((center - (end - vh * 0.1)) / (vh * 0.55));

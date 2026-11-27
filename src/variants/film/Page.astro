@@ -88,6 +88,7 @@ const dates = (start: string, end: string | null) => `${formatMonthYear(start)} 
     <img class="still still--exploded" src={stills.exploded} width="900" height="900" alt="" aria-hidden="true" decoding="async" loading="lazy" />
     <div class="vignette" aria-hidden="true"></div>
     <div class="leak" aria-hidden="true"></div>
+    <div class="wipe" aria-hidden="true">{[0, 1, 2, 3, 4].map((i) => <span class="wipe__band" style={`--i:${i}`} />)}</div>
     <div class="film-grain" aria-hidden="true"></div>
 
     <header class="bar bar--top">

@@ -144,7 +144,8 @@ test.describe('Film', () => {
     await expect(page.locator('html')).toHaveAttribute('data-leader', /on|out/);
     await expect(page.locator('.leader__nums li')).toHaveCount(7);
     await page.waitForFunction(() => !document.documentElement.dataset.leader, undefined, { timeout: 12000 });
-    await expect(page.locator('.leader')).toBeHidden();
+    // The leader is display:none the moment the attribute goes; give the style a frame to land.
+    await expect(page.locator('.leader')).toHaveCSS('display', 'none', { timeout: 5000 });
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Veerabhadra');
   });
 
