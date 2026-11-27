@@ -1,0 +1,71 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Refresh the GitHub snapshot weekly, even when nothing else changed.
+    - cron: '17 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Refresh public GitHub data
+        run: npm run sync:github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Note whether the GitHub snapshot moved since the last commit
+        run: git diff --quiet src/data/github.json && echo "GitHub data unchanged." || echo "::notice::GitHub data changed since the last commit; this build uses the fresh copy."
+      - run: npm run check
+      - run: npm test
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  e2e:
+    runs-on: ubuntu-latest
+    needs: build
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+      CI: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npm run test:e2e
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build, e2e]
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

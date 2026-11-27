@@ -15,7 +15,8 @@ export default defineConfig({
   reporter: [['list']],
   use: {
     baseURL: 'http://127.0.0.1:4322',
-    channel: process.env.CI ? undefined : 'chrome',
+    // Locally use the installed Chrome; in CI use the Chromium Playwright installs.
+    ...(process.env.CI ? {} : { channel: 'chrome' as const }),
     launchOptions: { args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] },
   },
   webServer: {

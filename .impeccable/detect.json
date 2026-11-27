@@ -1,0 +1,2054 @@
+[
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "2.1:1 (need 4.5:1) — text #a5b6ab on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.2:1 (need 4.5:1) — text #e2eae5 on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "1.6:1 (need 4.5:1) — text #7ae4aa on #ffffff"
+  },
+  {
+    "antipattern": "flat-type-hierarchy",
+    "name": "Flat type hierarchy",
+    "description": "Dominant heading and body roles are separated by less than 1.25× at every step, leaving the size hierarchy flat. Add at least one stronger size step.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "Role sizes: h2 14.4px, h3 14.4px, body 17px (largest adjacent step 1.18:1; target 1.25:1)"
+  },
+  {
+    "antipattern": "repeating-stripes-gradient",
+    "name": "Repeating-gradient stripes",
+    "description": "Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.",
+    "severity": "advisory",
+    "category": "slop",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\index.html",
+    "line": 0,
+    "snippet": "repeating-gradient decorative stripes",
+    "advisory": true
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "<section> \"sheet\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 52 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 39 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 34 chars of body text"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "<section> \"sheet\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 61 chars of body text"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "<section> \"sheet\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 33 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 65 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 33 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 89 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 34 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 56 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 33 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 88 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 33 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 86 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 33 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 63 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 33 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 84 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 33 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 52 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 33 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 67 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 31 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 63 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 33 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 86 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 52 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 63 chars of body text"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 84 chars of body text"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "<section> \"sheet\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "<section> \"sheet\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "<section> \"sheet\": children flush against bg on all sides (no inset)"
+  },
+  {
+    "antipattern": "all-caps-body",
+    "name": "All-caps body text",
+    "description": "Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "text-transform: uppercase on 54 chars of body text"
+  },
+  {
+    "antipattern": "repeating-stripes-gradient",
+    "name": "Repeating-gradient stripes",
+    "description": "Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.",
+    "severity": "advisory",
+    "category": "slop",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\manual\\index.html",
+    "line": 0,
+    "snippet": "repeating-gradient decorative stripes",
+    "advisory": true
+  },
+  {
+    "antipattern": "low-contrast",
+    "name": "Low contrast text",
+    "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": ":hover state 1.0:1 (need 4.5:1) — text #000000 on #000000"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "Zero-offset box-shadow glow (#eccf75)"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "Zero-offset box-shadow glow (#ec9c5c)"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "Zero-offset box-shadow glow (#ee7d8d)"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "Zero-offset box-shadow glow (#b386e4)"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "Zero-offset box-shadow glow (#6aa7f4)"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "Zero-offset box-shadow glow (#97def0)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<dl> \"facts\": children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<div>: children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<div>: children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<div>: children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<div>: children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<div>: children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<ol> \"layers\": children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<ul> \"more\": children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<li> \"more__row\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<li> \"more__row\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<li> \"more__row\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<li> \"more__row\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<li> \"more__row\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<li> \"more__row\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<ol> \"timeline\": children flush against border-left on left (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<ul> \"items\": children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<li> \"item\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<li> \"item\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<li> \"item\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<ul> \"items\": children flush against border-top on top (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<li> \"item\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<li> \"item\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<li> \"item\": children flush against border-bottom on bottom (no inset)"
+  },
+  {
+    "antipattern": "cramped-padding",
+    "name": "Cramped padding",
+    "description": "Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.",
+    "severity": "warning",
+    "category": "quality",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "<div> \"contact\": children flush against border on all sides (no inset)"
+  },
+  {
+    "antipattern": "dark-glow",
+    "name": "Glowing shadow accents",
+    "description": "Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default \"cool\" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "C:\\Users\\chbha\\Desktop\\project\\portfolio\\dist\\classic\\index.html",
+    "line": 0,
+    "snippet": "Zero-offset box-shadow glow (#eccf75)"
+  }
+]
