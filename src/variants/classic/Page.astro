@@ -1,0 +1,330 @@
+---
+/**
+ * Classic: the familiar dark 3D portfolio. A glass stack of the six layers leads, the work follows.
+ * All facts come from src/content; this file only decides how they are laid out.
+ */
+import '@fontsource-variable/mona-sans/wdth.css';
+import '@fontsource/monaspace-neon/latin-400.css';
+import '@fontsource/monaspace-neon/latin-500.css';
+import fontUrl from '@fontsource-variable/mona-sans/files/mona-sans-latin-wdth-normal.woff2?url';
+import './classic.css';
+import { otherBuilds } from '@site';
+import BaseHead from '@/components/shared/BaseHead.astro';
+import Icon from '@/components/shared/Icon.astro';
+import Shot from '@/components/shared/Shot.astro';
+import { certifications, education, experience, featured, hackathons, layerById, layers, mlProjects, moreProjects, profile, projects } from '@/content';
+import type { Project, ProjectLink } from '@/content';
+import { formatBytes, formatDay, formatInt, formatMonthYear } from '@/lib/format';
+import { contribStats, contribWeeks, github, languagePresence, originalRepoCount } from '@/lib/github';
+import type { IconName } from '@/lib/icons';
+
+const linkIcon: Record<ProjectLink['kind'], IconName> = { repo: 'github', live: 'play', apk: 'package', docs: 'book', evidence: 'evidence' };
+const contactIcon: Record<string, IconName> = { email: 'mail', phone: 'phone', github: 'github', telegram: 'telegram', resume: 'download' };
+const email = profile.contacts.find((c) => c.kind === 'email');
+const resume = profile.contacts.find((c) => c.kind === 'resume');
+const layerVar = (id: string) => `--layer:var(--c-layer-${id})`;
+const weeks = contribWeeks();
+const stats = contribStats();
+const langs = languagePresence().slice(0, 7);
+const langMax = langs[0]?.repos ?? 1;
+const CELL = 11;
+const months: { x: number; label: string }[] = [];
+weeks.forEach((week, i) => {
+  const first = week.find((d) => d !== null);
+  if (first && Number(first.date.slice(8, 10)) <= 7) months.push({ x: i * CELL, label: formatMonthYear(first.date).slice(0, 3) });
+});
+const sceneData = { weeks: weeks.map((w) => w.map((d) => (d ? { level: d.level, count: d.count } : null))), layers: layers.map((l) => ({ id: l.id, name: l.name })) };
+const builds = otherBuilds('classic');
+const showcase: Project[] = [...featured, ...mlProjects];
+const NAV = [
+  ['#work', 'Work'],
+  ['#stack', 'Stack'],
+  ['#experience', 'Experience'],
+  ['#github', 'GitHub'],
+  ['#contact', 'Contact'],
+] as const;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead variant="classic" />
+    <link rel="preload" as="font" type="font/woff2" href={fontUrl} crossorigin />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <canvas class="stage-canvas" id="stage" aria-hidden="true"></canvas>
+
+    <header class="nav">
+      <div class="wrap nav__in">
+        <a class="nav__id" href="#top">{profile.handle} <span class="muted">· {profile.role}</span></a>
+        <nav class="nav__links" aria-label="Sections">
+          {NAV.map(([href, label]) => <a href={href}>{label}</a>)}
+        </nav>
+        {resume && <a class="btn btn--gold btn--sm" href={resume.href} download><Icon name="download" />Résumé</a>}
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="wrap hero" id="top" aria-labelledby="name">
+        <div class="hero__text">
+          <h1 class="display" id="name">{profile.name}</h1>
+          <p class="hero__role">{profile.role} · {profile.focus} · {experience.employer}</p>
+          <p class="lede"><strong>{profile.thesis}</strong> {profile.thesisBody}</p>
+          <div class="actions">
+            <a class="btn btn--gold" href="#work">See the work</a>
+            {email && <a class="btn" href={email.href}><Icon name="mail" />Email me</a>}
+            <a class="btn" href={profile.github}><Icon name="github" />GitHub</a>
+          </div>
+        </div>
+        <div class="hero__stage">
+          <div class="slot" data-slot="hero">
+            <div class="css-stack slot__still" aria-hidden="true">
+              {layers.map((l, i) => <span style={`${layerVar(l.id)};--i:${i}`}></span>)}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap section" id="about" aria-labelledby="about-t">
+        <div class="about">
+          <div>
+            <h2 class="h2" id="about-t" style="margin-bottom:1.5rem">About</h2>
+            <div class="prose">{profile.about.map((p) => <p>{p}</p>)}</div>
+          </div>
+          <dl class="facts">
+            <div><dt>Now</dt><dd>{experience.roles[0]?.title}, {experience.employer}</dd></div>
+            <div><dt>Team</dt><dd>{experience.leadNote}</dd></div>
+            <div><dt>Building</dt><dd>{experience.product}, a multi-tenant HRMS on Django with an Android app</dd></div>
+            <div><dt>Degree</dt><dd>{education[0]?.degree}, {education[0]?.field}, {education[0]?.end}</dd></div>
+            <div><dt>Based in</dt><dd>{profile.location}</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="wrap section" id="stack" aria-labelledby="stack-t">
+        <div class="head">
+          <h2 class="h2" id="stack-t">The stack, layer by layer</h2>
+          <p>Six layers, from what people touch down to what keeps it running. Open a layer to see what I build there; its projects are one tap away.</p>
+        </div>
+        <div class="stack">
+          <div class="stack__stage">
+            <div class="slot" data-slot="stack">
+              <div class="css-stack css-stack--open slot__still" aria-hidden="true">
+                {layers.map((l, i) => <span style={`${layerVar(l.id)};--i:${i}`}></span>)}
+              </div>
+            </div>
+          </div>
+          <ol class="layers">
+            {
+              layers.map((l) => (
+                <li class="layer" data-layer={l.id} style={layerVar(l.id)}>
+                  <h3>
+                    <button class="layer__btn" type="button" aria-expanded="false" aria-controls={`layer-${l.id}`}>
+                      <span class="layer__dot" aria-hidden="true" />
+                      <span class="layer__name">{l.name}<small>{l.line}</small></span>
+                      <span class="layer__count">{l.projectIds.length} projects</span>
+                    </button>
+                  </h3>
+                  <div class="layer__body" id={`layer-${l.id}`}>
+                    <p>{l.body}</p>
+                    {l.workNote && <p class="muted">{l.workNote}</p>}
+                    <ul class="chips" aria-label="Skills">{l.skills.map((s) => <li class="chip">{s}</li>)}</ul>
+                    <p><a href="#work" data-filter-link={l.id}>Show the {l.projectIds.length} projects at this layer</a></p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </section>
+
+      <section class="wrap section" id="work" aria-labelledby="work-t">
+        <div class="head">
+          <h2 class="h2" id="work-t">Work</h2>
+          <p>Every number links to the README that reports it, and every project says where it stops working.</p>
+        </div>
+        <div class="filters" role="group" aria-label="Filter projects by layer">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+          {layers.map((l) => <button class="filter" type="button" data-filter={l.id} aria-pressed="false" style={layerVar(l.id)}>{l.name}</button>)}
+        </div>
+        <p class="count" data-count aria-live="polite">Showing all {projects.length} projects.</p>
+
+        <div class="work">
+          {
+            showcase.map((p) => {
+              const web = p.shots.filter((s) => s.kind !== 'phone').slice(0, 1);
+              const phones = p.shots.filter((s) => s.kind === 'phone').slice(0, 2);
+              const max = p.figure?.kind === 'bars' ? Math.max(...p.figure.items.map((i) => i.value)) : 1;
+              const hasMedia = web.length + phones.length > 0 || p.figure;
+              return (
+                <article class="project" id={`project-${p.id}`} data-layers={p.layers.join(' ')} aria-labelledby={`project-${p.id}-t`} style={hasMedia ? undefined : 'grid-template-columns:1fr'}>
+                  {hasMedia && (
+                    <div class="project__media">
+                      {web.map((s) => <figure class:list={['frame', s.kind === 'web' && 'frame--tall']}><Shot shot={s} sizes="(min-width: 960px) 44vw, 92vw" /></figure>)}
+                      {phones.length > 0 && <div class="phones">{phones.map((s) => <figure class="frame"><Shot shot={s} widths={[176, 352, 528]} sizes="176px" /></figure>)}</div>}
+                      {p.figure && (
+                        <figure class="fig">
+                          <figcaption>{p.figure.title}</figcaption>
+                          {p.figure.kind === 'bars' ? (
+                            <ul class="bars">
+                              {p.figure.items.map((item) => (
+                                <li>
+                                  <div class="bars__label"><span>{item.label}</span><span class="mono">{formatBytes(item.value)} ({formatInt(item.value)} B){item.note ? `, ${item.note}` : ''}</span></div>
+                                  <div class="bars__track" aria-hidden="true"><div class="bars__fill" style={`width:${Math.max(0.5, (item.value / max) * 100).toFixed(2)}%`} /></div>
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <div class="table-wrap">
+                              <table>
+                                <thead><tr>{p.figure.head.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+                                <tbody>{p.figure.rows.map((row) => <tr>{row.map((cell, i) => (i === 0 ? <th scope="row" class="mono">{cell}</th> : <td>{cell}</td>))}</tr>)}</tbody>
+                              </table>
+                            </div>
+                          )}
+                        </figure>
+                      )}
+                    </div>
+                  )}
+                  <div class="project__text">
+                    <p class="project__meta">
+                      {p.layers.map((id) => <span class="dot" style={layerVar(id)}>{layerById(id).name}</span>)}
+                      <span>{p.year}</span>
+                      {p.status && <span class="badge">{p.status}</span>}
+                    </p>
+                    <h3 class="h3" id={`project-${p.id}-t`}>{p.name}</h3>
+                    <p>{p.summary}</p>
+                    {p.metrics.length > 0 && (
+                      <dl class="metrics">
+                        {p.metrics.slice(0, 3).map((m) => (
+                          <div class="metric">
+                            <dd><b>{m.value}</b></dd>
+                            <dt><span>{m.label}</span>{m.source && <> <a href={m.source} aria-label={`Source for ${m.value} ${m.label}`}>source</a></>}</dt>
+                          </div>
+                        ))}
+                      </dl>
+                    )}
+                    <ul class="bullets">{p.highlights.map((h) => <li>{h}</li>)}</ul>
+                    <ul class="chips" aria-label="Built with">{p.stack.map((s) => <li class="chip">{s}</li>)}</ul>
+                    {p.limits && <div class="limits"><p>Limits, as its README states them</p><ul class="bullets">{p.limits.map((l) => <li>{l}</li>)}</ul></div>}
+                    <div class="actions">
+                      {p.links.map((l) => <a class="btn btn--sm" href={l.url}><Icon name={linkIcon[l.kind]} />{l.label}</a>)}
+                    </div>
+                  </div>
+                </article>
+              );
+            })
+          }
+        </div>
+
+        <ul class="more" aria-label="More projects">
+          {
+            moreProjects.map((p) => (
+              <li class="more__row" id={`project-${p.id}`} data-layers={p.layers.join(' ')}>
+                <p class="more__name">{p.name} <span class="muted mono" style="font-size:0.85rem;font-weight:400">{p.year}</span></p>
+                <p>{p.oneLiner} <span class="muted">{p.stack.join(', ')}.</span></p>
+                <p class="more__links">{p.links.map((l) => <a href={l.url}>{l.label}</a>)}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="wrap section" id="experience" aria-labelledby="exp-t">
+        <div class="head"><h2 class="h2" id="exp-t">Experience</h2></div>
+        <ol class="timeline">
+          {
+            experience.roles.map((r, i) => (
+              <li class:list={['role', r.end === null && 'role--now']}>
+                <p class="role__when mono">{formatMonthYear(r.start)} to {r.end ? formatMonthYear(r.end) : 'now'}</p>
+                <h3 class="h3">{r.title} <span class="muted" style="font-weight:500">at {experience.employer}</span></h3>
+                {i === 0 && (
+                  <>
+                    <p>{experience.leadNote}</p>
+                    <ul class="bullets">{experience.bullets.map((b) => <li>{b}</li>)}</ul>
+                  </>
+                )}
+                {i > 0 && <p class="muted">{r.kind}, before the full-time offer.</p>}
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section class="wrap section" aria-label="Education and recognition">
+        <div class="columns">
+          <div>
+            <h2 class="h3 subhead">Education</h2>
+            <ul class="items">
+              {education.map((e) => <li class="item"><p class="item__title"><span>{e.degree}, {e.field}</span><span class="muted mono" style="font-size:0.9rem;font-weight:400">{e.start} to {e.end}</span></p><p class="muted">{e.school}</p></li>)}
+              {certifications.map((c) => <li class="item"><p class="item__title"><span>{c.name}</span><span class="muted mono" style="font-size:0.9rem;font-weight:400">{formatMonthYear(c.date)}</span></p><p class="muted">{c.issuer}. {c.note}</p></li>)}
+            </ul>
+          </div>
+          <div>
+            <h2 class="h3 subhead">Hackathons</h2>
+            <ul class="items">
+              {hackathons.map((h) => <li class="item"><p class="item__title"><span>{h.name}</span>{h.rank ? <span class="badge">{h.result}</span> : <span class="muted" style="font-size:0.9rem;font-weight:400">{h.result}</span>}</p><p class="muted">{h.detail}</p></li>)}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap section" id="github" aria-labelledby="gh-t">
+        <div class="head">
+          <h2 class="h2" id="gh-t">On GitHub</h2>
+          <p>Public data, read on {formatDay(github.fetchedAt)}.</p>
+        </div>
+        <div class="gh">
+          <div style="display:grid;gap:2rem">
+            <dl class="stats">
+              <div><dd><b>{originalRepoCount}</b></dd><dt><span>original repositories</span></dt></div>
+              <div><dd><b>{formatInt(stats.total)}</b></dd><dt><span>contributions in the last year</span></dt></div>
+              <div><dd><b>{stats.activeDays}</b></dd><dt><span>active days</span></dt></div>
+            </dl>
+            <div>
+              <p class="muted" style="margin-bottom:0.6rem">Languages, by number of repositories that contain them</p>
+              <ul class="langs">
+                {langs.map((l) => <li class="lang"><span>{l.name}</span><span class="lang__bar" style={`width:${((l.repos / langMax) * 100).toFixed(1)}%`} aria-hidden="true" /><span class="mono">{l.repos}</span></li>)}
+              </ul>
+            </div>
+          </div>
+          <div style="display:grid;gap:1rem">
+            <div class="gh__stage" data-live-only><div class="slot" data-slot="skyline"></div></div>
+            <div class="cal" tabindex="0" role="group" aria-label="Contribution calendar, scrollable">
+              <svg viewBox={`-2 -14 ${weeks.length * CELL + 4} ${7 * CELL + 18}`} role="img" aria-label={`${formatInt(stats.total)} contributions on ${stats.activeDays} days between ${formatDay(github.contributions.from)} and ${formatDay(github.contributions.to)}`}>
+                {months.map((m) => <text x={m.x} y="-4">{m.label}</text>)}
+                {weeks.map((week, x) => week.map((d, y) => d && <rect class={`l${d.level}`} x={x * CELL} y={y * CELL} width={CELL - 2} height={CELL - 2} rx="2"><title>{`${d.count} on ${formatDay(d.date)}`}</title></rect>))}
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap section" id="contact" aria-labelledby="contact-t">
+        <div class="contact">
+          <h2 class="h2" id="contact-t">Get in touch</h2>
+          <dl class="contact__list">
+            {profile.contacts.map((c) => <div><dt>{c.label}</dt><dd><a href={c.href} download={c.kind === 'resume' ? true : undefined}>{c.value}</a></dd></div>)}
+          </dl>
+          <div class="actions">
+            {email && <a class="btn btn--gold" href={email.href}><Icon name="mail" />Email me</a>}
+            {resume && <a class="btn" href={resume.href} download><Icon name={contactIcon.resume ?? 'download'} />Résumé, PDF</a>}
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap foot__in">
+        <p>Drawn live with three.js. Set in Mona Sans and Monaspace Neon. Source on <a href="https://github.com/vbs-0/vbs-0.github.io">GitHub</a>.</p>
+        {builds.length > 0 && <p class="foot__builds"><span>Same content, other builds:</span>{builds.map((b) => <a href={b.path}>{b.name}</a>)}</p>}
+      </div>
+    </footer>
+
+    <script type="application/json" id="scene-data" set:html={JSON.stringify(sceneData)} />
+    <script>
+      import './client/main.ts';
+    </script>
+  </body>
+</html>

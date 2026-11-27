@@ -9,7 +9,18 @@ export default defineConfig({
   build: { format: 'directory', inlineStylesheets: 'auto' },
   compressHTML: true,
   devToolbar: { enabled: false },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap(),
+    {
+      // /lab/ is a viewer for the 3D phone, used while developing and by scripts/capture-posters.mjs. Dev only.
+      name: 'lab-route',
+      hooks: {
+        'astro:config:setup': ({ command, injectRoute }) => {
+          if (command === 'dev') injectRoute({ pattern: '/lab', entrypoint: './src/lab/index.astro' });
+        },
+      },
+    },
+  ],
   vite: {
     build: { chunkSizeWarningLimit: 900 },
   },

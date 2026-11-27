@@ -1,4 +1,14 @@
 ---
-const title = 'scaffold check';
+/**
+ * The root address shows the build named by `defaultVariant` in site.config.ts.
+ * Every build also keeps its own address: /phone/, /manual/, /classic/.
+ */
+import { siteConfig } from '@site';
+import Classic from '@/variants/classic/Page.astro';
+import Manual from '@/variants/manual/Page.astro';
+import Phone from '@/variants/phone/Page.astro';
+
+const Page = { phone: Phone, manual: Manual, classic: Classic }[siteConfig.defaultVariant];
 ---
-<html lang="en"><head><meta charset="utf-8" /><title>{title}</title></head><body><h1>{title}</h1></body></html>
+
+<Page />
