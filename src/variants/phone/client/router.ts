@@ -86,6 +86,9 @@ export function createRouter(onChange: (app: OpenApp | null) => void): Router {
         window.scrollTo({ top: 0, behavior: 'instant' });
         document.title = `${app.name} · ${baseTitle}`;
         if (barTitle) barTitle.textContent = app.name;
+        // Focus belongs here, inside the swap: the view-transition callback is what actually shows
+        // the new view, and focusing before it runs lands on a hidden element and is lost.
+        target.querySelector<HTMLElement>('h2')?.focus({ preventScroll: true });
       };
       const focusHeading = () => target.querySelector<HTMLElement>('h2')?.focus({ preventScroll: true });
       if (from && from.id === app.id) morph([appIcon(from.row), appTitle(from.row)], [appIcon(target), appTitle(target)], swap, focusHeading);
@@ -102,6 +105,7 @@ export function createRouter(onChange: (app: OpenApp | null) => void): Router {
         const section = hash.length > 1 && hash !== '#top' && hash !== '#apps' ? document.getElementById(hash.slice(1)) : null;
         if (section) section.scrollIntoView({ behavior: 'instant', block: 'start' });
         else if (app) window.scrollTo({ top: homeScroll, behavior: 'instant' });
+        if (app) rowFor(app.id)?.focus({ preventScroll: true });
       };
       const fromApp = app ? apps.find((a) => a.dataset.app === app.id) : null;
       const focusRow = () => {

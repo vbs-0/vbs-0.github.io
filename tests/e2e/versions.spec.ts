@@ -14,6 +14,7 @@ test.describe('About phone', () => {
 
   test('Escape returns from an App info page to the list', async ({ page }) => {
     await page.goto('/phone/');
+    await page.waitForFunction(() => document.documentElement.dataset.scene !== undefined);
     await page.locator('a.row[href="#app-pam"]').click();
     await expect(page.getByRole('heading', { level: 2, name: 'PAM' })).toBeVisible();
     await page.keyboard.press('Escape');

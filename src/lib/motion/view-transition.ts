@@ -10,7 +10,14 @@ export function withViewTransition(update: () => void): Promise<void> | null {
     update();
     return null;
   }
-  return doc.startViewTransition(update).finished.catch(() => undefined);
+  try {
+    return doc.startViewTransition(update).finished.catch(() => undefined);
+  } catch {
+    // The browser can refuse a transition (an invalid state during load, a duplicate name). The change
+    // itself must never be lost with it.
+    update();
+    return null;
+  }
 }
 
 /**
