@@ -1,0 +1,109 @@
+---
+import Icon from '@/components/shared/Icon.astro';
+import Shot from '@/components/shared/Shot.astro';
+import type { Project, ProjectLink } from '@/content';
+import { formatMonthYear } from '@/lib/format';
+import { projectDates, projectLanguages } from '@/lib/github';
+import type { IconName } from '@/lib/icons';
+import FigureData from './FigureData.astro';
+
+interface Props {
+  project: Project;
+  /** Figure number. */
+  n: number;
+  flip?: boolean;
+  compact?: boolean;
+}
+const { project: p, n, flip = false, compact = false } = Astro.props;
+const web = p.shots.filter((s) => s.kind !== 'phone').slice(0, compact ? 1 : 1);
+const phones = p.shots.filter((s) => s.kind === 'phone').slice(0, 2);
+const dates = projectDates(p);
+const langs = projectLanguages(p).slice(0, 4).map((l) => `${l.name} ${Math.round(l.share * 100)}%`);
+const linkIcon: Record<ProjectLink['kind'], IconName> = { repo: 'github', live: 'play', apk: 'package', docs: 'book', evidence: 'evidence' };
+---
+
+<article class:list={['plate', flip && 'plate--flip']} id={`fig-${p.id}`} aria-labelledby={`fig-${p.id}-t`}>
+  <div class="plate__media">
+    {
+      web.map((s) => (
+        <figure class:list={['shot', s.kind === 'web' && 'shot--tall']}>
+          <Shot shot={s} sizes="(min-width: 960px) 46vw, 92vw" />
+          {s.caption && <figcaption class="note">{s.caption}</figcaption>}
+        </figure>
+      ))
+    }
+    {
+      phones.length > 0 && (
+        <div class="phones">
+          {phones.map((s) => (
+            <figure>
+              <Shot shot={s} widths={[184, 368, 552]} sizes="184px" />
+              {s.caption && <figcaption class="note">{s.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      )
+    }
+    {p.figure && <FigureData figure={p.figure} />}
+  </div>
+  <div class="plate__text">
+    <header>
+      <p class="plate__fig note">
+        <span>Fig. {n}</span>
+        <span class="muted">{p.year}</span>
+        {p.status && <span class="stamp">{p.status}</span>}
+      </p>
+      <h3 class="h3" id={`fig-${p.id}-t`}>{p.name}</h3>
+      {p.resumeTitle && <p class="note muted">On the résumé as: {p.resumeTitle}</p>}
+    </header>
+    <p>{p.summary}</p>
+    {
+      p.metrics.length > 0 && (
+        <dl class="dims">
+          {p.metrics.map((m) => (
+            <div class="dim">
+              <dt class="dim__value">{m.value}</dt>
+              <dd class="dim__label">
+                {m.label}
+                {m.source && (
+                  <>
+                    {' '}
+                    <a href={m.source} aria-label={`Source for ${m.value} ${m.label}`}>source</a>
+                  </>
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
+    <ul class="list">{p.highlights.map((h) => <li>{h}</li>)}</ul>
+    <ul class="chips" aria-label="Built with">{p.stack.map((s) => <li>{s}</li>)}</ul>
+    {
+      p.limits && (
+        <div class="limits">
+          <p class="note">Limits, as its README states them</p>
+          <ul class="list">{p.limits.map((l) => <li>{l}</li>)}</ul>
+        </div>
+      )
+    }
+    <div class="actions">
+      {
+        p.links.map((l) => (
+          <a class="btn" href={l.url}>
+            <Icon name={linkIcon[l.kind]} size={18} />
+            {l.label}
+          </a>
+        ))
+      }
+    </div>
+    {
+      dates && (
+        <p class="note muted">
+          Created {formatMonthYear(dates.created)} · last pushed {formatMonthYear(dates.pushed)}
+          {langs.length > 0 && ` · ${langs.join(', ')}`}
+        </p>
+      )
+    }
+  </div>
+</article>

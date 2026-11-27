@@ -24,3 +24,9 @@ export const variantMeta: Record<VariantId, { path: string; name: string; blurb:
   manual: { path: '/manual/', name: 'Service manual', blurb: 'An exploded-view drawing in ink lines' },
   classic: { path: '/classic/', name: 'Classic', blurb: 'Dark studio with a glass layer stack' },
 };
+
+/** The other builds to link from a footer, or nothing when the switcher is off. */
+export function otherBuilds(current: VariantId): { id: VariantId; path: string; name: string; blurb: string }[] {
+  if (!siteConfig.showVariantSwitcher) return [];
+  return VARIANTS.filter((v) => v !== current).map((id) => ({ id, ...variantMeta[id] }));
+}

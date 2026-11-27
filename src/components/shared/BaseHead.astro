@@ -1,0 +1,89 @@
+---
+/**
+ * Everything every build needs in <head>: metadata, the palette as CSS custom properties,
+ * and the two tiny inline scripts that must run before first paint.
+ */
+import { type VariantId, siteConfig } from '@site';
+import { experience, layers, profile } from '@/content';
+import { palettes, themeCss } from '@/styles/palettes';
+
+interface Props {
+  variant: VariantId;
+  title?: string;
+  description?: string;
+}
+const { variant } = Astro.props;
+const title = Astro.props.title ?? `${profile.name} · ${profile.role}, ${profile.focus}`;
+const description =
+  Astro.props.description ??
+  `${profile.role} working on every layer of a shipped product: Android bring-up, protocols, full-stack services, interfaces and machine learning. Projects with measured results, experience and contact.`;
+
+const canonical = new URL('/', siteConfig.site).href;
+const ogImage = new URL(`/og/${variant}.png`, siteConfig.site).href;
+const twoThemes = palettes[variant].light !== palettes[variant].dark;
+const lightBg = palettes[variant].light.bg ?? '#ffffff';
+const darkBg = palettes[variant].dark.bg ?? '#000000';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  alternateName: profile.handle,
+  jobTitle: profile.role,
+  description,
+  url: canonical,
+  email: `mailto:${profile.email}`,
+  telephone: profile.phone.e164,
+  worksFor: { '@type': 'Organization', name: experience.employer },
+  sameAs: profile.contacts.filter((c) => c.kind === 'github' || c.kind === 'telegram').map((c) => c.href),
+  knowsAbout: [...new Set(layers.flatMap((l) => l.skills))],
+};
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="author" content={profile.name} />
+<link rel="canonical" href={canonical} />
+<meta property="og:type" content="profile" />
+<meta property="og:site_name" content={profile.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="color-scheme" content={twoThemes ? 'light dark' : 'dark'} />
+{
+  twoThemes ? (
+    <>
+      <meta name="theme-color" content={lightBg} media="(prefers-color-scheme: light)" />
+      <meta name="theme-color" content={darkBg} media="(prefers-color-scheme: dark)" />
+    </>
+  ) : (
+    <meta name="theme-color" content={darkBg} />
+  )
+}
+<style is:inline set:html={themeCss(variant)}></style>
+<script is:inline define:vars={{ twoThemes }}>
+  (function () {
+    var root = document.documentElement;
+    root.classList.add('js');
+    try {
+      if (twoThemes) {
+        var saved = localStorage.getItem('vbs-theme');
+        if (saved === 'light' || saved === 'dark') root.dataset.theme = saved;
+      }
+      if (localStorage.getItem('vbs-motion') === 'off') root.dataset.motion = 'off';
+    } catch (e) {
+      /* storage can be blocked; the defaults are fine */
+    }
+  })();
+</script>
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />

@@ -1,0 +1,369 @@
+---
+/**
+ * Service manual: the portfolio as a set of drawing sheets around an exploded view of a phone.
+ * All facts come from src/content; this file only decides how they are laid out.
+ */
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource-variable/chivo-mono/wght.css';
+import archivoUrl from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import './manual.css';
+import { getImage } from 'astro:assets';
+import { otherBuilds } from '@site';
+import coverDark from '@/assets/posters/manual-cover-dark.webp';
+import coverLight from '@/assets/posters/manual-cover-light.webp';
+import explodedDark from '@/assets/posters/manual-exploded-dark.webp';
+import explodedLight from '@/assets/posters/manual-exploded-light.webp';
+import BaseHead from '@/components/shared/BaseHead.astro';
+import Icon from '@/components/shared/Icon.astro';
+import { certifications, education, experience, featured, hackathons, layers, mlProjects, moreProjects, profile, projectById } from '@/content';
+import { formatDay, formatInt, formatMonthYear } from '@/lib/format';
+import { contribStats, contribWeeks, github, languagePresence, originalRepoCount } from '@/lib/github';
+import type { IconName } from '@/lib/icons';
+import Plate from './Plate.astro';
+import TitleBlock from './TitleBlock.astro';
+
+const SHEETS = ['General arrangement', 'Exploded view', 'Figure plates', 'Revision history', 'Approvals', 'Activity and contact'];
+const total = SHEETS.length;
+const date = new Date().toISOString().slice(0, 10);
+const still = async (img: ImageMetadata) => (await getImage({ src: img, width: 900, format: 'webp' })).src;
+const stills = {
+  coverLight: await still(coverLight),
+  coverDark: await still(coverDark),
+  explodedLight: await still(explodedLight),
+  explodedDark: await still(explodedDark),
+};
+
+const contactIcon: Record<string, IconName> = { email: 'mail', phone: 'phone', github: 'github', telegram: 'telegram', resume: 'download' };
+const email = profile.contacts.find((c) => c.kind === 'email');
+const resume = profile.contacts.find((c) => c.kind === 'resume');
+const githubLink = profile.contacts.find((c) => c.kind === 'github');
+
+const weeks = contribWeeks();
+const stats = contribStats();
+const langs = languagePresence().slice(0, 8);
+const langMax = langs[0]?.repos ?? 1;
+const CELL = 11;
+const monthLabels: { x: number; label: string }[] = [];
+weeks.forEach((week, i) => {
+  const first = week.find((d) => d !== null);
+  if (first && Number(first.date.slice(8, 10)) <= 7) monthLabels.push({ x: i * CELL, label: formatMonthYear(first.date).slice(0, 3) });
+});
+const builds = otherBuilds('manual');
+const revisions = [
+  ...experience.roles.map((r) => ({
+    when: `${formatMonthYear(r.start)} to ${r.end ? formatMonthYear(r.end) : 'now'}`,
+    what: `${r.title}, ${r.kind.toLowerCase()}`,
+    where: experience.employer,
+    current: r.end === null,
+  })),
+  ...education.map((e) => ({ when: `${e.start} to ${e.end}`, what: `${e.degree}, ${e.field}`, where: e.school, current: false })),
+];
+const letters = 'ABCDEFGH';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead variant="manual" />
+    <link rel="preload" as="font" type="font/woff2" href={archivoUrl} crossorigin />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="bar">
+      <a class="bar__id" href="#sheet-1">vbs <span class="muted">/ service manual</span></a>
+      <nav class="bar__nav note" aria-label="Sheets">
+        {
+          SHEETS.map((name, i) => (
+            <a href={`#sheet-${i + 1}`} aria-label={`Sheet ${i + 1}: ${name}`}>
+              <span class="short num">{i + 1}</span>
+              <span class="long">{name}</span>
+            </a>
+          ))
+        }
+      </nav>
+      <button class="switch note" type="button" data-theme-toggle aria-pressed="false" aria-label="Blueprint (dark) print">
+        <Icon name="moon" size={16} class="light-only" />
+        <Icon name="sun" size={16} class="dark-only" />
+        <span class="light-only">Blueprint</span>
+        <span class="dark-only">Whiteprint</span>
+      </button>
+    </header>
+
+    <main id="main">
+      <!-- Sheet 1: general arrangement -->
+      <section class="sheet cover" id="sheet-1" aria-labelledby="name">
+        <div class="cover__text">
+          <h1 class="display" id="name">{profile.name}</h1>
+          <p class="cover__role">{profile.role} · {profile.focus} · {experience.employer}</p>
+          <p class="lede"><strong>{profile.thesis}</strong> {profile.thesisBody}</p>
+          <div class="actions">
+            {email && <a class="btn btn--mark" href={email.href}><Icon name="mail" size={18} />Email me</a>}
+            {resume && <a class="btn" href={resume.href} download><Icon name="download" size={18} />Résumé, PDF</a>}
+            {githubLink && <a class="btn" href={githubLink.href}><Icon name="github" size={18} />GitHub</a>}
+          </div>
+        </div>
+        <div class="cover__stage">
+          <div class="slot" data-slot="cover">
+            <img class="slot__still for-light" src={stills.coverLight} width="900" height="900" alt="Line drawing of a phone, front three-quarter view" fetchpriority="high" />
+            <img class="slot__still for-dark" src={stills.coverDark} width="900" height="900" alt="" />
+          </div>
+        </div>
+        <div class="cover__foot">
+          <ol class="cover__notes note" aria-label="General notes">
+            <li>1. Every figure on these sheets links to its source.</li>
+            <li>2. Prototypes are marked as prototypes.</li>
+            <li>3. Scroll to take the phone apart.</li>
+          </ol>
+          <TitleBlock title={SHEETS[0] ?? ''} sheet={1} of={total} date={date} />
+        </div>
+      </section>
+
+      <!-- Sheet 2: exploded view -->
+      <section class="sheet explode" id="sheet-2" aria-labelledby="s2">
+        <div class="explode__track" data-explode-track>
+          <div class="explode__pin">
+            <div class="explode__head">
+              <h2 class="h2" id="s2">Exploded view</h2>
+              <p class="note muted">Six parts, six layers of the stack. Scroll, or select a part.</p>
+            </div>
+            <div class="explode__body">
+              <div class="explode__stage">
+                <div class="slot" data-slot="exploded">
+                  <img class="slot__still for-light" src={stills.explodedLight} width="900" height="900" loading="lazy" alt="Exploded line drawing of a phone: back cover, battery, logic board with cameras, frame, display and cover glass" />
+                  <img class="slot__still for-dark" src={stills.explodedDark} width="900" height="900" loading="lazy" alt="" />
+                </div>
+                <div class="balloons" role="group" aria-label="Parts of the phone">
+                  {
+                    layers.map((l, i) => (
+                      <button class="balloon" type="button" data-part={l.part} aria-pressed="false" aria-label={`Item ${i + 1}: ${l.partName}, ${l.name}`}>
+                        {i + 1}
+                      </button>
+                    ))
+                  }
+                </div>
+              </div>
+              <ol class="parts" aria-label="Parts list">
+                {
+                  layers.map((l, i) => (
+                    <li class="part" data-part={l.part} id={`part-${l.id}`}>
+                      <h3>
+                        <button class="part__row" type="button" aria-expanded="false" aria-controls={`part-${l.id}-d`}>
+                          <span class="num">{i + 1}</span>
+                          <span class="part__name">
+                            {l.name}
+                            <small>{l.partName}</small>
+                          </span>
+                          <span class="note">{l.projectIds.length} built here</span>
+                        </button>
+                      </h3>
+                      <div class="part__detail" id={`part-${l.id}-d`}>
+                        <p class="part__line">{l.line}</p>
+                        <p>{l.body}</p>
+                        {l.workNote && <p>{l.workNote}</p>}
+                        <ul class="chips" aria-label="Skills">{l.skills.map((s) => <li>{s}</li>)}</ul>
+                        <ul class="inline-list" aria-label="Projects at this layer">
+                          {l.projectIds.map((id) => <li><a href={`#fig-${id}`}>{projectById(id).name}</a></li>)}
+                        </ul>
+                      </div>
+                    </li>
+                  ))
+                }
+              </ol>
+            </div>
+            <TitleBlock title={SHEETS[1] ?? ''} sheet={2} of={total} date={date} scale="NTS" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Sheet 3: figure plates -->
+      <section class="sheet" id="sheet-3" aria-labelledby="s3">
+        <div class="sheet__head">
+          <h2 class="h2" id="s3">Figure plates</h2>
+          <p>Each plate is a project: what it is, what was measured, and where it stops working. Numbers link to the README that reports them.</p>
+        </div>
+        <div class="plates">
+          {featured.map((p, i) => <Plate project={p} n={i + 1} flip={i % 2 === 1} />)}
+        </div>
+
+        <div class="sheet__head" style="margin-top:clamp(3rem,7vw,6rem)">
+          <h2 class="h2" id="s3-ml">Machine learning</h2>
+          <p>The projects my résumé lists under AI and ML, from reinforcement learning to served classifiers.</p>
+        </div>
+        <div class="plates plates--small">
+          {mlProjects.map((p, i) => <Plate project={p} n={featured.length + i + 1} compact />)}
+        </div>
+
+        <div class="sheet__head" style="margin-top:clamp(3rem,7vw,6rem)">
+          <h2 class="h2" id="s3-more">Schedule of other work</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col" class="note">Item</th><th scope="col" class="note">What it is</th><th scope="col" class="note">Built with</th><th scope="col" class="note">Reference</th></tr>
+            </thead>
+            <tbody>
+              {
+                moreProjects.map((p) => (
+                  <tr id={`fig-${p.id}`}>
+                    <th scope="row">{p.name}<br /><span class="note muted">{p.year}</span></th>
+                    <td>{p.oneLiner}</td>
+                    <td>{p.stack.join(', ')}</td>
+                    <td>{p.links.map((l, k) => <>{k > 0 && ', '}<a href={l.url}>{l.label}</a></>)}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+        <TitleBlock title={SHEETS[2] ?? ''} sheet={3} of={total} date={date} scale="NTS" />
+      </section>
+
+      <!-- Sheet 4: revision history -->
+      <section class="sheet" id="sheet-4" aria-labelledby="s4">
+        <div class="sheet__head">
+          <h2 class="h2" id="s4">Revision history</h2>
+          <p>Work and study, newest first.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="rev">
+            <thead>
+              <tr><th scope="col" class="note">Rev</th><th scope="col" class="note">When</th><th scope="col" class="note">Description</th><th scope="col" class="note">Where</th></tr>
+            </thead>
+            <tbody>
+              {
+                revisions.map((r, i) => (
+                  <tr>
+                    <th scope="row" class="num">{letters[revisions.length - 1 - i]}</th>
+                    <td class="rev__when num">{r.when}</td>
+                    <td>
+                      <strong>{r.what}</strong>
+                      {r.current && (
+                        <>
+                          <p>{experience.leadNote}</p>
+                          <ul class="list">{experience.bullets.map((b) => <li>{b}</li>)}</ul>
+                        </>
+                      )}
+                    </td>
+                    <td>{r.where}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+        <TitleBlock title={SHEETS[3] ?? ''} sheet={4} of={total} date={date} scale="NTS" />
+      </section>
+
+      <!-- Sheet 5: approvals -->
+      <section class="sheet" id="sheet-5" aria-labelledby="s5">
+        <div class="sheet__head">
+          <h2 class="h2" id="s5">Approvals</h2>
+          <p>Hackathon results and certification.</p>
+        </div>
+        <ul class="approvals">
+          {
+            hackathons.map((h) => (
+              <li class:list={['approval', h.rank === 1 && 'approval--first']}>
+                <p class="approval__mark">{h.result}</p>
+                <h3 class="h3">{h.name}</h3>
+                <p>{h.detail}</p>
+              </li>
+            ))
+          }
+          {
+            certifications.map((c) => (
+              <li class="approval">
+                <p class="approval__mark">Certified</p>
+                <h3 class="h3">{c.name}</h3>
+                <p>{c.issuer}, {formatMonthYear(c.date)}. {c.note}</p>
+              </li>
+            ))
+          }
+        </ul>
+        <TitleBlock title={SHEETS[4] ?? ''} sheet={5} of={total} date={date} scale="NTS" />
+      </section>
+
+      <!-- Sheet 6: activity and contact -->
+      <section class="sheet" id="sheet-6" aria-labelledby="s6">
+        <div class="sheet__head">
+          <h2 class="h2" id="s6">Activity log</h2>
+          <p>Public GitHub data, read on {formatDay(github.fetchedAt)}.</p>
+        </div>
+        <div class="activity">
+          <dl class="stats">
+            <div class="stat"><dt class="note muted">Original repositories</dt><dd><b>{originalRepoCount}</b></dd></div>
+            <div class="stat"><dt class="note muted">Contributions, last year</dt><dd><b>{formatInt(stats.total)}</b></dd></div>
+            <div class="stat"><dt class="note muted">Active days</dt><dd><b>{stats.activeDays}</b></dd></div>
+            {stats.busiestDay && <div class="stat"><dt class="note muted">Busiest day</dt><dd><b>{stats.busiestDay.count}</b><span class="note muted">{formatDay(stats.busiestDay.date)}</span></dd></div>}
+          </dl>
+          <div class="cal">
+            <svg viewBox={`-2 -14 ${weeks.length * CELL + 4} ${7 * CELL + 18}`} role="img" aria-label={`Contribution calendar: ${formatInt(stats.total)} contributions on ${stats.activeDays} days between ${formatDay(github.contributions.from)} and ${formatDay(github.contributions.to)}`}>
+              {monthLabels.map((m) => <text x={m.x} y="-4">{m.label}</text>)}
+              {
+                weeks.map((week, x) =>
+                  week.map((d, y) => d && (
+                    <rect class={`l${d.level}`} x={x * CELL} y={y * CELL} width={CELL - 2} height={CELL - 2}>
+                      <title>{`${d.count} on ${formatDay(d.date)}`}</title>
+                    </rect>
+                  )),
+                )
+              }
+            </svg>
+          </div>
+          <div>
+            <p class="note muted" style="margin-bottom:0.5rem">Languages, by number of repositories that contain them</p>
+            <ul class="langs">
+              {
+                langs.map((l) => (
+                  <li class="lang">
+                    <span>{l.name}</span>
+                    <span class="lang__bar" style={`width:${((l.repos / langMax) * 100).toFixed(1)}%`} aria-hidden="true" />
+                    <span class="num">{l.repos}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <div class="close" style="margin-top:clamp(3rem,7vw,6rem)">
+          <h2 class="h2" id="contact">Contact</h2>
+          <dl class="contact">
+            {
+              profile.contacts.map((c) => (
+                <div>
+                  <dt class="note muted">{c.label}</dt>
+                  <dd>
+                    <a href={c.href} download={c.kind === 'resume' ? true : undefined}>
+                      <Icon name={contactIcon[c.kind] ?? 'external'} size={18} class="inline" /> {c.value}
+                    </a>
+                  </dd>
+                </div>
+              ))
+            }
+          </dl>
+          {
+            builds.length > 0 && (
+              <p class="builds note">
+                <span>Also issued as</span>
+                {builds.map((b) => <a href={b.path}>{b.name}</a>)}
+              </p>
+            )
+          }
+          <p class="colophon">
+            The phone is drawn live with three.js from procedural geometry; no model file is downloaded. Set in Archivo and Chivo Mono.
+            Source on <a href="https://github.com/vbs-0/vbs-0.github.io">GitHub</a>.
+          </p>
+        </div>
+        <TitleBlock title={profile.name} sheet={6} of={total} date={date} scale="NTS" />
+      </section>
+    </main>
+
+    <canvas class="stage-canvas" id="stage" aria-hidden="true"></canvas>
+    <svg class="leader" aria-hidden="true" style="visibility:hidden"><line x1="0" y1="0" x2="0" y2="0"></line><circle r="3.5"></circle></svg>
+    <script>
+      import './client/main.ts';
+    </script>
+  </body>
+</html>

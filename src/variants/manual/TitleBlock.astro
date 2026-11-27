@@ -1,0 +1,17 @@
+---
+interface Props {
+  title: string;
+  sheet: number;
+  of: number;
+  date: string;
+  scale?: string;
+}
+const { title, sheet, of, date, scale = '1:1' } = Astro.props;
+---
+
+<dl class="titleblock note" aria-label="Title block">
+  <div><dt>Title</dt><dd>{title}</dd></div>
+  <div><dt>Drawn</dt><dd>vbs</dd></div>
+  <div><dt>Date</dt><dd class="num">{date}</dd></div>
+  <div><dt>Sheet</dt><dd class="num">{sheet} of {of} · {scale}</dd></div>
+</dl>

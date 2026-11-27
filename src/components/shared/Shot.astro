@@ -1,0 +1,28 @@
+---
+import { Picture } from 'astro:assets';
+import type { Shot } from '@/content';
+import { shotImage } from '@/lib/shots';
+
+interface Props {
+  shot: Shot;
+  /** Candidate widths in pixels; ones larger than the source are dropped. */
+  widths?: number[];
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  class?: string;
+}
+const { shot, widths = [360, 640, 960, 1280], sizes = '(min-width: 900px) 640px, 92vw', loading = 'lazy', class: className } = Astro.props;
+const img = shotImage(shot.file);
+const usable = widths.filter((w) => w <= img.width);
+---
+
+<Picture
+  src={img}
+  alt={shot.alt}
+  formats={['avif', 'webp']}
+  widths={usable.length > 0 ? usable : [img.width]}
+  sizes={sizes}
+  loading={loading}
+  decoding="async"
+  class={className}
+/>

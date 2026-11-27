@@ -1,0 +1,23 @@
+---
+// Development-only page for looking at the 3D phone in isolation. Removed before shipping.
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>lab</title>
+    <style is:global>
+      html, body { margin: 0; height: 100%; }
+      canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; }
+      #hud { position: fixed; left: 8px; top: 8px; font: 12px ui-monospace, monospace; color: #888; }
+    </style>
+  </head>
+  <body>
+    <canvas id="c"></canvas>
+    <div id="hud"></div>
+    <script>
+      import '../../lab/main.ts';
+    </script>
+  </body>
+</html>

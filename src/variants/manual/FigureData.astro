@@ -1,0 +1,44 @@
+---
+import type { Figure } from '@/content';
+import { formatBytes, formatInt } from '@/lib/format';
+
+interface Props {
+  figure: Figure;
+}
+const { figure } = Astro.props;
+const max = figure.kind === 'bars' ? Math.max(...figure.items.map((i) => i.value)) : 1;
+---
+
+<figure class="fig">
+  <figcaption class="fig__title note">{figure.title}</figcaption>
+  {
+    figure.kind === 'bars' ? (
+      <ul class="bars">
+        {figure.items.map((item) => (
+          <li class="bar-row">
+            <span>{item.label}</span>
+            <span class="bar-row__track" aria-hidden="true">
+              <span class="bar-row__fill" style={`width:${Math.max(0.4, (item.value / max) * 100).toFixed(2)}%`} />
+            </span>
+            <span class="bar-row__value num muted">
+              {formatBytes(item.value)} ({formatInt(item.value)} B){item.note ? `, ${item.note}` : ''}
+            </span>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>{figure.head.map((h) => <th scope="col" class="note">{h}</th>)}</tr>
+          </thead>
+          <tbody>
+            {figure.rows.map((row) => (
+              <tr>{row.map((cell, i) => (i === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>))}</tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+</figure>
