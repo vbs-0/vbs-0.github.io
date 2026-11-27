@@ -45,6 +45,15 @@ They run with software WebGL, and they check each version for console errors, si
 accessibility (axe, WCAG 2.1 and 2.2 AA), the WebGL-off fallback, and the no-JavaScript page, plus
 each version's own interactions.
 
+## The motion
+
+Moving between builds plays a sweep: bands, blades and a flash cover the screen, the next build paints
+already covered and the cover leaves. Changing theme floods the new colour out of the switch. Opening a
+project morphs its icon into the header, and filtering the work moves the projects that stay.
+
+All of it animates transform, opacity or a view transition, and all of it is off under reduced motion
+(or About phone's animator scale set to 0). `DESIGN.md` has the detail; `src/lib/motion/` has the code.
+
 ## Change the content
 
 Everything factual lives in `src/content/`:

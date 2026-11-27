@@ -66,6 +66,18 @@ the three.js scenes read the same values.
   contribution calendar, one bar per day, height by count, colour by level.
 - **Signature:** the stack is the index: choosing a slab opens its layer and filters the work below.
 
+## Motion
+
+One motion system, three voices. Everything animates `transform`, `opacity` or a view transition; nothing animates layout, filters or shadows.
+
+- **The sweep between builds** (`src/lib/motion/sweep.ts`, `src/styles/motion.css`): seven bands slide in from the right, one every 14 ms, in two alternating tones of the destination's paper; three blades in its accent cross faster; one flash leads. The screen is covered at 280 ms and the page navigates. The destination paints covered (its head script reads a flag) and the bands leave to the left over 300 ms, with the build's name and one line about it riding across. Each build skins the sweep in its own colours and lettering. The destination is prefetched on hover or focus, so the swap happens under the cover.
+- **The theme flood** (`src/lib/motion/flood.ts`): a disc in the new theme's colour grows from the switch, the theme flips underneath it and the disc is removed in the same frame. One composited layer.
+- **Morphs** (`src/lib/motion/view-transition.ts`): an App info page takes its icon and name from the list row it was opened from; filtering the work moves the projects that stay to their new places. Both use the browser's view transitions, and both clear their names afterwards.
+- **Scroll reveals** (`src/lib/motion/reveal.ts`): one observer, transform and opacity, 70 ms apart in a group. Elements are only hidden once the module is running, so nothing is ever lost.
+- **Arrivals:** the drawing draws itself (manual), the device rises and settles (phone), the stack rises into place (classic).
+- **The budget** (`src/lib/three/engine.ts`): the median of the last 60 frame intervals is checked every 60 frames. Above 22 ms the drawing buffer shrinks to 70%, then the scene drops to simpler materials and loses its idle motion, then it renders on demand only. Scenes stop rendering when their slot leaves the screen, and the 3D boots only after the sweep has left.
+- **Off:** reduced motion removes the sweep, the flood and the reveals; the `data-motion="off"` switch (About phone's animator scale) does the same.
+
 ## Assets
 
 - Screenshots and logos come from the owner's public repositories, recorded in `src/assets/projects/provenance.json`
