@@ -35,14 +35,15 @@ the three.js scenes read the same values.
 
 ## Film (`/` and `/film/`)
 
-- **World:** the opening titles of a film about one engineer. A countdown leader splits open like a
-  letterbox onto a main title over the live phone; six scenes then follow one camera move into the part
-  each layer of the stack lives in; a reel of measured projects runs sideways; the credits and an end
-  card close it. It refuses the category's dark grid of project cards beside a floating 3D object.
+- **World:** the opening titles of a film about one engineer. The countdown opens on an illustrated
+  mountain pass, with the name to the left of the sun and watchtower. Play first scene returns to the
+  same viewpoint by moonlight. The camera moves into the product layers after that establishing pair;
+  a reel of measured projects, credits and an end card follow.
 - **Colour:** projection black `#0f0e0d` and title white `#f6f1e8`, and one grade per scene, never two at
   once: display azure `#67b8ee`, antenna violet `#b891f5`, board green `#6ad895`, lens rose `#ec8fbe`,
   silicon amber `#f2c14e`, battery ember `#f0956a`. The grade tints the set's rim light, the scene's slug,
-  the strip segment and the project's accent; the light leak that covers a cut is the incoming grade.
+  the strip segment and the project's accent. The cut has its own material: gold airborne pigment and
+  vermilion cloth with a dark cut-block maker's seal.
 - **Type:** League Gothic for every title card (condensed, uppercase, 0.86 to 0.92 leading, up to 13rem),
   Jost for body and credits, Courier Prime for sluglines, timecode and measured values. All self-hosted.
 - **Composition:** a fixed top bar (mark, live scene name, contact) and a fixed bottom bar (the film's acts
@@ -50,8 +51,10 @@ the three.js scenes read the same values.
 - **The set:** the same procedural phone, lit cinematically rather than as a studio product shot: a key that
   travels with the camera, a rim in the scene's grade, a soft pool of that grade behind the subject, and
   ACES tone mapping. The camera dives to each part in turn, blending between neighbouring shots as you scroll.
-- **Signature:** the six-scene camera move, cut with masked wipes and light leaks, each scene named by a
-  slugline and credited with its projects.
+- **Signature:** a bank of dust obscures the ridge; three overlapping standards pass close to the lens.
+  The scene link moves scroll, focus and the set together on the opaque frame, before the cloth parts.
+  A native scroll edits the exposure without moving focus. Further scene choices during cover replace
+  the pending destination; they never queue a string of wipes.
 - **Project pages** (`/work/<id>/`): one page per project in the same world: the headline number rolling,
   the whole scene, every metric with its source, the stack, the stated limits and all the shots.
 - **Details:** a vbs cameo hidden in every act (finding them all opens a director's HUD with live frame
@@ -124,8 +127,9 @@ nothing animates layout, filters or shadows.
   (0 is the title, 1 to 6 the layers) and the rig, the camera and the grade all blend between neighbours.
 - **The reel:** sideways on wide screens, pinned and driven by scroll; a frame is graded until it is in
   focus and its counter rolls when it arrives. On phones it is a column, which is the honest layout there.
-- **Wheel smoothing** (Lenis, 1.3.27) on desktop only, native touch, and off with reduced motion. Jumping to
-  a scene moves focus with it.
+- **Wheel smoothing** (Lenis, 1.3.27) on desktop only, native touch, and off with reduced motion. The Film
+  cut uses one 470 ms cover and 570 ms release; only opacity and transforms animate. No live particles,
+  extra WebGL context or video decoder. If the cloth fails to decode, the link still lands immediately.
 
 - **The sweep between builds** (`src/lib/motion/sweep.ts`, `src/styles/motion.css`): seven bands slide in from the right, one every 14 ms, in two alternating tones of the destination's paper; three blades in its accent cross faster; one flash leads. The screen is covered at 280 ms and the page navigates. The destination paints covered (its head script reads a flag) and the bands leave to the left over 300 ms, with the build's name and one line about it riding across. Each build skins the sweep in its own colours and lettering. The destination is prefetched on hover or focus, so the swap happens under the cover.
 - **The theme flood** (`src/lib/motion/flood.ts`): a disc in the new theme's colour grows from the switch, the theme flips underneath it and the disc is removed in the same frame. One composited layer.
@@ -142,4 +146,8 @@ nothing animates layout, filters or shadows.
   with repository, path, date and SHA-256.
 - Still images of the 3D scenes (`src/assets/posters/`) are rendered from the development viewer and
   shipped as the no-WebGL fallback; they carry the same provenance rule: produced by `npm run posters`.
+- Film art (`src/assets/film/`): `day.webp` and `night.webp` are original registered prints of one ridge,
+  stone causeway and watchtower. `dust.webp` is a seeded pigment matte; `standard.webp` is a warp of an
+  original seal, woven field and cut fringe. `npm run film:art` produces all four from local source. No
+  frames, characters, lettering or audio were lifted from the reference film.
 - Icons are authored line glyphs in `src/lib/icons.ts`, one stroke weight, on a 24 by 24 grid.

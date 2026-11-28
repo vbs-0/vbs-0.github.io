@@ -12,6 +12,7 @@ import { detectCapabilities } from '@/lib/three/capabilities';
 import { clamp01 } from '@/lib/three/math';
 import { palettes } from '@/styles/palettes';
 import { initAutofocus } from './autofocus';
+import { createFilmCut } from './cut';
 import { filmGrain } from './grain';
 import { type Odometer, odometer } from './odometer';
 import type { FilmScene } from './scene';
@@ -29,7 +30,8 @@ const $$ = <T extends Element>(sel: string, scope: ParentNode = document) => [..
 const canvas = $<HTMLCanvasElement>('#stage');
 // Cheap checks now; the WebGL probe waits for boot(), because creating a context is a long task and the
 // countdown has to be on screen, running on the compositor, before the main thread gets busy.
-const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches || new URLSearchParams(location.search).get('motion') === 'off';
+const motionOff = root.dataset.motion === 'off' || new URLSearchParams(location.search).get('motion') === 'off';
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches || motionOff;
 const pal = palettes.film.dark;
 const GRADE: Record<string, string> = {
   title: pal.gTitle as string,
@@ -120,9 +122,10 @@ const sceneLabel = $<HTMLElement>('[data-scene-label]');
 const strip = $<HTMLElement>('.strip__acts');
 const head = $<HTMLElement>('.strip__head');
 const tc = $<HTMLElement>('[data-timecode]');
-const leakEl = $<HTMLElement>('.leak');
+const cut = createFilmCut(document.querySelector<HTMLElement>('.film-cut')!, motionOff);
 let scene: FilmScene | undefined;
 let lenis: Lenis | null = null;
+let jumping = false;
 
 let vh = innerHeight;
 let docH = 1;
@@ -138,31 +141,11 @@ let stripWidth = 1;
 let activeIdx = -1;
 let shotNow = 0;
 
-let lastCut = -1;
-/**
- * The cut, as in the reference: skewed banners of the incoming scene's grade whip across the frame, one
- * after another, and the world behind them is a different scene by the time they leave.
- */
-function wipe(color: string): void {
-  const el = document.querySelector<HTMLElement>('.wipe');
-  if (!el || reduced) return;
-  el.style.setProperty('--wc', color);
-  el.classList.add('is-on');
-  const bands = el.children.length;
-  window.setTimeout(() => el.classList.remove('is-on'), 640 + bands * 42 + 60);
-}
-
-function leak(color: string): void {
-  if (!leakEl || reduced) return;
-  leakEl.style.setProperty('--leak', color);
-  leakEl.animate(
-    [
-      { opacity: 0, transform: 'translate3d(-55%, 0, 0)' },
-      { opacity: 0.5, offset: 0.4 },
-      { opacity: 0, transform: 'translate3d(55%, 0, 0)' },
-    ],
-    { duration: 950, easing: 'cubic-bezier(0.2, 0.6, 0.2, 1)' },
-  );
+function expose(act: Act): void {
+  const shot = camActs.indexOf(act);
+  root.dataset.exposure = shot > 0 && shot % 2 === 1 ? 'night' : 'day';
+  root.toggleAttribute('data-interior', shot > 1);
+  scene?.set({ grade: act.grade });
 }
 
 function reveal(el: HTMLElement, base = 120): void {
@@ -177,13 +160,16 @@ function setActive(idx: number, quiet: boolean): void {
   const prev = acts[activeIdx];
   activeIdx = idx;
   root.dataset.actNow = act.id;
-  root.toggleAttribute('data-in-stack', LAYERS.includes(act.id));
   root.style.setProperty('--g-now', act.grade);
   if (sceneLabel) sceneLabel.textContent = act.label;
   for (const a of acts) a.link?.removeAttribute('aria-current');
   act.link?.setAttribute('aria-current', 'location');
-  scene?.set({ grade: act.grade });
-  if (!quiet && prev && prev.grade !== act.grade) leak(act.grade);
+  if (jumping) return;
+  if (!quiet && prev && camActs.includes(prev) && camActs.includes(act)) cut.play(() => expose(act));
+  else {
+    cut.cancel();
+    expose(act);
+  }
 }
 
 function focusFrame(frame: Frame, on: boolean): void {
@@ -204,18 +190,10 @@ function update(quiet = false): void {
   // The camera: scene k is fully on when its act is centred (on a phone, when its picture fills the top).
   const centers = camActs.map((a) => a.top + (mobile ? vh * 0.5 : a.height * 0.5));
   shotNow = playhead(centers, center);
-  // A cut at every scene boundary: the banners cross, and the scene behind them has changed.
-  const cut = Math.round(shotNow);
-  if (!quiet && cut !== lastCut) {
-    if (lastCut >= 0 && cut !== lastCut) {
-      const target = camActs[Math.min(camActs.length - 1, cut)];
-      if (target) wipe(target.grade);
-    }
-    lastCut = cut;
-  }
   const last = camActs[camActs.length - 1];
   const end = last ? last.top + last.height : 0;
-  const presence = 1 - clamp01((center - (end - vh * 0.1)) / (vh * 0.55));
+  // Leave both establishing shots clear; the product model emerges as the camera leaves the ridge.
+  const presence = clamp01((shotNow - 1) / 0.5) * (1 - clamp01((center - (end - vh * 0.1)) / (vh * 0.55)));
   if (canvas) canvas.style.opacity = presence < 0.999 ? presence.toFixed(3) : '';
   scene?.set({ shot: shotNow, presence });
 
@@ -314,21 +292,42 @@ void document.fonts?.ready.then(remeasure);
 const main = $<HTMLElement>('main');
 if (main) new ResizeObserver(remeasure).observe(main);
 
-/** Scrolls to an act (a scene lands with its shot established) and moves keyboard focus there. */
+/** Scene links cut straight to their destination while covered; never fly past intervening scenes. */
 function go(target: HTMLElement): void {
-  let top = target.getBoundingClientRect().top + scrollY;
   const act = acts.find((a) => a.el === target);
-  if (act && LAYERS.includes(act.id) && !mobile) top += Math.max(0, (act.height - vh) * 0.5);
-  const focus = () => {
+  const land = () => {
+    jumping = true;
+    let top = target.getBoundingClientRect().top + scrollY;
+    if (act && LAYERS.includes(act.id) && !mobile) top += Math.max(0, (act.height - vh) * 0.5);
+    if (lenis) lenis.scrollTo(top, { immediate: true, force: true });
+    else scrollTo({ top, behavior: 'instant' });
+    update(true);
+    jumping = false;
+    const current = acts[activeIdx];
+    if (current) expose(current);
+    if (location.hash !== `#${target.id}`) history.pushState(null, '', `#${target.id}`);
     if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
     target.focus({ preventScroll: true });
   };
-  history.pushState(null, '', `#${target.id}`);
-  if (lenis) lenis.scrollTo(top, { duration: Math.min(2.6, 0.9 + Math.abs(top - scrollY) / 5000), onComplete: focus });
-  else {
-    scrollTo({ top, behavior: 'auto' });
-    focus();
+  const from = acts[activeIdx];
+  if (act && from && act !== from && camActs.includes(act) && camActs.includes(from)) {
+    jumping = true;
+    cut.play(land);
+  } else {
+    cut.cancel();
+    land();
   }
+}
+
+function cancelJump(): void {
+  cut.cancel();
+  jumping = false;
+  const current = acts[activeIdx];
+  if (current) expose(current);
+}
+for (const event of ['popstate', 'pagehide'] as const) addEventListener(event, cancelJump);
+for (const event of ['wheel', 'touchmove'] as const) {
+  addEventListener(event, () => { if (jumping) cancelJump(); }, { passive: true });
 }
 
 document.addEventListener('click', (e) => {

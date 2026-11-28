@@ -9,7 +9,7 @@ Pick a version per application; each is a complete page at its own address.
 | `/phone/` | About phone | A custom-ROM Settings screen where the device is the person. The 3D phone mirrors the page, comes apart under Hardware, and its display shows the open app. |
 | `/manual/` | Service manual | A drawing sheet: an ink-line phone that takes itself apart as you scroll, a numbered parts list, and figure plates for the projects. |
 | `/graph/` | System map | Every layer, project and tool as a node in one 3D chart, with a command palette (⌘K) and a panel of facts. |
-| `/film/` | Film | Opening titles: a countdown leader, one camera move through six scenes, a sideways reel of measured projects, credits. |
+| `/film/` | Film | A countdown opens on a mountain pass. Gold dust and red silk cut from daylight to moonlight, then into six software layers and a reel of measured projects. |
 | `/work/<id>/` | — | One page per project in the Film world. |
 | `/classic/` | Classic | Dark studio, a stack of six glass slabs (one per layer of the stack), a work list you can filter by layer, and a 3D contribution skyline. |
 
@@ -50,6 +50,15 @@ accessibility (axe, WCAG 2.1 and 2.2 AA), the WebGL-off fallback, and the no-Jav
 each version's own interactions.
 
 ## The motion
+
+On `/` or `/film/`, choose **Play first scene**. The ridge stays in place while the light changes
+behind the passing standards. Choose **Title** in the bottom strip to play the return cut. Scrolling
+works too; the page never locks the wheel or touch input for the cut. Reduced motion jumps directly
+to the destination, and the same link works with JavaScript or WebGL off.
+
+[Watch the local-build recording](docs/previews/film-cut.mp4) or inspect its
+[desktop frames](docs/previews/film-cut-desktop.webp) and [phone frames](docs/previews/film-cut-phone.webp).
+These are browser captures, not concept art or files loaded by the site.
 
 Moving between builds plays a sweep: bands, blades and a flash cover the screen, the next build paints
 already covered and the cover leaves. Changing theme floods the new colour out of the switch. Opening a
@@ -105,6 +114,10 @@ npm run posters
 
 This renders the fallback stills in `src/assets/posters/` from the development viewer at `/lab/`
 (the lab is routed in development only). Re-run it after changing the phone model or its materials.
+
+The Film's four illustrated plates are independent of the 3D posters. `npm run film:art` regenerates
+them locally from the print inks and seeded drawing in `scripts/print-film-plates.mjs`. The supplied
+movie is a motion reference, not a runtime asset.
 
 ## Deploy
 

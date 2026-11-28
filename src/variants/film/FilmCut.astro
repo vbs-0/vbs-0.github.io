@@ -1,0 +1,18 @@
+---
+import dust from '@/assets/film/dust.webp?url';
+import standard from '@/assets/film/standard.webp?url';
+import { filmInks } from '@/styles/palettes';
+---
+
+<div class="film-cut" aria-hidden="true" hidden>
+  <!-- Inert until motion is permitted: the static path does not download the effects plates. -->
+  <template>
+    <div class="cut__air">
+      <div class="cut__cover" style={`--sand:${filmInks.dust.body};--umber:${filmInks.dust.shadow}`}></div>
+    </div>
+    <img class="cut__dust" src={dust} width="896" height="576" alt="" decoding="async" fetchpriority="low" />
+    {['far', 'edge', 'near'].map((plane) => (
+      <img class={`cut__silk cut__silk--${plane}`} src={standard} width="816" height="706" alt="" decoding="async" fetchpriority="low" />
+    ))}
+  </template>
+</div>

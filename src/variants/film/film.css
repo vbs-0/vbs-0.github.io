@@ -271,8 +271,57 @@ html[data-leader='out'] .leader__half--bottom {
 
 /* ── The stage: live 3D behind everything, the fallback stills, the lens ─── */
 
+.sequence {
+  display: flow-root;
+  isolation: isolate;
+}
+.backlot {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  margin-block-end: -100svh;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--c-bg);
+}
+.backlot__plate {
+  position: absolute;
+  inset: var(--bar-h) 0;
+  width: 100%;
+  height: calc(100% - 2 * var(--bar-h));
+  object-fit: cover;
+  object-position: 72% 52%;
+}
+.backlot__night,
+html[data-exposure='night'] .backlot__plate:not(.backlot__night) {
+  visibility: hidden;
+}
+html[data-exposure='night'] .backlot__night,
+html:not(.film-ready):has(.act--scene:target) .backlot__night {
+  visibility: visible;
+}
+html[data-interior] .backlot__plate {
+  opacity: 0.24;
+}
+.backlot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--c-bg) 0%, color-mix(in srgb, var(--c-bg) 96%, transparent) 28%,
+    color-mix(in srgb, var(--c-bg) 85%, transparent) 40%, transparent 65%),
+    linear-gradient(0deg, color-mix(in srgb, var(--c-bg) 48%, transparent), transparent 25%);
+}
+@media (max-aspect-ratio: 1/1), (max-width: 599px) {
+  .backlot__plate {
+    height: 56svh;
+    object-position: 74% 46%;
+  }
+  .backlot::after {
+    background: linear-gradient(0deg, var(--c-bg) 39%, transparent 65%);
+  }
+}
 .stage {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 0;
   inline-size: 100%;
@@ -283,7 +332,7 @@ html:not([data-scene='live']) .stage {
   visibility: hidden;
 }
 .still--exploded {
-  position: fixed;
+  position: absolute;
   z-index: 0;
   inset-block-start: var(--bar-h);
   inset-inline-end: 0;
@@ -294,79 +343,102 @@ html:not([data-scene='live']) .stage {
   transition: opacity 0.5s;
   pointer-events: none;
 }
-html[data-scene='still'][data-in-stack] .still--exploded {
+html[data-scene='still'][data-interior] .still--exploded {
   opacity: 0.9;
 }
-.vignette {
+
+/* Dust enters first. Its opaque frame hides the edit; the two depths of cloth part to reveal it.
+   Keyframes exist only during a pass, so the second cut starts from the same frame as the first. */
+.film-cut {
+  --cover-time: 470ms;
+  --release-time: 570ms;
   position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background:
-    radial-gradient(120% 95% at 68% 50%, transparent 48%, color-mix(in srgb, var(--c-bg) 88%, transparent) 100%),
-    linear-gradient(90deg, color-mix(in srgb, var(--c-bg) 72%, transparent), transparent 54%);
-}
-.wipe {
-  position: fixed;
-  inset: 0;
+  inset: var(--bar-h) 0;
   z-index: 20;
+  contain: strict;
   overflow: hidden;
   pointer-events: none;
-  visibility: hidden;
 }
-.wipe.is-on {
-  visibility: visible;
-}
-/* Paused until the class lands, then every band runs from the same instant: the banners cannot miss. */
-.wipe.is-on .wipe__band {
-  animation-play-state: running;
-}
-@keyframes wipe-band {
-  from {
-    transform: translate3d(135%, 0, 0) skewX(-14deg);
-  }
-  to {
-    transform: translate3d(-150%, 0, 0) skewX(-14deg);
-  }
-}
-.wipe__band {
+.cut__air, .cut__cover {
   position: absolute;
-  inset-block: -25%;
-  inset-inline-start: 0;
-  inline-size: 62%;
-  transform: translate3d(135%, 0, 0) skewX(-14deg);
-  animation: wipe-band 640ms cubic-bezier(0.76, 0, 0.24, 1) calc(var(--i) * 42ms) both;
-  animation-play-state: paused;
-  background: linear-gradient(90deg, transparent 0%, var(--wc, #fff) 26%, var(--wc, #fff) 88%, transparent 100%);
-  opacity: 0.94;
-  will-change: transform;
-}
-.wipe__band:nth-child(even) {
-  inline-size: 78%;
-  opacity: 0.72;
-}
-.wipe__band::after {
-  content: '';
-  position: absolute;
-  inset-block: 0;
-  inset-inline-start: 0;
-  inline-size: 3px;
-  background: var(--c-text);
-  opacity: 0.55;
-}
-.leak {
-  position: fixed;
   inset: 0;
-  z-index: 5;
-  pointer-events: none;
-  opacity: 0;
-  background: linear-gradient(
-    100deg,
-    transparent 18%,
-    color-mix(in srgb, var(--leak, #fff) 50%, transparent) 44%,
-    color-mix(in srgb, var(--leak, #fff) 18%, transparent) 56%,
-    transparent 78%
-  );
+}
+.cut__cover {
+  background: linear-gradient(130deg, var(--sand), var(--umber));
+}
+.cut__dust, .cut__silk {
+  position: absolute;
+  max-inline-size: none;
+  user-select: none;
+}
+.cut__dust { left: -18%; top: -27%; width: 140%; height: 165%; object-fit: cover; }
+.cut__silk--far {
+  left: -12%; top: -6%; width: 61%; height: 103%;
+  --delay: 155ms;
+  --entry: translate3d(-115%, -42%, 0) rotate(-16deg);
+  --meet: translate3d(0, 0, 0) rotate(5deg);
+  --fold: translate3d(5%, 3%, 0) rotate(8deg);
+  --exit: translate3d(33%, -140%, 0) rotate(16deg);
+}
+.cut__silk--edge {
+  right: -16%; top: 12%; width: 61%; height: 106%;
+  --delay: 205ms;
+  --entry: translate3d(108%, 65%, 0) rotate(15deg);
+  --meet: translate3d(0, 0, 0) rotate(-8deg);
+  --fold: translate3d(-4%, 3%, 0) rotate(-6deg);
+  --exit: translate3d(-38%, 135%, 0) rotate(10deg);
+}
+.cut__silk--near {
+  left: 19%; top: -15%; width: 65%; height: 126%;
+  --delay: 240ms;
+  --entry: translate3d(-17%, -119%, 0) rotate(-16deg);
+  --meet: translate3d(0, 0, 0) rotate(-6deg);
+  --fold: translate3d(2%, 2%, 0) rotate(-3deg) scale(1.04, 0.98);
+  --exit: translate3d(24%, -133%, 0) rotate(11deg) scale(1.12, 0.93);
+}
+/* Below one 8-bit colour step: paint the decoded plates once without flashing a warm-up frame. */
+.film-cut[data-priming] { opacity: 0.001; }
+.film-cut[data-priming] .cut__silk { transform: var(--meet); }
+.film-cut[data-priming] .cut__dust { transform: translate3d(0, -11%, 0); }
+.film-cut[data-running] .cut__air { animation: cut-density var(--cover-time) linear both; }
+.film-cut[data-running] .cut__dust { animation: cut-gust var(--cover-time) ease-out both; }
+.film-cut[data-running] .cut__silk { animation: cut-catch calc(var(--cover-time) - var(--delay)) var(--ease-cut) var(--delay) both; }
+.film-cut[data-releasing] .cut__cover { animation: cut-clear var(--release-time) linear both; }
+.film-cut[data-releasing] .cut__dust { animation: cut-settle var(--release-time) ease-out both; }
+.film-cut[data-releasing] .cut__silk { animation: cut-fly var(--release-time) var(--ease-cut) both; }
+@keyframes cut-density {
+  0%, 20% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes cut-clear {
+  0%, 16% { opacity: 1; }
+  81%, 100% { opacity: 0; }
+}
+@keyframes cut-gust {
+  0% { opacity: 0; transform: translate3d(-9%, 38%, 0); }
+  40% { opacity: 1; transform: translate3d(-4%, 9%, 0); }
+  100% { opacity: 1; transform: translate3d(0, -11%, 0); }
+}
+@keyframes cut-settle {
+  from { opacity: 1; transform: translate3d(0, -11%, 0); }
+  to { opacity: 0; transform: translate3d(8%, -18%, 0); }
+}
+@keyframes cut-catch {
+  from { transform: var(--entry); }
+  to { transform: var(--meet); }
+}
+@keyframes cut-fly {
+  0% { transform: var(--meet); }
+  18% { transform: var(--fold); }
+  100% { transform: var(--exit); }
+}
+@media (max-aspect-ratio: 1/1) {
+  .cut__silk--near { left: -15%; top: 2%; width: 130%; height: 91%; }
+  .cut__silk--far { left: -42%; top: -14%; width: 105%; height: 77%; }
+  .cut__silk--edge { right: -42%; top: 38%; width: 111%; height: 79%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .film-cut { display: none; }
 }
 .film-grain {
   position: fixed;
@@ -654,10 +726,6 @@ html[data-scene='still'][data-in-stack] .still--exploded {
   border-color: var(--g);
   color: var(--c-bg);
 }
-.btn--ghost {
-  border-color: transparent;
-  background: none;
-}
 .badge {
   display: inline-block;
   padding: 0.1rem 0.45rem;
@@ -749,65 +817,49 @@ html[data-scene='still'][data-in-stack] .still--exploded {
 .act--title .actions {
   margin-block-start: 1.9rem;
 }
-/* The main title dissolves at its foot, so its buttons never float over the next scene as it leaves. */
-.act--title::after {
-  content: '';
-  position: absolute;
-  inset-inline: 0;
-  inset-block-end: 0;
-  z-index: 1;
-  block-size: 16svh;
-  background: linear-gradient(to bottom, transparent, var(--c-bg));
-  pointer-events: none;
-}
-.title__still {
-  position: absolute;
-  z-index: -1;
-  inset-block-start: var(--bar-h);
-  inset-inline-end: 1vw;
-  inline-size: min(48vw, calc(100svh - 2 * var(--bar-h)));
-  block-size: calc(100svh - 2 * var(--bar-h));
-  object-fit: contain;
-  pointer-events: none;
-}
-/* With the page script running, the still waits for the verdict: shown only when the 3D is off. */
-.film-ready:not([data-scene='still']) .title__still {
-  visibility: hidden;
-}
 @media (max-aspect-ratio: 1/1), (max-width: 599px) {
   .act--title {
     align-items: end;
-    padding-block-start: 40svh;
+    padding-block-start: 30svh;
   }
   .title {
     max-inline-size: none;
     /* The picture sits above; the words get an opaque ground so nothing is read over the image. */
     margin-inline: calc(-1 * var(--pad));
     padding-inline: var(--pad);
-    padding-block-start: 2.5rem;
+    padding-block-start: 1.5rem;
     background: linear-gradient(to top, var(--c-bg) 82%, transparent);
   }
   .title__name {
     font-size: min(17vw, 9.5svh, 6rem);
   }
   .title__role {
-    margin-block-start: 1.1rem;
+    margin-block-start: 0.85rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
   }
   .title__thesis {
     font-size: 1rem;
+    line-height: 1.45;
   }
   .act--title .actions {
-    margin-block-start: 1.3rem;
+    margin-block-start: 1rem;
+    gap: 0.5rem;
   }
-  .act--title .btn--ghost {
+  .act--title .btn {
+    min-block-size: 2.75rem;
+    padding-inline: 0.75rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.055em;
+    gap: 0.4rem;
+  }
+  .act--title .actions [download] {
     display: none;
   }
-  .title__still {
-    inset-inline: 0;
-    margin-inline: auto;
-    inline-size: min(100vw, 40svh);
-    block-size: 40svh;
-  }
+}
+@media (max-width: 359px) {
+  .act--title { padding-block-start: 24svh; }
+  .title__thesis { font-size: 0.9375rem; }
 }
 /* A short, wide window (a browser pane beside an editor): everything a size down, so the title fits. */
 @media (max-height: 640px) and (min-aspect-ratio: 1/1) and (min-width: 600px) {
@@ -1220,9 +1272,10 @@ html[data-scene='still'][data-in-stack] .still--exploded {
 }
 @media (max-width: 899px) {
   .more__row {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 0.35rem;
   }
+  .more__links { flex-wrap: wrap; }
 }
 
 .credits {
@@ -1903,16 +1956,13 @@ html:not(.film-ready) .cameo {
 
 @media print {
   .leader,
-  .stage,
-  .still--exploded,
-  .vignette,
-  .leak,
+  .backlot,
+  .film-cut,
   .film-grain,
   .bar,
   .af,
   .toast,
   .cameo,
-  .title__still,
   .hud {
     display: none !important;
   }

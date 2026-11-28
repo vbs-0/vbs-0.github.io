@@ -17,6 +17,7 @@
     "sync:github": "node scripts/sync-github.mjs",
     "sync:shots": "node scripts/fetch-screenshots.mjs",
     "posters": "node scripts/capture-posters.mjs",
+    "film:art": "node scripts/print-film-plates.mjs",
     "verify": "npm run check && npm run test && npm run build"
   },
   "dependencies": {

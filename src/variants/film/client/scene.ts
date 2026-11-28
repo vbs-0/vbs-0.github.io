@@ -212,9 +212,13 @@ export async function createFilmScene(canvas: HTMLCanvasElement, opts: FilmScene
   let first = true;
   let fpsAvg = 60;
   let drawn = false;
+  let compiled = false;
+  let resolveReady!: () => void;
+  const ready = new Promise<void>((resolve) => { resolveReady = resolve; });
 
   engine.onFrame((dt, elapsed) => {
-    const instant = opts.reducedMotion || first;
+    if (!compiled) return;
+    const instant = opts.reducedMotion || !drawn;
     const size = engine.size;
     const w = size.width;
     const h = size.height;
@@ -223,7 +227,7 @@ export async function createFilmScene(canvas: HTMLCanvasElement, opts: FilmScene
     const portrait = w / h <= 1 || w < 600;
     const short = !portrait && h < 640;
 
-    if (state.presence < 0.004) {
+    if (state.presence < 0.004 && !first) {
       if (drawn) {
         renderer.clear();
         drawn = false;
@@ -295,22 +299,22 @@ export async function createFilmScene(canvas: HTMLCanvasElement, opts: FilmScene
 
     renderer.render(scene, camera);
     drawn = true;
-    first = false;
+    if (first) {
+      first = false;
+      resolveReady();
+    }
     if (dt > 0) fpsAvg = lerp(fpsAvg, 1 / dt, 0.08);
   });
 
-  let resolveReady: () => void = () => {};
-  const ready = new Promise<void>((resolve) => {
-    resolveReady = resolve;
-  });
-  // Compile every shader now, under the leader, rather than on the first frame the visitor sees.
+  // Compilation alone doesn't upload geometry and textures. Warm one real frame off-camera
+  // before parking the set; otherwise the first interior cut pays the driver's first-draw cost.
   void Promise.resolve()
     .then(() => (document.fonts?.ready ?? Promise.resolve()).then(() => paintScreen()))
     .then(() => renderer.compileAsync?.(scene, camera))
     .catch(() => undefined)
     .then(() => {
+      compiled = true;
       engine.invalidate(3);
-      requestAnimationFrame(() => requestAnimationFrame(() => resolveReady()));
     });
 
   return {

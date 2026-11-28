@@ -14,8 +14,9 @@ import bodyFont from '@fontsource-variable/jost/files/jost-latin-wght-normal.wof
 import './film.css';
 import { getImage } from 'astro:assets';
 import { otherBuilds } from '@site';
+import daylight from '@/assets/film/day.webp?url';
+import moonlight from '@/assets/film/night.webp?url';
 import explodedDark from '@/assets/posters/phone-exploded-dark.webp';
-import heroDark from '@/assets/posters/phone-hero-dark.webp';
 import BaseHead from '@/components/shared/BaseHead.astro';
 import Icon from '@/components/shared/Icon.astro';
 import Shot from '@/components/shared/Shot.astro';
@@ -25,9 +26,9 @@ import type { LayerId, Project, ProjectLink } from '@/content';
 import { formatDay, formatInt, formatMonthYear } from '@/lib/format';
 import { contribStats, contribWeeks, github, languagePresence, originalRepoCount } from '@/lib/github';
 import type { IconName } from '@/lib/icons';
+import FilmCut from './FilmCut.astro';
 
-const still = async (img: ImageMetadata) => (await getImage({ src: img, width: 900, format: 'webp' })).src;
-const stills = { hero: await still(heroDark), exploded: await still(explodedDark) };
+const exploded = (await getImage({ src: explodedDark, width: 900, format: 'webp' })).src;
 
 const email = profile.contacts.find((c) => c.kind === 'email');
 const resume = profile.contacts.find((c) => c.kind === 'resume');
@@ -58,7 +59,7 @@ const dates = (start: string, end: string | null) => `${formatMonthYear(start)} 
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-exposure="day">
   <head>
     <BaseHead variant="film" leader />
     <link rel="preload" as="font" type="font/woff2" href={displayFont} crossorigin />
@@ -84,11 +85,7 @@ const dates = (start: string, end: string | null) => `${formatMonthYear(start)} 
       <span class="leader__half leader__half--bottom"></span>
     </div>
 
-    <canvas class="stage" id="stage" aria-hidden="true"></canvas>
-    <img class="still still--exploded" src={stills.exploded} width="900" height="900" alt="" aria-hidden="true" decoding="async" loading="lazy" />
-    <div class="vignette" aria-hidden="true"></div>
-    <div class="leak" aria-hidden="true"></div>
-    <div class="wipe" aria-hidden="true">{[0, 1, 2, 3, 4].map((i) => <span class="wipe__band" style={`--i:${i}`} />)}</div>
+    <FilmCut />
     <div class="film-grain" aria-hidden="true"></div>
 
     <header class="bar bar--top">
@@ -101,8 +98,14 @@ const dates = (start: string, end: string | null) => `${formatMonthYear(start)} 
     </header>
 
     <main id="main">
+      <div class="sequence">
+      <div class="backlot" aria-hidden="true">
+        <img class="backlot__plate" src={daylight} width="1536" height="896" alt="" fetchpriority="high" />
+        <img class="backlot__plate backlot__night" src={moonlight} width="1536" height="896" alt="" decoding="async" fetchpriority="low" />
+        <canvas class="stage" id="stage"></canvas>
+        <img class="still--exploded" src={exploded} width="900" height="900" alt="" decoding="async" loading="lazy" />
+      </div>
       <section class="act act--title" id="title" data-act="title" style={grade('title')} aria-labelledby="name">
-        <img class="title__still" src={stills.hero} width="900" height="900" alt="A phone, standing, lit from the side" fetchpriority="high" />
         <div class="title">
           <h1 class="title__name" id="name">
             <span class="ln"><span>Veerabhadra </span></span>
@@ -112,9 +115,9 @@ const dates = (start: string, end: string | null) => `${formatMonthYear(start)} 
           <p class="title__role rise">{profile.role} · {profile.focus} · {experience.employer}</p>
           <p class="title__thesis rise"><strong>{profile.thesis}</strong> {profile.thesisBody}</p>
           <div class="actions rise">
-            {email && <a class="btn btn--key" href={email.href}><Icon name="mail" size={20} />Email me</a>}
+            <a class="btn btn--key" href="#interface"><Icon name="play" size={20} />Play first scene</a>
+            {email && <a class="btn" href={email.href}><Icon name="mail" size={20} />Email me</a>}
             {resume && <a class="btn" href={resume.href} download><Icon name="download" size={20} />Résumé, PDF</a>}
-            <a class="btn btn--ghost" href="#interface"><Icon name="play" size={20} />Watch the stack</a>
           </div>
         </div>
         <span class="cameo" data-cameo="title" aria-hidden="true">vbs</span>
@@ -160,6 +163,7 @@ const dates = (start: string, end: string | null) => `${formatMonthYear(start)} 
             </article>
           ))
         }
+      </div>
       </div>
 
       <section class="act act--reel" id="reel" data-act="reel" style={grade('title')} aria-labelledby="reel-t">

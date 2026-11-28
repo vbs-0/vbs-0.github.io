@@ -19,13 +19,13 @@ A completely different UI from the earlier builds, at the level of current award
 
 ## Direction contract
 
-THESIS: The portfolio is the opening title sequence of a film about one engineer: a single camera move through a phone's insides, cut into six scenes, one per layer he ships. It refuses the category default, a dark grid of project cards beside a floating 3D object.
+THESIS: The portfolio is the opening title sequence of a film about one engineer. A daylight exterior returns at night before the camera enters the product's layers. A phone is not the opening image.
 
-OWN-WORLD: Projection black and title white; each scene graded in one colour (display azure, antenna violet, board green, lens rose, silicon amber, battery ember), never two at once. League Gothic title cards, Jost credits, Courier Prime sluglines and timecode. Letterbox bars carry the chrome; cuts are masked wipes and light leaks; screenshots stay bleach-bypassed until their scene.
+OWN-WORLD: The same printed ridge, stone causeway and watchtower in sun and moonlight. Gold dust, vermilion silk, black block ink. League Gothic title cards, Jost credits and Courier Prime timecode stay in the letterbox; layer colours identify evidence, not the material of the wipe.
 
 STORY: The visitor learns who and what from the main title, watches the stack resolve layer by layer with its evidence named in each scene's credits, reaches the reel of measured projects, and leaves through the end card with email, phone or résumé.
 
-FIRST VIEWPORT: After a countdown leader of at most 1.6 s that splits open like a letterbox, the name fills the left 55% in three stacked lines; the live phone stands right, rim-lit; role, thesis and Email / Résumé sit under the name; the scene strip and timecode run along the bottom bar.
+FIRST VIEWPORT: The countdown splits onto a sunlit pass. The name sits in the dark margin on a laptop and beneath the ridge on a phone. Play first scene is the primary action; email and résumé stay within reach. The scene strip runs along the bottom bar.
 
 FORM: Film opening titles, sixth of seven on the ordered list; seed key 940c290b.
 
@@ -33,7 +33,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
 ## Memorable moment
 
-The camera dives from the whole phone into each part in turn (display, antenna, board, lens, chip, battery) while the scene's grade washes the frame and its title card cuts in.
+Dust sweeps in and three silk standards pass so close that their seal fills the screen. They pull apart to reveal a moon and lit windows in the same tower. A still visitor gets that change of state directly, without a curtain to wait for.
 
 ## Kept from the passes
 

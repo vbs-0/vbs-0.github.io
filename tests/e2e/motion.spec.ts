@@ -140,13 +140,20 @@ test('the floating preview follows hovering an app row', async ({ page, isMobile
 
 test.describe('Film', () => {
   test('the countdown leader plays once, then splits open onto the title', async ({ page }) => {
+    // A slow load can finish after the intro. Observe the rendered countdown and opening from navigation start.
+    await page.addInitScript(() => {
+      document.addEventListener('animationstart', (e) => {
+        if (e.animationName === 'leader-num' || e.animationName === 'leader-up') performance.mark(`test:${e.animationName}`);
+      });
+    });
     await page.goto('/?leader=on');
-    await expect(page.locator('html')).toHaveAttribute('data-leader', /on|out/);
     await expect(page.locator('.leader__nums li')).toHaveCount(7);
+    await page.waitForFunction(() => ['leader-num', 'leader-up'].every((key) => performance.getEntriesByName(`test:${key}`).length > 0));
     await page.waitForFunction(() => !document.documentElement.dataset.leader, undefined, { timeout: 12000 });
     // The leader is display:none the moment the attribute goes; give the style a frame to land.
     await expect(page.locator('.leader')).toHaveCSS('display', 'none', { timeout: 5000 });
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Veerabhadra');
+    expect(await page.evaluate(() => sessionStorage.getItem('vbs-leader'))).toBe('1');
   });
 
   test('with reduced motion there is no leader and the title is there at once', async ({ page }) => {

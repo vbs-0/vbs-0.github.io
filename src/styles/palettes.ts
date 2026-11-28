@@ -3,7 +3,7 @@
  * The stylesheets (as CSS custom properties), the three.js scenes and the contrast tests all read from here.
  */
 import type { VariantId } from '@site';
-import { oklch } from '@/lib/color';
+import { oklch } from '../lib/color.ts';
 
 export type Theme = 'light' | 'dark';
 export type Palette = Record<string, string>;
@@ -119,6 +119,22 @@ const filmDark: Palette = {
   phoneFrame: oklch(0.62, 0.012, 80),
 };
 const film: Record<Theme, Palette> = { light: filmDark, dark: filmDark };
+
+/** Print inks for the original Film plates. Used offline, not shipped in the scene script. */
+export const filmInks = {
+  day: {
+    zenith: '#d69052', haze: '#fae0a1', disc: '#fff1ba', distant: '#bc9c73', shale: '#8c9181',
+    jade: '#56776a', moss: '#425a4c', pine: '#233e38', deep: '#182f2d', glint: '#d6b477',
+    timber: '#392e2c', tile: '#354b41', window: '#eab35e', stone: '#ad8761', parapet: '#dfb77c',
+  },
+  night: {
+    zenith: '#131d4a', haze: '#6378a6', disc: '#fff0c3', distant: '#697b9c', shale: '#425e82',
+    jade: '#344f66', moss: '#294659', pine: '#173545', deep: '#102436', glint: '#869eae',
+    timber: '#172538', tile: '#24495b', window: '#ffd481', stone: '#526782', parapet: '#8396ae',
+  },
+  silk: { dye: '#bf3225', hem: '#59261e', gold: '#e9aa56', block: '#301f21' },
+  dust: { shadow: '#8f491d', body: '#db923b', light: '#ffe1a0' },
+} as const;
 
 /**
  * System map: a deep chart ground, one signal cyan for anything you can act on, and the six layer hues
