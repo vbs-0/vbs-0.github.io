@@ -33,6 +33,21 @@ the three.js scenes read the same values.
   touch screens or with WebGL off; the page is complete without them (rows carry an inline screenshot on touch).
 - **Signature:** the dust field and the work row's pointer picture.
 
+## In Motion (standalone Vite)
+
+Motion starts on the first view, before any interaction or GPU setup. Flow opens in a
+sage field with twisting chartreuse and cyan ribbons. Tide puts a wide water scene
+under an editorial masthead and a chapter index beside the work. Kiln uses a coal-dark
+workbench and a rolling flame with separate, rising embers. Each cover follows the
+shape and direction of its material; GSAP swaps the page while the cover is opaque.
+Portfolio evidence remains in place while its images move slightly with scroll.
+
+The moving vector art is the first paint and the fallback, not a screenshot of the
+WebGL stage. The pause input freezes the vector art without JavaScript; with JavaScript
+it also stops the GPU and scroll effects. The renderer keeps a bounded resolution and
+gives way to the vector art on a slow device. Reduced motion gets the full content
+without the opener, loops or moving covers.
+
 ## Motion editions
 
 The chooser at `/editions/` presents three complete alternatives, not themes applied to one layout.

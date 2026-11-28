@@ -224,6 +224,24 @@ const kilnPaper = {
 };
 export const editionsPalette = { bg: '#f6f5ef', ink: '#22271f', muted: '#50594f', rule: '#b9c3b6', accent: '#2b5142' };
 
+export const motionPalettes = {
+  flow: {
+    paper: '#e8ecdf', surface: '#f5f7ef', ink: '#12231b', muted: '#435449', rule: '#a9b6a6',
+    button: '#192d23', 'button-ink': '#f3f9ea', stage: '#0d221e', deep: '#071610',
+    accent: '#d1ff70', beam: '#7ce5fb', peak: '#f1ffbc', shade: '#2f8892', art: '#e5ffec',
+  },
+  tide: {
+    paper: '#e5eff6', surface: '#f2f8fb', ink: '#122b44', muted: '#405c70', rule: '#a3b9c7',
+    button: '#103453', 'button-ink': '#f4fbff', stage: '#143750', deep: '#051929',
+    accent: '#91eeed', beam: '#86cffa', peak: '#e8fffd', shade: '#1c7294', art: '#ddfbfc',
+  },
+  kiln: {
+    paper: '#191411', surface: '#261c17', ink: '#f7eade', muted: '#cdb8a8', rule: '#745a4b',
+    button: '#ff975e', 'button-ink': '#281309', stage: '#27110e', deep: '#100d0c',
+    accent: '#ff7139', beam: '#ffaf4a', peak: '#fff0af', shade: '#8e261c', art: '#ffe6d3',
+  },
+} as const satisfies Record<string, Palette>;
+
 export const palettes: Record<VariantId, Record<Theme, Palette>> = {
   studio, film, graph, phone, manual, classic,
   pop: { light: popPaper, dark: popPaper },

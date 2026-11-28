@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-delegated: Astro (static output) + TypeScript + vanilla three.js, deployed to GitHub Pages. The owner pinned three.js and left the rest to the builder ("the best one possible as u like", 2026-11-27). Astro was chosen once the owner asked for three complete versions: they share one typed content source, and every version must ship its text as real HTML with the 3D layered on top. No UI framework runs in the browser.
+The existing editions use Astro static output, TypeScript and vanilla three.js. At the owner's request, In Motion is a separate Vite multipage build with GSAP and three.js. Both use one typed content source and ship the text as real HTML. No UI framework runs in the browser.
 
 ## Users
 

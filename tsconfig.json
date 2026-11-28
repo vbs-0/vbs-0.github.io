@@ -12,5 +12,5 @@
     "types": ["astro/client"]
   },
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "node_modules"]
+  "exclude": ["dist", "dist-motion", "motion/.media", "node_modules"]
 }

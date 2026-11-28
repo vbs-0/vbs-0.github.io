@@ -1,5 +1,7 @@
 node_modules/
 dist/
+dist-motion/
+motion/.media/
 .astro/
 test-results/
 playwright-report/
@@ -10,3 +12,4 @@ playwright-report/
 *.log
 .DS_Store
 Thumbs.db
+.reanimate/

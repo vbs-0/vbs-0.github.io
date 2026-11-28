@@ -29,6 +29,24 @@ Live site: <https://vbs-0.github.io>.
 
 To change what `/` shows, edit `defaultVariant` in `site.config.ts`. The other addresses do not change.
 
+## In Motion (standalone Vite)
+
+```sh
+npm run motion:dev       # http://127.0.0.1:4350/
+npm run motion:build     # static site in dist-motion/
+npm run motion:preview   # http://127.0.0.1:4351/
+npm run motion:test      # test the production build in desktop and mobile Chrome
+```
+
+Flow opens on `/`, Tide on `/tide/`, and Kiln on `/kiln/` in this preview. Vite builds the
+real project and resume content into each HTML page. The opening and animated vector
+scenes work without WebGL; use `?webgl=off` to see them. With JavaScript, GSAP runs the
+edition changes and project-image scroll motion, and three.js loads after the opening.
+The **Pause motion** checkbox also works without JavaScript. Reduced motion skips the
+opening, page cuts and scene animation.
+
+This Vite site is a separate build. The Astro site's routes and default are unchanged.
+
 ## Run it
 
 Node 22.23.4 or newer.
