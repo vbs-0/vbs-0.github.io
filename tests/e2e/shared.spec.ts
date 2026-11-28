@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-const PAGES = ['/', '/film/', '/graph/', '/phone/', '/manual/', '/classic/'] as const;
+const PAGES = ['/', '/studio/', '/film/', '/graph/', '/phone/', '/manual/', '/classic/'] as const;
 const NAME = 'Veerabhadra Swami Challagali';
 
 for (const path of PAGES) {

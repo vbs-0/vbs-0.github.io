@@ -15,6 +15,24 @@ the three.js scenes read the same values.
 - **Floor:** one `h1`, a skip link, visible focus, 44 px touch targets, AA contrast checked by unit test,
   no sideways scrolling from 320 px, a print stylesheet that drops the 3D.
 
+## Studio (`/` and `/studio/`)
+
+- **World:** a modern studio site with no device in it. A loading counter on ink lifts like a shutter onto a
+  dark hero: the name set heavy and condensed over a live dust field (one full-screen shader). The rest sits on
+  bone paper; the closing section returns to ink.
+- **Colour:** ink `oklch(0.17 0.012 60)`, bone `oklch(0.955 0.014 85)`, one vermilion for anything pressable,
+  gold only inside the shader and the hover fill of the key button. Contrast pairs are in `palettes.ts`.
+- **Type:** Bricolage Grotesque, variable width and weight, for every voice (condensed black for display, regular
+  for body); Chivo Mono for labels and numbers.
+- **Composition:** a floating pill nav; hero; two scrubbed statements; ruled work rows (name, layer, year, lead
+  metric) whose hover fills vermilion and opens a picture on a pointer-following WebGL plane; six sticky cards
+  (one per layer) that stack as you scroll; the record; a closing email you can press.
+- **3D:** two small three.js scenes, each its own canvas. The hero field is one quad, domain-warped noise,
+  rendered only while the hero is visible, one frame with reduced motion. The work plane is created on the first
+  hover, bends and splits colour channels with pointer speed, and stops rendering when hidden. Neither exists on
+  touch screens or with WebGL off; the page is complete without them (rows carry an inline screenshot on touch).
+- **Signature:** the dust field and the work row's pointer picture.
+
 ## System map (`/graph/`)
 
 - **World:** the work as one chart you read. Every layer, project and tool is a node in a 3D field; six

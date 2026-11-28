@@ -5,6 +5,7 @@
 import { type VariantId, variantMeta } from '@site';
 import { palettes } from '@/styles/palettes';
 
+const studio = palettes.studio.dark;
 const film = palettes.film.dark;
 const graph = palettes.graph.dark;
 
@@ -23,6 +24,17 @@ export interface SweepSkin {
 }
 
 export const SWEEP_SKINS: Record<VariantId, SweepSkin> = {
+  studio: {
+    paper: studio.ink as string,
+    paperAlt: studio.inkSoft as string,
+    ink: studio.bg as string,
+    accent: studio.accent as string,
+    label: 'Studio',
+    caption: variantMeta.studio.blurb,
+    font: "'Bricolage Grotesque Variable', 'Bricolage Grotesque', system-ui, sans-serif",
+    stretch: '75%',
+    transform: 'none',
+  },
   film: {
     paper: film.bg as string,
     paperAlt: film.surface as string,

@@ -1,0 +1,273 @@
+---
+/**
+ * Studio: kinetic type over a live dust field, a list of measured work that opens a picture where the
+ * pointer is, six layers that stack like cards as you scroll, and a closing line you can press.
+ * All facts come from src/content; this file only decides how they are laid out. No phone anywhere.
+ */
+import '@fontsource-variable/bricolage-grotesque/wdth.css';
+import '@fontsource-variable/chivo-mono/wght.css';
+import 'lenis/dist/lenis.css';
+import displayFont from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wdth-normal.woff2?url';
+import monoFont from '@fontsource-variable/chivo-mono/files/chivo-mono-latin-wght-normal.woff2?url';
+import './studio.css';
+import { getImage } from 'astro:assets';
+import { otherBuilds } from '@site';
+import BaseHead from '@/components/shared/BaseHead.astro';
+import Icon from '@/components/shared/Icon.astro';
+import Shot from '@/components/shared/Shot.astro';
+import Sweep from '@/components/shared/Sweep.astro';
+import { certifications, education, experience, featured, hackathons, layerById, layers, mlProjects, moreProjects, profile, projectById } from '@/content';
+import type { Project } from '@/content';
+import { formatInt, formatMonthYear } from '@/lib/format';
+import { contribStats, originalRepoCount } from '@/lib/github';
+import type { IconName } from '@/lib/icons';
+import { shotImage } from '@/lib/shots';
+
+const email = profile.contacts.find((c) => c.kind === 'email');
+const resume = profile.contacts.find((c) => c.kind === 'resume');
+const contactIcon: Record<string, IconName> = { email: 'mail', phone: 'phone', github: 'github', telegram: 'telegram', resume: 'download' };
+
+const work: Project[] = [...featured, ...mlProjects];
+const frameShot = (p: Project) => p.shots.find((s) => s.kind === 'web') ?? p.shots.find((s) => s.kind === 'chart') ?? p.shots[0];
+const previews = Object.fromEntries(
+  await Promise.all(
+    work.map(async (p) => {
+      const shot = frameShot(p);
+      if (!shot) return [p.id, null] as const;
+      const img = await getImage({ src: shotImage(shot.file), width: 720, format: 'webp' });
+      return [p.id, { src: img.src, w: img.options.width ?? 720, h: img.options.height ?? 450 }] as const;
+    }),
+  ),
+);
+
+const stats = contribStats();
+const dates = (start: string, end: string | null) => `${formatMonthYear(start)} to ${end ? formatMonthYear(end) : 'now'}`;
+const builds = otherBuilds('studio');
+const belt = layers.map((l) => l.name);
+const GROUNDS = ['ink', 'accent', 'paper', 'gold', 'ink-soft', 'paper-soft'];
+---
+
+<!doctype html>
+<html lang="en" data-variant="studio">
+  <head>
+    <BaseHead variant="studio" leader />
+    <link rel="preload" as="font" type="font/woff2" href={displayFont} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={monoFont} crossorigin />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Sweep variant="studio" />
+
+    <div class="pre" aria-hidden="true">
+      <p class="pre__name">vbs</p>
+      <p class="pre__count"><span data-pre-count>0</span><i>%</i></p>
+      <span class="pre__bar"><i data-pre-bar></i></span>
+      <p class="pre__hint">Loading · any key skips</p>
+    </div>
+
+    <span class="progress" aria-hidden="true"></span>
+
+    <header class="pill">
+      <a class="pill__mark" href="#top" aria-label="vbs, back to the top">vbs</a>
+      <nav class="pill__nav" aria-label="Sections">
+        <a href="#work">Work</a>
+        <a href="#stack">Stack</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      {email && <a class="pill__cta" href={email.href}><Icon name="mail" size={18} /><span>Email</span></a>}
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="name">
+        <canvas class="field" id="field" aria-hidden="true"></canvas>
+        <div class="hero__scrim" aria-hidden="true"></div>
+        <div class="hero__body wrap">
+          <p class="hero__role rise">{profile.role} · {profile.focus} · {experience.employer}</p>
+          <h1 class="hero__name" id="name">
+            <span class="ln"><span>Veerabhadra Swami</span></span>
+            <span class="ln"><span>Challagali</span></span>
+          </h1>
+          <div class="hero__foot">
+            <p class="hero__thesis rise"><strong>{profile.thesis}</strong> {profile.thesisBody}</p>
+            <div class="actions rise">
+              <a class="btn btn--key" href="#work"><Icon name="chevron" size={20} />See the work</a>
+              {email && <a class="btn" href={email.href}><Icon name="mail" size={20} />Email me</a>}
+              {resume && <a class="btn" href={resume.href} download><Icon name="download" size={20} />Résumé, PDF</a>}
+            </div>
+          </div>
+        </div>
+        <div class="belt" aria-hidden="true">
+          <div class="belt__track">
+            {[0, 1].map(() => <ul>{belt.map((b) => <li>{b}</li>)}</ul>)}
+          </div>
+        </div>
+      </section>
+
+      <section class="about" id="about" aria-labelledby="about-t">
+        <div class="wrap">
+          <h2 class="sr" id="about-t">About</h2>
+          <p class="about__lead" data-scrub>{profile.about[1]}</p>
+          <p class="about__claim" data-scrub>{profile.about[2]}</p>
+          <dl class="facts">
+            <div><dt>Public repositories of my own</dt><dd data-countup>{formatInt(originalRepoCount)}</dd></div>
+            <div><dt>Contributions in the last year</dt><dd data-countup>{formatInt(stats.total)}</dd></div>
+            <div><dt>Days with at least one contribution</dt><dd data-countup>{formatInt(stats.activeDays)}</dd></div>
+          </dl>
+          <p class="about__me">{profile.about[0]}</p>
+        </div>
+      </section>
+
+      <section class="work" id="work" aria-labelledby="work-t">
+        <div class="wrap">
+          <h2 class="big" id="work-t" data-split>Selected work</h2>
+          <p class="work__lede">Each project with the number it is measured by. Open one for what it does, how it was checked and where it stops working.</p>
+          <ol class="rows" data-rows>
+            {
+              work.map((p) => {
+                const lead = p.metrics[0];
+                const pre = previews[p.id];
+                const shot = frameShot(p);
+                return (
+                  <li class="row" data-preview={pre?.src} data-w={pre?.w} data-h={pre?.h}>
+                    <a class="row__link" href={`/work/${p.id}/`}>
+                      <span class="row__name">{p.name}</span>
+                      <span class="row__meta">
+                        <span class="row__layer">{layerById(p.layers[0] ?? 'interface').name}</span>
+                        <span class="row__year">{p.year}</span>
+                      </span>
+                      {lead && <span class="row__metric"><b>{lead.value}</b> {lead.label}</span>}
+                      <span class="row__go" aria-hidden="true"><Icon name="external" size={26} /></span>
+                    </a>
+                    {shot && <div class="row__thumb" aria-hidden="true"><Shot shot={shot} widths={[360, 540]} sizes="(min-width: 600px) 360px, 92vw" /></div>}
+                  </li>
+                );
+              })
+            }
+          </ol>
+          <h3 class="work__more">Smaller things, also public</h3>
+          <ul class="more">
+            {
+              moreProjects.map((p) => (
+                <li>
+                  <a href={`/work/${p.id}/`}>
+                    <span class="more__name">{p.name}</span>
+                    <span class="more__line">{p.oneLiner}</span>
+                    <span class="more__year">{p.year}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+
+      <section class="stack" id="stack" aria-labelledby="stack-t">
+        <div class="wrap">
+          <h2 class="big" id="stack-t" data-split>Six layers</h2>
+          <p class="stack__lede">The same person works on every layer of a product. These are the six, from what people touch to what boots it.</p>
+        </div>
+        <ol class="deck">
+          {
+            layers.map((l, i) => (
+              <li class={`card card--${GROUNDS[i]}`} style={`--i:${i}`}>
+                <article class="card__in wrap" aria-labelledby={`${l.id}-t`}>
+                  <header class="card__head">
+                    <h3 class="card__title" id={`${l.id}-t`}>{l.name}</h3>
+                    <p class="card__line">{l.line}</p>
+                  </header>
+                  <div class="card__main">
+                    <p class="card__body">{l.body}</p>
+                    <ul class="chips">{l.skills.map((s) => <li>{s}</li>)}</ul>
+                    <ul class="card__work">
+                      {l.projectIds.map((id) => <li><a href={`/work/${id}/`}>{projectById(id).name}<Icon name="external" size={18} /></a></li>)}
+                    </ul>
+                    {l.workNote && <p class="card__note">{l.workNote}</p>}
+                  </div>
+                </article>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section class="record" id="record" aria-labelledby="record-t">
+        <div class="wrap">
+          <h2 class="big" id="record-t" data-split>The record</h2>
+          <div class="record__grid">
+            <div class="record__col">
+              <h3>Experience</h3>
+              <p class="record__who">{experience.employer} <span>· {experience.product}</span></p>
+              <ul class="record__roles">
+                {experience.roles.map((r) => <li><b>{r.title}</b> <span>{r.kind}, {dates(r.start, r.end)}</span></li>)}
+              </ul>
+              <p class="record__lead">{experience.leadNote}</p>
+              <ul class="record__list">{experience.bullets.map((b) => <li>{b}</li>)}</ul>
+            </div>
+            <div class="record__col">
+              <h3>Education</h3>
+              <ul class="record__rows">
+                {education.map((e) => <li><b>{e.degree}, {e.field}</b> <span>{e.school}, {e.start} to {e.end}</span></li>)}
+              </ul>
+              <h3>Certificate</h3>
+              <ul class="record__rows">
+                {certifications.map((c) => <li><b>{c.issuer}: {c.name}</b> <span>{formatMonthYear(c.date)}. {c.note}</span></li>)}
+              </ul>
+              <h3>Hackathons</h3>
+              <ul class="record__rows">
+                {hackathons.map((h) => <li><b>{h.name}</b> <span>{h.result}. {h.detail}</span></li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contact" aria-labelledby="contact-t">
+        <div class="wrap">
+          <h2 class="contact__t" id="contact-t">Have something that has to ship?</h2>
+          {email && <a class="contact__mail" href={email.href} data-magnetic>{email.value}</a>}
+          <ul class="contact__links">
+            {
+              profile.contacts.map((c) => (
+                <li>
+                  <a href={c.href} download={c.kind === 'resume' ? '' : undefined} target={c.kind === 'github' || c.kind === 'telegram' ? '_blank' : undefined} rel={c.kind === 'github' || c.kind === 'telegram' ? 'noopener' : undefined}>
+                    <Icon name={contactIcon[c.kind] ?? 'external'} size={22} />
+                    <span class="contact__k">{c.label}</span>
+                    <span class="contact__v">{c.value}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap">
+        {
+          builds.length > 0 && (
+            <nav class="cuts" aria-label="Other versions of this site">
+              <p class="cuts__head">Other versions of this site</p>
+              <ul>
+                {builds.map((b) => (
+                  <li>
+                    <a href={b.path} data-sweep={b.id}>
+                      <span class="cuts__name">{b.name}</span>
+                      <span class="cuts__blurb">{b.blurb}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )
+        }
+        <p class="foot__made">Built with three.js. Set in Bricolage Grotesque and Chivo Mono. Source on <a href="https://github.com/vbs-0/vbs-0.github.io">GitHub</a>. © {profile.name}.</p>
+      </div>
+    </footer>
+
+    <script>
+      import './client/main';
+    </script>
+  </body>
+</html>

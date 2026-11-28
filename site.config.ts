@@ -1,11 +1,12 @@
 /**
  * The builds of the portfolio. Each one is a complete page with the same content.
+ *   studio  — "Studio": the flagship. Kinetic type, a shader field, a stack of six layers; no phone
  *   film    — "Film": opening titles, one camera move through every layer of a phone (the flagship)
  *   phone   — "About phone": a custom-ROM Settings screen with a live 3D phone
  *   manual  — "Service manual": an exploded-view drawing in ink lines
  *   classic — "Classic": dark studio, glass layer stack, project grid
  */
-export const VARIANTS = ['film', 'graph', 'phone', 'manual', 'classic'] as const;
+export const VARIANTS = ['studio', 'film', 'graph', 'phone', 'manual', 'classic'] as const;
 export type VariantId = (typeof VARIANTS)[number];
 
 export const siteConfig = {
@@ -15,12 +16,13 @@ export const siteConfig = {
    * Which build the root URL (/) shows. Every build also keeps its own address
    * (/film/, /phone/, /manual/, /classic/), so a link you already sent never changes.
    */
-  defaultVariant: 'film' as VariantId,
+  defaultVariant: 'studio' as VariantId,
   /** Show the small "other builds" links in each footer. */
   showVariantSwitcher: true,
 } as const;
 
 export const variantMeta: Record<VariantId, { path: string; name: string; blurb: string }> = {
+  studio: { path: '/studio/', name: 'Studio', blurb: 'Kinetic type, a live dust field and six stacked layers' },
   film: { path: '/film/', name: 'Film', blurb: 'Opening titles: one camera move through every layer' },
   graph: { path: '/graph/', name: 'System map', blurb: 'Every project as a node in one 3D chart, with a command palette' },
   phone: { path: '/phone/', name: 'About phone', blurb: 'A Settings screen with a live 3D phone' },

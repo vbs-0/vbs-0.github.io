@@ -5,7 +5,8 @@ Pick a version per application; each is a complete page at its own address.
 
 | Address | Version | What it is |
 |---|---|---|
-| `/` | the default | Whatever `defaultVariant` in `site.config.ts` names. Today: Film. |
+| `/` | the default | Whatever `defaultVariant` in `site.config.ts` names. Today: Studio. |
+| `/studio/` | Studio | Kinetic type over a live dust shader, a loading counter, a work list that opens a bent, colour-split picture at the pointer, and six layers that stack as cards. No phone. |
 | `/phone/` | About phone | A custom-ROM Settings screen where the device is the person. The 3D phone mirrors the page, comes apart under Hardware, and its display shows the open app. |
 | `/manual/` | Service manual | A drawing sheet: an ink-line phone that takes itself apart as you scroll, a numbered parts list, and figure plates for the projects. |
 | `/graph/` | System map | Every layer, project and tool as a node in one 3D chart, with a command palette (⌘K) and a panel of facts. |

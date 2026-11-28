@@ -158,10 +158,46 @@ const graphDark: Palette = {
 };
 const graph: Record<Theme, Palette> = { light: graphDark, dark: graphDark };
 
-export const palettes: Record<VariantId, Record<Theme, Palette>> = { film, graph, phone, manual, classic };
+/**
+ * Studio: bone paper and ink, one vermilion for what can be pressed, and gold only inside the shader.
+ * Single theme; the hero and the closing section sit on ink, the rest on bone.
+ */
+const studioPalette: Palette = {
+  bg: oklch(0.955, 0.014, 85),
+  surface: oklch(0.915, 0.022, 85),
+  ink: oklch(0.17, 0.012, 60),
+  inkSoft: oklch(0.225, 0.014, 60),
+  text: oklch(0.17, 0.012, 60),
+  textMuted: oklch(0.4, 0.02, 70),
+  paperMuted: oklch(0.78, 0.02, 85),
+  outline: oklch(0.8, 0.02, 80),
+  accent: oklch(0.66, 0.2, 35),
+  accentInk: oklch(0.5, 0.19, 33),
+  gold: oklch(0.84, 0.13, 85),
+};
+const studio: Record<Theme, Palette> = { light: studioPalette, dark: studioPalette };
+
+export const palettes: Record<VariantId, Record<Theme, Palette>> = { studio, film, graph, phone, manual, classic };
 
 /** Text-on-background pairs that must hold a WCAG contrast ratio. [foreground, background, minimum]. */
 export const contrastPairs: Record<VariantId, Array<[string, string, number]>> = {
+  studio: [
+    ['ink', 'bg', 4.5],
+    ['ink', 'surface', 4.5],
+    ['textMuted', 'bg', 4.5],
+    ['textMuted', 'surface', 4.5],
+    ['accentInk', 'bg', 4.5],
+    ['accentInk', 'surface', 4.5],
+    ['ink', 'accent', 4.5],
+    ['ink', 'gold', 4.5],
+    ['bg', 'ink', 4.5],
+    ['bg', 'inkSoft', 4.5],
+    ['paperMuted', 'ink', 4.5],
+    ['paperMuted', 'inkSoft', 4.5],
+    ['accent', 'ink', 4.5],
+    ['accent', 'inkSoft', 4.5],
+    ['gold', 'ink', 4.5],
+  ],
   graph: [
     ['text', 'bg', 4.5],
     ['text', 'surface', 4.5],

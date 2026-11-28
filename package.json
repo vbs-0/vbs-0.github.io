@@ -23,6 +23,7 @@
   "dependencies": {
     "@astrojs/sitemap": "3.7.6",
     "@fontsource-variable/archivo": "5.3.0",
+    "@fontsource-variable/bricolage-grotesque": "5.3.0",
     "@fontsource-variable/chivo-mono": "5.3.0",
     "@fontsource-variable/jost": "5.3.0",
     "@fontsource-variable/league-gothic": "5.3.0",
