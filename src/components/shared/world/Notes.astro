@@ -1,0 +1,29 @@
+---
+import type { Project } from '@/content';
+import Links from './Links.astro';
+
+interface Props {
+  project: Project;
+  summary?: boolean;
+  links?: boolean;
+}
+const { project, summary = true, links = false } = Astro.props;
+---
+
+<div class="world-notes">
+  {summary && <p>{project.summary}</p>}
+  {project.metrics.length > 0 && (
+    <dl class="world-metrics">
+      {project.metrics.map((metric) => (
+        <div>
+          <dt>{metric.label}</dt>
+          <dd>{metric.source ? <a href={metric.source}>{metric.value}</a> : metric.value}</dd>
+        </div>
+      ))}
+    </dl>
+  )}
+  {project.highlights.length > 0 && <ul class="world-bullets">{project.highlights.map((highlight) => <li>{highlight}</li>)}</ul>}
+  {project.limits && project.limits.length > 0 && <p><strong>Limits.</strong> {project.limits.join(' ')}</p>}
+  <p><strong>Built with</strong> {project.stack.join(', ')}.</p>
+  {links && <Links project={project} />}
+</div>

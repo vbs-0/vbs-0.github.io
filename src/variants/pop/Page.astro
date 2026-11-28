@@ -1,0 +1,121 @@
+---
+import '@fontsource/bagel-fat-one/latin-400.css';
+import '@/components/shared/world/world.css';
+import './pop.css';
+import BaseHead from '@/components/shared/BaseHead.astro';
+import Icon from '@/components/shared/Icon.astro';
+import Shot from '@/components/shared/Shot.astro';
+import Sweep from '@/components/shared/Sweep.astro';
+import Archive from '@/components/shared/world/Archive.astro';
+import Artwork from '@/components/shared/world/Artwork.astro';
+import Contacts from '@/components/shared/world/Contacts.astro';
+import Curtain from '@/components/shared/world/Curtain.astro';
+import IntroHead from '@/components/shared/world/IntroHead.astro';
+import Links from '@/components/shared/world/Links.astro';
+import Notes from '@/components/shared/world/Notes.astro';
+import Record from '@/components/shared/world/Record.astro';
+import SceneControls from '@/components/shared/world/SceneControls.astro';
+import { layerById, profile, projectById } from '@/content';
+
+const picks = ['studease', 'pam'].map(projectById);
+---
+
+<!doctype html>
+<html lang="en" data-variant="pop">
+  <head>
+    <BaseHead variant="pop" path={Astro.url.pathname} title={`${profile.name} | Pop`} />
+    <IntroHead edition="pop" />
+  </head>
+  <body class="world-site pop">
+    <a class="skip-world" href="#main">Skip to content</a>
+    <Sweep variant="pop" />
+    <Curtain edition="pop" label="Opening the playground" />
+
+    <div class="pop-top">
+      <header class="world-nav world-shell pop-nav">
+        <a class="pop-mark" href="/pop/" aria-label={`${profile.handle}, Pop home`}>{profile.handle}<span aria-hidden="true">.</span></a>
+        <nav aria-label="Portfolio sections">
+          <a href="#work" data-world-jump>Work</a>
+          <a href="#about">About</a>
+          <a href="#contact" data-world-jump>Contact</a>
+          <a class="world-nav__resume" href={profile.resumePath} download>Resume <Icon name="download" size={16} /></a>
+        </nav>
+      </header>
+    </div>
+    <main id="main" tabindex="-1">
+      <section class="pop-opening" aria-labelledby="hello">
+        <div class="pop-hero world-shell">
+          <div class="pop-hello">
+            <h1 id="hello">I build things<br />that run<span>.</span></h1>
+            <p class="pop-identity"><strong>{profile.name}</strong><span>{profile.role}, {profile.focus}</span></p>
+            <p class="pop-lede">From Android builds to APIs, interfaces and machine learning.</p>
+            <div class="world-actions">
+              <a href="#work" class="world-cta pop-cta" data-world-jump>Play with my work <Icon name="external" size={21} /></a>
+              <a class="pop-source" href={profile.github}>Find me on GitHub</a>
+            </div>
+          </div>
+          <figure class="pop-toy">
+            <div class="world-stage pop-stage" data-world-stage>
+              <div class="pop-disc" aria-hidden="true"></div>
+              <div class="pop-shadow" aria-hidden="true"></div>
+              <Artwork edition="pop" class="world-static-layer" />
+              <canvas aria-hidden="true"></canvas>
+              <svg class="pop-orbit" viewBox="0 0 620 560" aria-hidden="true" focusable="false">
+                <path d="M108 174c-70 76-46 196 8 235m-15-42 16 44-47-11M484 116c74 33 103 92 99 154" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 9" />
+              </svg>
+            </div>
+            <figcaption><SceneControls action="Spin the loop" /></figcaption>
+          </figure>
+        </div>
+        <svg class="pop-scallop" viewBox="0 0 1440 32" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 0H1440V7Q1380 48 1320 7Q1260 48 1200 7Q1140 48 1080 7Q1020 48 960 7Q900 48 840 7Q780 48 720 7Q660 48 600 7Q540 48 480 7Q420 48 360 7Q300 48 240 7Q180 48 120 7Q60 48 0 7Z" fill="currentColor" />
+        </svg>
+      </section>
+
+      <section class="pop-work world-shell" id="work" aria-labelledby="work-title" tabindex="-1">
+        <header class="pop-section-head">
+          <h2 id="work-title">Things you<br />can try<span>.</span></h2>
+          <p>Open a live build, or read the numbers and the code behind it.</p>
+        </header>
+        <div class="pop-shelf">
+          {picks.map((project) => {
+            const shot = project.shots.find((item) => item.kind === 'web');
+            const metric = project.metrics[0];
+            return (
+              <article class="pop-feature" id={`project-${project.id}`} aria-labelledby={`title-${project.id}`}>
+                <div class="pop-poster">
+                  <span class="pop-sticker">{layerById(project.layers[0]!).name}</span>
+                  {shot && <Shot shot={shot} widths={[360, 720, 960]} sizes="(min-width: 850px) 50vw, 90vw" />}
+                </div>
+                <div class="pop-feature__copy">
+                  <h3 id={`title-${project.id}`}>{project.name}</h3>
+                  <p>{project.oneLiner}</p>
+                  {metric && <p class="pop-proof">{metric.source ? <a href={metric.source}>{metric.value}</a> : <strong>{metric.value}</strong>} {metric.label}</p>}
+                  <Links {project} />
+                  <details>
+                    <summary>How it works <Icon name="chevron" size={17} /></summary>
+                    <Notes {project} />
+                  </details>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+      <Archive omit={picks.map((project) => project.id)} title="Open the toy box." />
+      <Record title="A bit about me." />
+      <section class="pop-contact" id="contact" aria-labelledby="contact-title" tabindex="-1">
+        <div class="world-shell">
+          <h2 id="contact-title">Let's make<br />something run.</h2>
+          <a class="world-mail" href={`mailto:${profile.email}`}>{profile.email} <Icon name="external" size={26} /></a>
+          <Contacts />
+        </div>
+      </section>
+    </main>
+    <footer class="world-shell pop-footer"><span>{profile.name}</span><a href="/editions/">Compare the editions <Icon name="external" size={17} /></a></footer>
+    <script>
+      import { mountWorld } from '@/lib/motion/world';
+      mountWorld((canvas) => import('./client/scene').then(({ createPop }) => createPop(canvas)));
+    </script>
+  </body>
+</html>

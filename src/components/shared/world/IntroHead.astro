@@ -1,0 +1,29 @@
+---
+import type { MotionEdition } from '@site';
+
+interface Props {
+  edition: MotionEdition;
+}
+const { edition } = Astro.props;
+---
+
+<script is:inline define:vars={{ edition }}>
+  const root = document.documentElement;
+  const query = new URLSearchParams(location.search);
+  if (query.get('motion') === 'off') root.dataset.motion = 'off';
+  if (!root.dataset.sweep && root.dataset.motion !== 'off' && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const key = `vbs-intro-${edition}`;
+    const force = query.get('intro') === 'on';
+    try {
+      if (query.get('intro') !== 'off' && (force || (!navigator.webdriver && !location.hash && !sessionStorage.getItem(key)))) {
+        sessionStorage.setItem(key, '1');
+        root.dataset.worldPhase = 'intro';
+        setTimeout(() => {
+          if (root.dataset.worldPhase === 'intro') delete root.dataset.worldPhase;
+        }, 1800);
+      }
+    } catch {
+      // The portfolio does not depend on session storage.
+    }
+  }
+</script>

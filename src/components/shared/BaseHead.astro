@@ -5,7 +5,7 @@
  */
 import { type VariantId, siteConfig } from '@site';
 import { experience, layers, profile } from '@/content';
-import { palettes, themeCss } from '@/styles/palettes';
+import { fixedScheme, palettes, themeCss } from '@/styles/palettes';
 import '@/styles/motion.css';
 
 interface Props {
@@ -64,7 +64,7 @@ const jsonLd = {
 <link rel="icon" href="/favicon.ico" sizes="32x32" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
-<meta name="color-scheme" content={twoThemes ? 'light dark' : 'dark'} />
+<meta name="color-scheme" content={twoThemes ? 'light dark' : fixedScheme(variant)} />
 {
   twoThemes ? (
     <>

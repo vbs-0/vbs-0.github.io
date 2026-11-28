@@ -1,0 +1,121 @@
+---
+import { MOTION_EDITIONS, siteConfig, variantMeta } from '@site';
+import { profile } from '@/content';
+import Icon from '@/components/shared/Icon.astro';
+import Artwork from '@/components/shared/world/Artwork.astro';
+import { cssVars, editionsPalette, palettes } from '@/styles/palettes';
+
+const tryThis = {
+  pop: 'Spin the loop, then open a project from the shelf.',
+  tide: 'Send a ripple, then follow the chapters in the field journal.',
+  kiln: 'Stoke the fire, then switch tools on the workbench.',
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content={editionsPalette.bg} />
+    <meta name="description" content={`Three interactive editions of ${profile.name}'s software-engineering portfolio.`} />
+    <link rel="canonical" href={new URL('/editions/', siteConfig.site)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Motion editions | {profile.name}</title>
+    <style is:inline set:html={`:root{${cssVars(editionsPalette)}}`}></style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="edition-shell edition-nav">
+      <a href="/" class="edition-mark" aria-label={`${profile.handle}, portfolio home`}>{profile.handle}<span>.</span></a>
+      <nav aria-label="Portfolio links">
+        <a href={profile.github}>GitHub</a>
+        <a href={profile.resumePath} download>Resume <Icon name="download" size={17} /></a>
+      </nav>
+    </header>
+    <main class="edition-shell" id="main">
+      <div class="edition-lede">
+        <h1>One engineer.<br />Three editions.</h1>
+        <div>
+          <p><strong>{profile.name}</strong><br />{profile.role}, {profile.focus}</p>
+          <p>Same body of work. Three different ways to explore it. Open any edition for the full portfolio.</p>
+        </div>
+      </div>
+      <ul class="edition-choices" aria-label="Motion editions">
+        {MOTION_EDITIONS.map((edition) => (
+          <li>
+            <a href={variantMeta[edition].path} class:list={['edition', `edition--${edition}`]} aria-labelledby={`edition-${edition}`} aria-describedby={`try-${edition}`}>
+              <div aria-hidden="true" class="edition-art" style={cssVars(palettes[edition].light)}>
+                <div class="edition-art__surface"><Artwork {edition} /></div>
+              </div>
+              <div class="edition-title">
+                <h2 id={`edition-${edition}`}>Open {variantMeta[edition].name}</h2>
+                <Icon name="external" size={29} />
+              </div>
+              <p id={`try-${edition}`}>{tryThis[edition]}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </main>
+    <footer class="edition-shell edition-footer">
+      <a href="/"><Icon name="back" size={18} /> Current portfolio</a>
+      <a href={`mailto:${profile.email}`}>{profile.email}</a>
+    </footer>
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: "Mona Sans Variable";
+    src: url("@fontsource-variable/mona-sans/files/mona-sans-latin-wght-normal.woff2") format("woff2");
+    font-weight: 200 900;
+    font-display: swap;
+  }
+  body { margin: 0; background: var(--c-bg); color: var(--c-ink); font: 450 1rem/1.5 "Mona Sans Variable", sans-serif; }
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-underline-offset: .22em; }
+  a:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 5px; }
+  ::selection { color: var(--c-bg); background: var(--c-accent); }
+  .skip { position: fixed; top: .5rem; left: .5rem; z-index: 2; padding: .7rem; background: var(--c-bg); transform: translateY(-170%); }
+  .skip:focus { transform: none; }
+  .edition-shell { width: min(90%, 82rem); margin-inline: auto; }
+  .edition-nav, .edition-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .2rem 1rem; }
+  .edition-nav { min-height: 70px; border-bottom: 1px solid var(--c-rule); }
+  .edition-nav a, .edition-footer a { display: inline-flex; align-items: center; gap: .35em; min-height: 44px; }
+  .edition-nav nav { display: flex; gap: clamp(.7rem, 3vw, 2rem); }
+  .edition-mark { font-size: 2rem; font-weight: 850; letter-spacing: -.035em; text-decoration: none; }
+  .edition-mark span { color: var(--c-accent); }
+  .edition-lede { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 1.4rem 2.5rem; padding-block: clamp(2.6rem, 6.5vw, 6.1rem) clamp(1.95rem, 4vw, 3.65rem); }
+  .edition-lede h1 { font-size: clamp(3.15rem, 7.5vw, 7.5rem); font-weight: 820; line-height: .94; letter-spacing: -.04em; margin: 0; }
+  .edition-lede > div { max-width: 28ch; }
+  .edition-lede p { margin: 0; }
+  .edition-lede p + p { margin-top: .7rem; color: var(--c-muted); }
+  .edition-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2.4rem); margin: 0 0 clamp(2.65rem, 5.4vw, 5rem); padding: 0; list-style: none; }
+  .edition { display: block; text-decoration: none; border-bottom: 1px solid var(--c-rule); padding-block-end: 1.15rem; }
+  .edition-art { display: grid; place-items: stretch; isolation: isolate; aspect-ratio: 1.32; border-radius: .8rem; overflow: hidden; }
+  .edition-art__surface { position: relative; transition: transform .48s cubic-bezier(.22, 1, .36, 1); }
+  .edition-art :global(svg) { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .edition:hover .edition-art__surface, .edition:focus-visible .edition-art__surface { transform: scale(1.075); }
+  .edition--pop .edition-art { background: var(--c-sun); }
+  .edition--pop .edition-art__surface::before { content: ""; position: absolute; width: min(70%, 15rem); aspect-ratio: 1; border-radius: 50%; background: var(--c-cream); inset: 50% auto auto 50%; transform: translate(-50%, -50%); }
+  .edition--tide .edition-art { background: linear-gradient(var(--c-bg), var(--c-mist)); }
+  .edition--tide .edition-art__surface :global(svg) { transform: translateY(-8%) scale(1.18); }
+  .edition--kiln .edition-art { place-items: center; background: var(--c-putty); }
+  .edition--kiln .edition-art__surface { margin-top: 5%; width: 60%; height: 87%; overflow: hidden; border-radius: 48% 48% 4px 4px / 51% 51% 4px 4px; background: var(--c-chamber); border: .65rem solid var(--c-clay); }
+  .edition-title { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding-block: .95rem .45rem; }
+  .edition-title h2 { font-size: clamp(1.4rem, 2.6vw, 2.55rem); letter-spacing: -.035em; margin: 0; line-height: 1.05; }
+  .edition:hover .edition-title h2 { text-decoration: underline; }
+  .edition p { margin: 0; color: var(--c-muted); max-width: 32ch; }
+  .edition-footer { border-top: 1px solid var(--c-rule); padding-block: .5rem 1rem; }
+  @media (max-width: 695px) {
+    .edition-nav { min-height: 60px; }
+    .edition-choices { grid-template-columns: 1fr; gap: 1.65rem; }
+    .edition-art { aspect-ratio: 1.55; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .edition-art__surface { transition: none; }
+    .edition:hover .edition-art__surface, .edition:focus-visible .edition-art__surface { transform: none; }
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+import { featured, mlProjects, moreProjects } from '@/content';
+import Notes from './Notes.astro';
+import Icon from '@/components/shared/Icon.astro';
+
+interface Props {
+  omit: string[];
+  title: string;
+}
+const { omit, title } = Astro.props;
+const groups = [
+  { name: 'Products and tools', projects: featured },
+  { name: 'Machine learning', projects: mlProjects },
+  { name: 'More experiments', projects: moreProjects },
+].map((group) => ({ ...group, projects: group.projects.filter((p) => !omit.includes(p.id)) }));
+---
+
+<section class="world-archive world-shell" aria-labelledby="archive-title">
+  <h2 id="archive-title">{title}</h2>
+  <div class="world-archive__groups">
+    {groups.filter((group) => group.projects.length > 0).map((group) => (
+      <div>
+        <h3>{group.name}</h3>
+        {group.projects.map((project) => (
+          <details id={`project-${project.id}`}>
+            <summary>{project.name}<Icon name="chevron" size={17} /></summary>
+            <Notes {project} links />
+          </details>
+        ))}
+      </div>
+    ))}
+  </div>
+</section>

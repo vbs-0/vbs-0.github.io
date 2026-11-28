@@ -33,6 +33,34 @@ the three.js scenes read the same values.
   touch screens or with WebGL off; the page is complete without them (rows carry an inline screenshot on touch).
 - **Signature:** the dust field and the work row's pointer picture.
 
+## Motion editions
+
+The chooser at `/editions/` presents three complete alternatives, not themes applied to one layout.
+The homepage is not switched until the owner chooses. New editions contain no phone scene.
+
+- **Pop (`/pop/`):** sunflower `#ffe477`, ink `#211545`, candy pink `#fa5786`, mint `#9ceabb` and
+  ink blue `#2b38bb`. Bagel Fat One for the display and Fredoka for reading. The opening is an
+  asymmetric playground; under it, two offset product posters lead to real live demos. A lacquered
+  trefoil spins on demand, around a code-bracket charm and two small enamel forms. Soft-edged sheets
+  pop across when moving to Work or Contact.
+- **Tide (`/tide/`):** pale blue `#edf7fb`, deep ink `#122b64`, cobalt `#213bb4` and crest teal
+  `#2db9bc`. Fraunces with italic stress is the masthead; Jost is the reading face. A single
+  deforming wave opens the archive; interaction launches a radial ripple through the actual mesh.
+  Below it the index sits beside sequential project chapters. The transition is a three-layer
+  opaque swell, not a tinted version of Pop's sheets.
+- **Kiln (`/kiln/`):** biscuit `#f8efdf`, iron `#241b23`, terracotta `#c68260`, oxide `#8a3628`
+  and honey `#ffbf58`. Archivo compresses for headings, then opens up for the record. A shader flame
+  and seeded rising particles sit inside one ceramic arch over a lit 3D brazier. Two iron shutters
+  close on the anchor change, then open from the heated seam. The workbench swaps actual measurements,
+  command screenshots and source links; without scripting it is a linear set of exhibits.
+
+Each edition ships with static vector artwork, source links and native project disclosures in HTML.
+Motion is optional. An independently skippable opening lasts about a second, plays once per edition
+per session and never waits on the GPU. Each side of a section cut fits within the viewport; focus
+lands with the destination. Scene code is imported after the cover leaves and the hero is in view.
+Off-screen scenes stop drawing, and the shared frame budget can lower resolution and disable idle
+rendering. The pause control stops both procedural and interface motion on the page.
+
 ## System map (`/graph/`)
 
 - **World:** the work as one chart you read. Every layer, project and tool is a node in a 3D field; six
@@ -51,7 +79,7 @@ the three.js scenes read the same values.
 - **Signature:** the palette (`⌘K`, `/`, or the bar) searches every node and action by name and opens it
   on the map, and the camera flight from node to node.
 
-## Film (`/` and `/film/`)
+## Film (`/film/`)
 
 - **World:** the opening titles of a film about one engineer. The countdown opens on an illustrated
   mountain pass, with the name to the left of the sun and watchtower. Play first scene returns to the

@@ -16,6 +16,19 @@ test.describe('Studio', () => {
     await expect(page.locator('.hero')).toHaveClass(/is-on/);
   });
 
+  test('the title still arrives if the safety timer removes the cover first', async ({ page }) => {
+    const time = new Date('2026-01-01T00:00:00Z');
+    await page.clock.install({ time });
+    await page.clock.pauseAt(new Date(+time + 60_000));
+    await page.goto('/studio/?leader=on&webgl=off');
+    await expect(page.locator('html')).toHaveClass(/studio-ready/);
+    await expect(page.locator('html')).toHaveAttribute('data-leader', 'on');
+    // Reproduce the head watchdog winning while the counter cannot advance.
+    await page.evaluate(() => { delete document.documentElement.dataset.leader; });
+    await page.clock.resume();
+    await expect(page.locator('.hero')).toHaveClass(/is-on/);
+  });
+
   test('reduced motion has no loading counter and the title is there at once', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/studio/?leader=on&webgl=off');

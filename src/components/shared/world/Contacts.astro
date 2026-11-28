@@ -1,0 +1,17 @@
+---
+import { profile } from '@/content';
+import Icon from '@/components/shared/Icon.astro';
+
+const icons = { github: 'github', phone: 'phone', telegram: 'telegram', resume: 'download' } as const;
+---
+
+<ul class="world-contact-links" aria-label="Other ways to get in touch">
+  {profile.contacts.filter((link) => link.kind !== 'email').map((link) => {
+    if (link.kind === 'email') return;
+    return (
+      <li><a href={link.href} download={link.kind === 'resume' ? true : undefined}>
+        <Icon name={icons[link.kind]} size={18} />{link.kind === 'phone' ? link.value : link.label}
+      </a></li>
+    );
+  })}
+</ul>

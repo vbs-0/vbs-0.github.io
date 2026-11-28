@@ -1,5 +1,5 @@
 /**
- * Every colour of every build, authored in OKLCH and exported as hex.
+ * Every colour of every build, exported as hex.
  * The stylesheets (as CSS custom properties), the three.js scenes and the contrast tests all read from here.
  */
 import type { VariantId } from '@site';
@@ -177,10 +177,89 @@ const studioPalette: Palette = {
 };
 const studio: Record<Theme, Palette> = { light: studioPalette, dark: studioPalette };
 
-export const palettes: Record<VariantId, Record<Theme, Palette>> = { studio, film, graph, phone, manual, classic };
+const popPaper = {
+  bg: '#fffaf0',
+  sun: '#ffe477',
+  cream: '#fff3b5',
+  ink: '#211545',
+  muted: '#4f3f5f',
+  rule: '#cbbb9c',
+  blue: '#2b38bb',
+  sky: '#a4dcff',
+  mint: '#9ceabb',
+  green: '#16815a',
+  pink: '#fa5786',
+  blush: '#ffd4e1',
+  shade: '#ac1949',
+  glint: '#fff8ed',
+};
+const tidePaper = {
+  bg: '#edf7fb',
+  surface: '#f9fdff',
+  foam: '#d5eefb',
+  mist: '#acd9ed',
+  ink: '#122b64',
+  muted: '#3e5675',
+  rule: '#9fbad0',
+  blue: '#213bb4',
+  deep: '#101e51',
+  crest: '#2db9bc',
+  glint: '#ecffff',
+};
+const kilnPaper = {
+  bg: '#f8efdf',
+  surface: '#fff8ed',
+  putty: '#eddbbe',
+  ink: '#2b2424',
+  muted: '#634a42',
+  rule: '#b69a81',
+  oxide: '#8a3628',
+  clay: '#c68260',
+  wall: '#663c37',
+  chamber: '#241b23',
+  coal: '#3a2528',
+  flame: '#fa732d',
+  honey: '#ffbf58',
+  core: '#fff2b3',
+};
+export const editionsPalette = { bg: '#f6f5ef', ink: '#22271f', muted: '#50594f', rule: '#b9c3b6', accent: '#2b5142' };
+
+export const palettes: Record<VariantId, Record<Theme, Palette>> = {
+  studio, film, graph, phone, manual, classic,
+  pop: { light: popPaper, dark: popPaper },
+  tide: { light: tidePaper, dark: tidePaper },
+  kiln: { light: kilnPaper, dark: kilnPaper },
+};
+
+export function fixedScheme(variant: VariantId): Theme {
+  return variant === 'pop' || variant === 'tide' || variant === 'kiln' ? 'light' : 'dark';
+}
 
 /** Text-on-background pairs that must hold a WCAG contrast ratio. [foreground, background, minimum]. */
 export const contrastPairs: Record<VariantId, Array<[string, string, number]>> = {
+  pop: [
+    ...['bg', 'sun', 'cream', 'sky', 'mint', 'blush', 'pink'].map((bg): [string, string, number] => ['ink', bg, 4.5]),
+    ['muted', 'bg', 4.5],
+    ['muted', 'sun', 4.5],
+    ['bg', 'blue', 4.5],
+    ['blue', 'sun', 4.5],
+  ],
+  tide: [
+    ...['bg', 'surface', 'foam', 'mist'].map((bg): [string, string, number] => ['ink', bg, 4.5]),
+    ['muted', 'bg', 4.5],
+    ['muted', 'surface', 4.5],
+    ['surface', 'deep', 4.5],
+    ['surface', 'blue', 4.5],
+    ['blue', 'bg', 4.5],
+  ],
+  kiln: [
+    ...['bg', 'surface', 'putty', 'clay', 'honey'].map((bg): [string, string, number] => ['ink', bg, 4.5]),
+    ['muted', 'bg', 4.5],
+    ['muted', 'putty', 4.5],
+    ['surface', 'chamber', 4.5],
+    ['surface', 'oxide', 4.5],
+    ['honey', 'chamber', 4.5],
+  ],
   studio: [
     ['ink', 'bg', 4.5],
     ['ink', 'surface', 4.5],
@@ -287,7 +366,7 @@ export function cssVars(p: Palette): string {
 /** A complete theme stylesheet for one build: light by default, dark by system preference or by `data-theme`. */
 export function themeCss(variant: VariantId): string {
   const { light, dark } = palettes[variant];
-  if (light === dark) return `:root{color-scheme:dark;${cssVars(dark)}}`;
+  if (light === dark) return `:root{color-scheme:${fixedScheme(variant)};${cssVars(light)}}`;
   return [
     `:root{color-scheme:light;${cssVars(light)}}`,
     `@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;${cssVars(dark)}}}`,

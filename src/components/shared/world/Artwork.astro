@@ -1,0 +1,67 @@
+---
+import type { MotionEdition } from '@site';
+
+interface Props {
+  edition: MotionEdition;
+  class?: string;
+}
+const { edition, class: className } = Astro.props;
+const contours = edition === 'tide' ? Array.from({ length: 48 }, (_, i) => {
+  const y = 248 + i * 5.15;
+  const crest = 104 + 33 * Math.sin(i * .06);
+  return `M-24 ${y-24}C216 ${y+106} 321 ${y-100} 493 ${y-62}S736 ${y+132} 941 ${y-crest} 1251 ${y-136} 1480 ${y+32}`;
+}) : [];
+---
+
+{edition === 'pop' && (
+  <svg class={className} viewBox="0 0 620 560" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="pop-candy" cx="34%" cy="22%" r="84%">
+        <stop stop-color="var(--c-blush)" /><stop offset=".38" stop-color="var(--c-pink)" /><stop offset="1" stop-color="var(--c-shade)" />
+      </radialGradient>
+      <radialGradient id="pop-ball" cx="34%" cy="24%" r="74%">
+        <stop stop-color="var(--c-glint)" /><stop offset=".32" stop-color="var(--c-sky)" /><stop offset="1" stop-color="var(--c-blue)" />
+      </radialGradient>
+    </defs>
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M296 300C168 402 103 298 159 227S328 160 331 264 415 405 459 302 407 108 330 171 347 365 232 410" stroke="var(--c-shade)" stroke-width="73" transform="translate(0 8)" />
+      <path d="M296 300C168 402 103 298 159 227S328 160 331 264 415 405 459 302 407 108 330 171 347 365 232 410" stroke="url(#pop-candy)" stroke-width="74" />
+      <path d="m166 155-31-23 32-22m28 0 33 23-31 23" stroke="var(--c-blue)" stroke-width="14" />
+    </g>
+    <path d="M485 113q13 39 50 48-37 9-50 47-9-38-44-47 37-12 44-48Z" fill="var(--c-green)" />
+    <circle cx="488" cy="399" r="30" fill="url(#pop-ball)" />
+  </svg>
+)}
+
+{edition === 'tide' && (
+  <svg class={className} viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="tide-ink" x1="0%" x2="100%">
+        <stop stop-color="var(--c-crest)" /><stop offset=".58" stop-color="var(--c-blue)" /><stop offset="1" stop-color="var(--c-crest)" />
+      </linearGradient>
+    </defs>
+    <g fill="none" stroke="url(#tide-ink)">
+      {contours.map((d, i) => <path d={d} stroke-width={i % 6 === 0 ? 2.8 : 1.4} opacity={0.42 + i * .011} />)}
+    </g>
+  </svg>
+)}
+
+{edition === 'kiln' && (
+  <svg class={className} viewBox="0 0 600 620" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="kiln-flame" x1="0%" y1="100%" x2="0%" y2="0%">
+        <stop stop-color="var(--c-honey)" /><stop offset=".52" stop-color="var(--c-flame)" /><stop offset="1" stop-color="var(--c-oxide)" />
+      </linearGradient>
+      <radialGradient id="kiln-glow">
+        <stop stop-color="var(--c-oxide)" /><stop offset="1" stop-color="var(--c-chamber)" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+    <ellipse cx="300" cy="396" rx="238" ry="202" fill="url(#kiln-glow)" />
+    <path d="M171 478c-64-99 59-122 36-197 53 45 91 15 83-96 89 71 47 156 113 177 17-14 31-41 34-64 37 68 60 116 12 177Z" fill="url(#kiln-flame)" />
+    <path d="M211 471c-14-65 85-92 78-165 47 44 30 82 65 112 15-12 41-33 48-62 37 62 31 92 7 116Z" fill="var(--c-honey)" />
+    <path d="M256 477c-3-53 50-61 49-113 43 41 53 76 59 113Z" fill="var(--c-core)" />
+    <g fill="var(--c-honey)"><circle cx="218" cy="247" r="3" /><circle cx="391" cy="253" r="5" /><circle cx="429" cy="210" r="2.8" /><circle cx="271" cy="159" r="3.2" /><circle cx="489" cy="371" r="3" /></g>
+    <path d="M144 487Q300 444 457 487L426 531H175Z" fill="var(--c-coal)" stroke="var(--c-clay)" stroke-width="4" />
+    <ellipse cx="300" cy="487" rx="157" ry="22" fill="none" stroke="var(--c-flame)" stroke-width="4" />
+  </svg>
+)}

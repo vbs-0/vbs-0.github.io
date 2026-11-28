@@ -1,0 +1,50 @@
+---
+import { certifications, education, experience, hackathons, layers, profile, projectById } from '@/content';
+import { formatMonthYear } from '@/lib/format';
+import Icon from '@/components/shared/Icon.astro';
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<section class="world-record" id="about" aria-labelledby="about-title" tabindex="-1">
+  <div class="world-record__layout world-shell">
+    <div class="world-record__intro">
+      <h2 id="about-title">{title}</h2>
+      <p>{profile.about[0]}</p>
+    </div>
+    <div class="world-record__facts">
+      <h3>{experience.employer} / {experience.product}</h3>
+      <ul class="world-roles">
+        {experience.roles.map((role) => (
+          <li><strong>{role.title}</strong><span>{formatMonthYear(role.start)} to {role.end ? formatMonthYear(role.end) : 'now'}</span></li>
+        ))}
+      </ul>
+      <ul class="world-bullets">{experience.bullets.map((bullet) => <li>{bullet}</li>)}</ul>
+      <details>
+        <summary>Education and awards <Icon name="chevron" size={17} /></summary>
+        <ul class="world-bullets">
+          {education.map((e) => <li><strong>{e.degree}, {e.field}</strong> &ndash; {e.school}, {e.start} to {e.end}</li>)}
+          {certifications.map((c) => <li><strong>{c.name}</strong> &ndash; {c.issuer}, {formatMonthYear(c.date)}</li>)}
+          {hackathons.map((h) => <li><strong>{h.name}</strong> &ndash; {h.result}</li>)}
+        </ul>
+      </details>
+      <details>
+        <summary>Tools by layer <Icon name="chevron" size={17} /></summary>
+        <dl class="world-tools">
+          {layers.map((layer) => (
+            <div>
+              <dt>{layer.name}</dt>
+              <dd>{layer.skills.join(', ')}</dd>
+              <dd class="world-tools__projects">
+                {layer.projectIds.map((id) => <a href={`#project-${id}`} data-project-jump>{projectById(id).name}</a>)}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </details>
+    </div>
+  </div>
+</section>

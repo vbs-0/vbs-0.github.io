@@ -24,6 +24,24 @@ export interface SweepSkin {
 }
 
 export const SWEEP_SKINS: Record<VariantId, SweepSkin> = {
+  pop: {
+    paper: palettes.pop.light.sun!, paperAlt: palettes.pop.light.cream!,
+    ink: palettes.pop.light.ink!, accent: palettes.pop.light.blue!,
+    label: variantMeta.pop.name, caption: variantMeta.pop.blurb,
+    font: "'Bagel Fat One', sans-serif", stretch: '100%', transform: 'none',
+  },
+  tide: {
+    paper: palettes.tide.light.foam!, paperAlt: palettes.tide.light.bg!,
+    ink: palettes.tide.light.ink!, accent: palettes.tide.light.blue!,
+    label: variantMeta.tide.name, caption: variantMeta.tide.blurb,
+    font: "'Fraunces Variable', serif", stretch: '100%', transform: 'none',
+  },
+  kiln: {
+    paper: palettes.kiln.light.putty!, paperAlt: palettes.kiln.light.bg!,
+    ink: palettes.kiln.light.ink!, accent: palettes.kiln.light.oxide!,
+    label: variantMeta.kiln.name, caption: variantMeta.kiln.blurb,
+    font: "'Archivo Variable', sans-serif", stretch: '100%', transform: 'none',
+  },
   studio: {
     paper: studio.ink as string,
     paperAlt: studio.inkSoft as string,

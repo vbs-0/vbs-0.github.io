@@ -146,7 +146,7 @@ test.describe('Film', () => {
         if (e.animationName === 'leader-num' || e.animationName === 'leader-up') performance.mark(`test:${e.animationName}`);
       });
     });
-    await page.goto('/?leader=on');
+    await page.goto('/film/?leader=on&webgl=off');
     await expect(page.locator('.leader__nums li')).toHaveCount(7);
     await page.waitForFunction(() => ['leader-num', 'leader-up'].every((key) => performance.getEntriesByName(`test:${key}`).length > 0));
     await page.waitForFunction(() => !document.documentElement.dataset.leader, undefined, { timeout: 12000 });
@@ -158,14 +158,14 @@ test.describe('Film', () => {
 
   test('with reduced motion there is no leader and the title is there at once', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.goto('/?leader=on');
+    await page.goto('/film/?leader=on');
     await expect(page.locator('html')).not.toHaveAttribute('data-leader', /.*/);
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Challagali');
     await expect(page.locator('.leader')).toBeHidden();
   });
 
   test('the scene strip jumps to a scene and marks it current', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/film/?webgl=off');
     await page.waitForFunction(() => document.documentElement.dataset.scene !== undefined);
     await page.locator('[data-strip="models"]').click();
     await expect(page.locator('[data-strip="models"]')).toHaveAttribute('aria-current', 'location');
@@ -173,7 +173,7 @@ test.describe('Film', () => {
   });
 
   test('a reel frame opens its whole scene and the way back returns to the reel', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/film/?webgl=off');
     await page.locator('#frame-pam .frame__open').click();
     await expect(page).toHaveURL(/\/work\/pam\/$/);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('PAM');
@@ -182,7 +182,7 @@ test.describe('Film', () => {
   });
 
   test('the timecode advances with the film', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/film/?webgl=off');
     const first = await page.locator('[data-timecode]').textContent();
     await page.evaluate(() => scrollTo({ top: document.documentElement.scrollHeight * 0.6, behavior: 'instant' }));
     await page.waitForTimeout(400);

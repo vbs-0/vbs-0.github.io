@@ -1027,14 +1027,10 @@ html:not([data-scene='live']) .field {
   transform: none;
 }
 .studio-ready .rise {
-  opacity: 0;
   transform: translate3d(0, 1.1rem, 0);
-  transition:
-    opacity 0.8s var(--ease-out),
-    transform 0.9s var(--ease-out);
+  transition: transform 0.9s var(--ease-out);
 }
 .studio-ready .is-on .rise {
-  opacity: 1;
   transform: none;
 }
 @media (prefers-reduced-motion: reduce) {

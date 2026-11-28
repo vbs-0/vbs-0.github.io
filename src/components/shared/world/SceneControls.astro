@@ -1,0 +1,13 @@
+---
+interface Props {
+  action: string;
+}
+const { action } = Astro.props;
+---
+
+<div class="world-scene-controls">
+  <button data-world-action type="button" hidden>{action}</button>
+  <button data-world-pause type="button" aria-pressed="false" hidden>
+    <span aria-hidden="true" class="world-scene-controls__mark"></span> Pause motion
+  </button>
+</div>

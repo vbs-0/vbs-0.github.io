@@ -1,0 +1,123 @@
+---
+import '@/components/shared/world/world.css';
+import './tide.css';
+import BaseHead from '@/components/shared/BaseHead.astro';
+import Icon from '@/components/shared/Icon.astro';
+import Shot from '@/components/shared/Shot.astro';
+import Sweep from '@/components/shared/Sweep.astro';
+import Archive from '@/components/shared/world/Archive.astro';
+import Artwork from '@/components/shared/world/Artwork.astro';
+import Contacts from '@/components/shared/world/Contacts.astro';
+import Curtain from '@/components/shared/world/Curtain.astro';
+import IntroHead from '@/components/shared/world/IntroHead.astro';
+import Links from '@/components/shared/world/Links.astro';
+import Notes from '@/components/shared/world/Notes.astro';
+import Record from '@/components/shared/world/Record.astro';
+import SceneControls from '@/components/shared/world/SceneControls.astro';
+import { layerById, profile, projectById } from '@/content';
+
+const samples = ['quantumlink', 'predoctor', 'dsaallocator'].map(projectById);
+---
+
+<!doctype html>
+<html lang="en" data-variant="tide">
+  <head>
+    <BaseHead variant="tide" path={Astro.url.pathname} title={`${profile.name} | Tide`} />
+    <IntroHead edition="tide" />
+  </head>
+  <body class="world-site tide">
+    <a class="skip-world" href="#main">Skip to content</a>
+    <Sweep variant="tide" />
+    <Curtain edition="tide" label="Coming up to the surface" />
+    <header class="world-nav world-shell tide-nav">
+      <a class="tide-mark" href="/tide/" aria-label={`${profile.handle}, Tide home`}>
+        <svg viewBox="0 0 38 21" width="38" height="21" aria-hidden="true"><path d="M1 8c6.7 0 6.7-6 13-6s6.8 6 13 6c5 0 6.8-3.5 10-5M1 14c6.7 0 6.7-6 13-6s6.8 6 13 6c5 0 6.8-3.5 10-5M1 20c6.7 0 6.7-6 13-6s6.8 6 13 6c5 0 6.8-3.5 10-5" fill="none" stroke="currentColor" stroke-width="1.7" /></svg>
+        {profile.handle}
+      </a>
+      <nav aria-label="Portfolio sections">
+        <a href="#work" data-world-jump>Work</a>
+        <a href="#about">About</a>
+        <a href="#contact" data-world-jump>Contact</a>
+        <a class="world-nav__resume" href={profile.resumePath} download>Resume <Icon name="download" size={16} /></a>
+      </nav>
+    </header>
+    <main id="main" tabindex="-1">
+      <section class="tide-opening" aria-labelledby="surface-title">
+        <div class="tide-mast world-shell">
+          <h1 id="surface-title">Systems with <em>depth.</em></h1>
+          <p class="tide-identity"><strong>{profile.name}</strong><span>{profile.role}, {profile.focus}</span></p>
+          <p class="tide-lede">Protocols, services and models, from first principles to working software.</p>
+          <a href="#work" class="world-cta tide-next" data-world-jump>
+            Explore the work <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path d="M12 4v15m-5-5 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg>
+          </a>
+        </div>
+        <figure class="tide-wave">
+          <div class="world-stage tide-stage" data-world-stage>
+            <Artwork edition="tide" class="world-static-layer" />
+            <canvas aria-hidden="true"></canvas>
+          </div>
+          <figcaption class="tide-caption world-shell">
+            <span class="tide-caption__name">A study in moving surfaces</span>
+            <SceneControls action="Send a ripple" />
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="tide-work" id="work" aria-labelledby="work-title" tabindex="-1">
+        <div class="tide-book world-shell">
+          <header class="tide-contents">
+            <h2 id="work-title">Field notes</h2>
+            <p>{profile.about[2]}</p>
+            <nav aria-label="Featured projects">
+              {samples.map((project, i) => <a href={`#project-${project.id}`}><span aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>{project.name}<Icon name="chevron" size={17} /></a>)}
+            </nav>
+          </header>
+          <div class="tide-spreads">
+            {samples.map((project, i) => {
+              const shot = project.shots.find((item) => item.kind !== 'phone');
+              const metric = project.metrics[0];
+              return (
+                <article class="tide-spread" id={`project-${project.id}`} aria-labelledby={`title-${project.id}`}>
+                  <header>
+                    <div class="tide-spread__index"><span>Chapter {i + 1}</span><span>{layerById(project.layers[0]!).name}</span></div>
+                    <h3 id={`title-${project.id}`}>{project.name}</h3>
+                    <p>{project.oneLiner}</p>
+                    {project.status && <p class="tide-status">{project.status}</p>}
+                  </header>
+                  {shot && (
+                    <figure class="tide-plate">
+                      <Shot shot={shot} widths={[360, 720, 1000]} sizes="(min-width: 850px) 59vw, 91vw" />
+                      {shot.caption && <figcaption>{shot.caption}</figcaption>}
+                    </figure>
+                  )}
+                  <div class="tide-spread__source">
+                    {metric && <p><strong>{metric.source ? <a href={metric.source}>{metric.value}</a> : metric.value}</strong> {metric.label}</p>}
+                    <Links {project} />
+                  </div>
+                  <details>
+                    <summary>Read the field notes <Icon name="chevron" size={17} /></summary>
+                    <Notes {project} />
+                  </details>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+      <Archive omit={samples.map((project) => project.id)} title="The full index" />
+      <Record title="About the engineer" />
+      <section class="tide-contact" id="contact" aria-labelledby="contact-title" tabindex="-1">
+        <div class="world-shell">
+          <h2 id="contact-title">Let's work together.</h2>
+          <a class="world-mail" href={`mailto:${profile.email}`}>{profile.email} <Icon name="external" size={24} /></a>
+          <Contacts />
+        </div>
+      </section>
+    </main>
+    <footer class="tide-footer world-shell"><span>{profile.name}</span><a href="/editions/">Compare the editions <Icon name="external" size={17} /></a></footer>
+    <script>
+      import { mountWorld } from '@/lib/motion/world';
+      mountWorld((canvas) => import('./client/scene').then(({ createTide }) => createTide(canvas)));
+    </script>
+  </body>
+</html>

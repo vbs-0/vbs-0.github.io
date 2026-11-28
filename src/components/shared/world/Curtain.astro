@@ -1,0 +1,28 @@
+---
+import { variantMeta, type MotionEdition } from '@site';
+
+interface Props {
+  edition: MotionEdition;
+  label: string;
+}
+const { edition, label } = Astro.props;
+---
+
+<div class="world-curtain" data-world-curtain>
+  <div class="world-curtain__material" aria-hidden="true">
+    {edition === 'pop' && <><i></i><i></i><i></i></>}
+    {edition === 'tide' && (
+      <svg viewBox="0 0 1440 1050" preserveAspectRatio="none">
+        <path d="M0 105Q176-30 357 78T717 73Q932-30 1105 68T1440 47V975Q1260 1089 1080 1002T720 986Q540 1081 360 996T0 992Z" />
+        <path d="M0 187Q218 35 393 155T744 137Q926 25 1105 144T1440 112V949Q1260 1039 1080 967T720 956Q540 1044 360 963T0 971Z" />
+        <path d="M0 266Q185 109 366 238T735 210Q921 103 1107 211T1440 175V921Q1260 1008 1080 938T720 925Q540 1011 360 937T0 944Z" />
+      </svg>
+    )}
+    {edition === 'kiln' && <><i></i><i></i></>}
+  </div>
+  <div class="world-curtain__info">
+    <span aria-hidden="true">{variantMeta[edition].name}</span>
+    <p aria-hidden="true">{label}</p>
+    <button type="button" data-skip-intro>Skip intro</button>
+  </div>
+</div>

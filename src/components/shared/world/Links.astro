@@ -1,0 +1,15 @@
+---
+import type { Project } from '@/content';
+import Icon from '@/components/shared/Icon.astro';
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+---
+
+<ul class="world-project-links" aria-label={`${project.name} links`}>
+  {project.links.map((link) => (
+    <li><a href={link.url}>{link.label} <Icon name="external" size={16} /></a></li>
+  ))}
+</ul>

@@ -20,7 +20,7 @@ Secondary: engineers who land from GitHub and want to see what was built and how
 
 A personal portfolio at https://vbs-0.github.io that says who vbs is, shows what they built using the résumé and their public GitHub repositories, and makes contact easy.
 
-It ships as three complete versions of the same content, because the owner picks one per job application or event (decision of 2026-11-27): `/phone/` (About phone), `/manual/` (Service manual) and `/classic/` (Classic). The root URL shows whichever version `site.config.ts` names as the default.
+It ships as complete versions of the same content, because the owner picks one per job application or event. The original phone, manual and classic versions remain. The motion editions, compared at `/editions/`, are three separate no-phone worlds: playful Pop, wave-driven Tide and the Kiln workshop. The root URL shows whichever version `site.config.ts` names as the default.
 
 Success means a visitor can say what vbs builds after the first screen, can reach the evidence for any claim (repository, live demo, measured number) in one click, and can email, call or download the résumé from wherever they stop reading.
 
@@ -37,7 +37,7 @@ Range plus rigor. vbs works on every layer of a shipped product: Android device 
 
 ## Capabilities and Constraints
 
-- Three single-page versions sharing one content source. No backend, no analytics or third-party trackers, self-hosted fonts.
+- Single-page editions sharing one content source. No backend, no analytics or third-party trackers, self-hosted fonts.
 - three.js is required by the owner.
 - All content must be readable with WebGL unavailable, with JavaScript disabled, and with reduced motion requested.
 - Must run acceptably on a mid-range Android phone.

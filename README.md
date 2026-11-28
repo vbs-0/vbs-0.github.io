@@ -1,11 +1,15 @@
-# Portfolio, three ways
+# One portfolio, multiple editions
 
-Veerabhadra Swami Challagali's portfolio, built three times from one content source with three.js.
+Veerabhadra Swami Challagali's portfolio, built from one content source with three.js.
 Pick a version per application; each is a complete page at its own address.
 
 | Address | Version | What it is |
 |---|---|---|
 | `/` | the default | Whatever `defaultVariant` in `site.config.ts` names. Today: Studio. |
+| `/editions/` | Motion editions | Compare the three new no-phone portfolios side by side. |
+| `/pop/` | Pop | Bright sticker playground, a spin-button 3D knot and a shelf of live products. |
+| `/tide/` | Tide | Blue field journal, a rippling 3D wave and an indexed set of project chapters. |
+| `/kiln/` | Kiln | Terracotta workshop, shader fire, 3D embers and a keyboard-operated workbench. |
 | `/studio/` | Studio | Kinetic type over a live dust shader, a loading counter, a work list that opens a bent, colour-split picture at the pointer, and six layers that stack as cards. No phone. |
 | `/phone/` | About phone | A custom-ROM Settings screen where the device is the person. The 3D phone mirrors the page, comes apart under Hardware, and its display shows the open app. |
 | `/manual/` | Service manual | A drawing sheet: an ink-line phone that takes itself apart as you scroll, a numbered parts list, and figure plates for the projects. |
@@ -20,10 +24,10 @@ Live site: <https://vbs-0.github.io>.
 
 - Applying for a mobile, Android or full-stack role: `/phone/`. It shows range and playfulness.
 - Applying somewhere that values rigour, systems or hardware: `/manual/`. It shows how you think.
-- Sending a link to anyone: `/`, the Film. It is the most distinctive and the fastest to read.
+- Comparing the new motion builds: `/editions/`. Each has its own URL and full project evidence, contact and resume.
 - Applying for an AI/ML role at a company that likes the expected shape: `/classic/`, done properly.
 
-To change what `/` shows, edit `defaultVariant` in `site.config.ts` and push. The other addresses never change.
+To change what `/` shows, edit `defaultVariant` in `site.config.ts`. The other addresses do not change.
 
 ## Run it
 
@@ -52,7 +56,13 @@ each version's own interactions.
 
 ## The motion
 
-On `/` or `/film/`, choose **Play first scene**. The ridge stays in place while the light changes
+On Pop, Tide and Kiln, the opening plays once per edition per browser session. Add `?intro=on` to
+replay it, choose **Work** for a material cut, and use the scene button to spin, ripple or stoke.
+**Pause motion** stops the scene and skips cuts; reduced-motion visitors get the still art by default.
+With `?webgl=off` the scene button animates the original vector art instead. Workbench controls,
+project evidence and the full portfolio remain available without WebGL or JavaScript.
+
+On `/film/`, choose **Play first scene**. The ridge stays in place while the light changes
 behind the passing standards. Choose **Title** in the bottom strip to play the return cut. Scrolling
 works too; the page never locks the wheel or touch input for the cut. Reduced motion jumps directly
 to the destination, and the same link works with JavaScript or WebGL off.

@@ -96,6 +96,14 @@ function endLoading(): void {
 
 if (leaderOn) {
   lenis?.stop();
+  // The pre-paint watchdog can remove the cover before the counter gets another frame.
+  const watchdog = new MutationObserver(() => {
+    if (root.dataset.leader) return;
+    watchdog.disconnect();
+    lenis?.start();
+    startTitle();
+  });
+  watchdog.observe(root, { attributes: true, attributeFilter: ['data-leader'] });
   const num = $<HTMLElement>('[data-pre-count]');
   const bar = $<HTMLElement>('[data-pre-bar]');
   const t0 = performance.now();

@@ -1,0 +1,161 @@
+---
+import '@/components/shared/world/world.css';
+import './kiln.css';
+import BaseHead from '@/components/shared/BaseHead.astro';
+import Icon from '@/components/shared/Icon.astro';
+import Shot from '@/components/shared/Shot.astro';
+import Sweep from '@/components/shared/Sweep.astro';
+import Archive from '@/components/shared/world/Archive.astro';
+import Artwork from '@/components/shared/world/Artwork.astro';
+import Contacts from '@/components/shared/world/Contacts.astro';
+import Curtain from '@/components/shared/world/Curtain.astro';
+import IntroHead from '@/components/shared/world/IntroHead.astro';
+import Links from '@/components/shared/world/Links.astro';
+import Notes from '@/components/shared/world/Notes.astro';
+import Record from '@/components/shared/world/Record.astro';
+import SceneControls from '@/components/shared/world/SceneControls.astro';
+import { profile, projectById } from '@/content';
+import { formatInt } from '@/lib/format';
+import { isIcon } from '@/lib/icons';
+
+const pieces = ['clipbridge', 'termadb', 'notepad'].map(projectById);
+---
+
+<!doctype html>
+<html lang="en" data-variant="kiln">
+  <head>
+    <BaseHead variant="kiln" path={Astro.url.pathname} title={`${profile.name} | Kiln`} />
+    <IntroHead edition="kiln" />
+  </head>
+  <body class="world-site kiln">
+    <a class="skip-world" href="#main">Skip to content</a>
+    <Sweep variant="kiln" />
+    <Curtain edition="kiln" label="Opening the furnace" />
+    <div class="kiln-bar">
+      <header class="world-nav world-shell kiln-nav">
+        <a class="kiln-mark" href="/kiln/" aria-label={`${profile.handle}, Kiln home`}>
+          <svg viewBox="0 0 26 26" width="25" height="25" aria-hidden="true"><path d="M3 22v-9a10 10 0 0 1 20 0v9H3Zm5 0v-9a5 5 0 0 1 10 0v9M3 15h5m10 0h5" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linejoin="round" /></svg>{profile.handle}<span> / Kiln</span>
+        </a>
+        <nav aria-label="Portfolio sections">
+          <a href="#work" data-world-jump>Work</a>
+          <a href="#about">About</a>
+          <a href="#contact" data-world-jump>Contact</a>
+          <a class="world-nav__resume" href={profile.resumePath} download>Resume <Icon name="download" size={16} /></a>
+        </nav>
+      </header>
+    </div>
+
+    <main id="main" tabindex="-1">
+      <section class="kiln-hero world-shell" aria-labelledby="furnace-title">
+        <div class="kiln-hello">
+          <h1 id="furnace-title">Build it.<br /><em>Test it.</em></h1>
+          <p class="kiln-identity"><strong>{profile.name}</strong><span>{profile.role}, {profile.focus}</span></p>
+          <p class="kiln-lede">Android builds, APIs, interfaces and models. I measure what works.</p>
+          <div class="world-actions">
+            <a href="#work" class="world-cta kiln-cta" data-world-jump>See the workbench <Icon name="external" size={20} /></a>
+            <a class="kiln-github" href={profile.github}>GitHub <Icon name="external" size={17} /></a>
+          </div>
+        </div>
+        <figure class="kiln-forge">
+          <div class="kiln-housing">
+            <div class="world-stage kiln-stage" data-world-stage>
+              <Artwork edition="kiln" class="world-static-layer" />
+              <canvas aria-hidden="true"></canvas>
+            </div>
+          </div>
+          <figcaption>
+            <span class="kiln-forge__label">Furnace study / Fire and embers</span>
+            <SceneControls action="Stoke the fire" />
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="kiln-work" id="work" aria-labelledby="work-title" tabindex="-1">
+        <div class="world-shell">
+          <header class="kiln-work__head">
+            <h2 id="work-title">The workbench</h2>
+            <p>Three small tools, with their measurements and the trade-offs behind them.</p>
+          </header>
+          <div class="kiln-bench">
+            <nav aria-label="Choose a project" class="kiln-bench__nav">
+              <div data-bench-tabs>
+                {pieces.map((project) => (
+                  <a id={`tab-${project.id}`} href={`#project-${project.id}`}>
+                    <Icon name={isIcon(project.glyph) ? project.glyph : 'package'} size={23} />
+                    {project.name}
+                    <Icon name="chevron" size={17} />
+                  </a>
+                ))}
+              </div>
+            </nav>
+            <div class="kiln-bench__tray">
+              {pieces.map((project) => {
+                const figure = project.figure;
+                const shot = project.shots[0];
+                return (
+                  <article class="kiln-piece" data-bench-panel id={`project-${project.id}`} aria-labelledby={`title-${project.id}`}>
+                    <div class="kiln-piece__copy">
+                      <h3 id={`title-${project.id}`}>{project.name}</h3>
+                      <p>{project.oneLiner}</p>
+                      <Links {project} />
+                    </div>
+                    {figure?.kind === 'table' && (
+                      <div class="kiln-figure kiln-table">
+                        <table>
+                          <caption>{figure.title}</caption>
+                          <thead><tr>{figure.head.map((value) => <th scope="col">{value}</th>)}</tr></thead>
+                          <tbody>{figure.rows.map(([head, ...cells]) => <tr><th scope="row">{head}</th>{cells.map((cell) => <td>{cell}</td>)}</tr>)}</tbody>
+                        </table>
+                      </div>
+                    )}
+                    {figure?.kind === 'bars' && (
+                      <figure class="kiln-figure kiln-bars">
+                        <figcaption>{figure.title} <span>(log scale)</span></figcaption>
+                        <dl>
+                          {figure.items.map((item) => (
+                            <div>
+                              <dt>{item.label}</dt>
+                              <dd><span aria-hidden="true" style={`--length:${Math.log10(item.value) / Math.log10(Math.max(...figure.items.map(({ value }) => value))) * 100}%`}></span>
+                                {formatInt(item.value)} bytes</dd>
+                            </div>
+                          ))}
+                        </dl>
+                      </figure>
+                    )}
+                    {shot && <figure class="kiln-figure kiln-shot"><Shot shot={shot} widths={[360, 640]} sizes="(min-width: 820px) 300px, 68vw" />{shot.caption && <figcaption>{shot.caption}</figcaption>}</figure>}
+                    <details>
+                      <summary>Read the build notes <Icon name="chevron" size={17} /></summary>
+                      <Notes {project} />
+                    </details>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+      <Archive omit={pieces.map((project) => project.id)} title="The parts shelf" />
+      <Record title="At the bench" />
+      <section class="kiln-contact" id="contact" aria-labelledby="contact-title" tabindex="-1">
+        <div class="world-shell kiln-ticket">
+          <div>
+            <h2 id="contact-title">Get in touch.</h2>
+            <a class="world-mail" href={`mailto:${profile.email}`}>{profile.email} <Icon name="external" size={23} /></a>
+            <Contacts />
+          </div>
+          <svg viewBox="0 0 145 145" class="kiln-stamp" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="72.5" cy="72.5" r="68" /><circle cx="72.5" cy="72.5" r="59" stroke-dasharray="2.8 5" />
+            <path d="M45 101V65a27.5 27.5 0 0 1 55 0v36ZM56 101V65a16.5 16.5 0 0 1 33 0v36M45 79h11m33 0h11M63 98c-3-14 10-12 8-25 8 7 7 13 11 24" />
+          </svg>
+        </div>
+      </section>
+    </main>
+    <footer class="kiln-footer world-shell"><span>{profile.name}</span><a href="/editions/">Compare the editions <Icon name="external" size={17} /></a></footer>
+    <script>
+      import { mountWorld } from '@/lib/motion/world';
+      import { mountWorkbench } from './client/workbench';
+      mountWorld((canvas) => import('./client/scene').then(({ createKiln }) => createKiln(canvas)));
+      mountWorkbench();
+    </script>
+  </body>
+</html>
